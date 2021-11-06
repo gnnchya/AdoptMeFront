@@ -1,4 +1,3 @@
-import './App.css';
 import {
     BrowserRouter as Router,
     Switch,
@@ -7,22 +6,15 @@ import {
     useRouteMatch,
     useParams
 } from "react-router-dom"; 
-import Page2 from "./page2";
 import HomePage from './pages/homePage';
-import ShowMenu from './pages/showMenu';
-import MenuInfo from './pages/menuInfo';
-import ShowCart from './pages/showCart';
-import UpdateMenu from './pages/updateMenu';
-import CreateMenu from './pages/createMenu';
-import ShowOrder from './pages/showOrder';
-import ChangeBill from './pages/changeBill'
-import ShowHistory from './pages/showHistory'
-import OrderInfo from './pages/orderInfo'
-import Report from './pages/report'
-import ShowMoney from './pages/showMoney'
+import ReadAllPost from './pages/readAllPost';
+import ReadPost from './pages/readPost';
+import UpdatePost from './pages/updatePost';
+import CreatePost from './pages/createPost';
+import DeletePost from './pages/deletePost';
+import SearchPost from './pages/searchPost'
+import FilterPost from './pages/filterPost'
 import React, { Component }  from 'react';
-import TestAxios from './pages/testAxios';
-
 
 function App() {
     return (
@@ -35,38 +27,26 @@ function App() {
                 <Route exact path="/homepage">
                     <HomePage />
                 </Route>
-                <Route exact path="/showMenu/:page">
-                    <ShowMenu />
+                <Route exact path="/posts/:page">
+                    <ReadAllPost />
                 </Route>
-                <Route exact path="/menuInfo/:id" >
-                    <MenuInfo />
+                <Route exact path="/post/:id" >
+                    <ReadPost />
                 </Route>
-                <Route exact path="/showCart">
-                    <ShowCart />
+                <Route exact path="/post/:id">
+                    <UpdatePost />
                 </Route>
-                <Route exact path="/createMenu">
-                    <CreateMenu />
+                <Route exact path="/createPost">
+                    <CreatePost />
                 </Route>
-                <Route exact path="/showOrder">
-                    <ShowOrder />
+                <Route exact path="/deletePost/:id">
+                    <DeletePost />
                 </Route>
-                <Route exact path="/updateMenu/:id">
-                    <UpdateMenu />
+                <Route exact path="/searchPost/:keyword">
+                    <SearchPost />
                 </Route>
-                <Route exact path="/changeBill">
-                    <ChangeBill />
-                </Route>
-                <Route exact path="/showHistory">
-                    <ShowHistory />
-                </Route>
-                <Route exact path="/orderInfo/:id">
-                    <OrderInfo />
-                </Route>
-                <Route exact path="/showReport">
-                    <Report />
-                </Route>
-                <Route exact path="/showMoney">
-                    <ShowMoney />
+                <Route exact path="/filterPost">
+                    <FilterPost />
                 </Route>
             </Switch>
         </Router>
