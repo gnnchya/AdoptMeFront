@@ -9,7 +9,8 @@ import {
 import HomePage from './pages/homePage';
 import ReadAllPostAdopt from './pages/readAllPostAdopt';
 import ReadAllPostLost from './pages/readAllPostLost';
-import ReadPost from './pages/readPostLost';
+import ReadPostLost from './pages/readPostLost';
+import ReadPostAdopt from './pages/readPostAdopt';
 import UpdatePost from './pages/updatePost';
 import React, { Component }  from 'react';
 
@@ -24,20 +25,17 @@ function App() {
                 <Route exact path="/home">
                     <HomePage />
                 </Route>
-                <Route exact path="/posts/adopt/dog/:page">
+                <Route exact path="/posts/adopt/:keyword/:page">
                     <ReadAllPostAdopt />
                 </Route>
-                <Route exact path="/posts/adopt/cat/:page">
-                    <ReadAllPostAdopt />
-                </Route>
-                <Route exact path="/posts/adopt/bunny/:page">
-                    <ReadAllPostAdopt />
-                </Route>
-                <Route exact path="/posts/lost/lost/:page">
+                <Route exact path="/posts/lost/:keyword/:page">
                     <ReadAllPostLost />
                 </Route>
-                <Route exact path="/post/:id" >
-                    <ReadPost />
+                <Route exact path="/post/lost/:id" >
+                    <ReadPostLost />
+                </Route>
+                <Route exact path="/post/adopt/:id" >
+                    <ReadPostAdopt />
                 </Route>
                 <Route exact path="/updatePost/:id">
                     <UpdatePost />

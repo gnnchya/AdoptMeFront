@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import {readAllPost } from '../actions/posts'
 // import PostList from '../components/PostList'
 
-function ReadAllPost() {
+function ReadAllPostLost() {
     let limit = 100
     let {keyword, page} = useParams()
 
@@ -27,6 +27,68 @@ function ReadAllPost() {
         }
     }
 
+    const handleChangeInput = (e) => {
+        e.preventDefault()
+        const name = e.target.name
+        const value = e.target.value
+        setKeyword((oldValue) => ({ ...oldValue, [name]: value }))
+    }
+
+    const handlePostInput = (e) =>{
+        e.preventDefault()
+        const name = e.target.name
+        const value = e.target.value
+        setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
+    }
+   
+    const handleSpayInput = (e) =>{
+        e.preventDefault()
+        const name = e.target.name
+        const value = e.target.value
+        setSpay((oldValue) => ({ ...oldValue, [name]: value }))
+    }
+
+    const fileSelectedHandler = event => {
+        event.preventDefault()
+        this.setState({
+            selectedFile : event.target.files[0]
+        })
+    }
+
+    const postUploadHandler = event =>{
+        try {
+            event.preventDefault()
+            const {url} = await generateUploadURL()
+            var options = {
+                headers: {
+                'Content-Type': this.state.selectedFile.type
+                }
+            };
+
+            this.setState({
+                picURL : await uploadPic(url, this.state.selectedFile, options)
+            })
+
+            const tempAnimal = {type:"lost", age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: this.state.picURL, medical_condition: ""}
+            const temp = {...postInfo, animal:tempAnimal, adopt: false}
+            const response = await createPost(temp)
+            console.log(response)
+            
+
+            if (response.status === 201) {
+                console.log("create", response)
+                alert("created")
+            }
+        } catch (error) {
+            // if (error.status === 422){
+            //     alert("422")
+            // }
+            alert(error)
+        }
+
+
+
+
     return (
         <div>  
            <body>    
@@ -35,9 +97,9 @@ function ReadAllPost() {
                     <a href="index.html" class="logo"> <i class="fas fa-paw"></i> Adopt </a>
                 
                     <nav class="navbar">
-                        <a href="index.html">home</a>
-                        <a href="adoption.html">Adoption</a>
-                        <a href="lost.html">Lost</a>
+                        <a href="/home">home</a>
+                        <a href="/posts/adopt/all/1">Adoption</a>
+                        <a href="/posts/lost/all/1">Lost</a>
                     </nav>
                 
                     <div class="icons">
@@ -48,32 +110,40 @@ function ReadAllPost() {
                     </div>
                 
                     <form action="" class="search-form">
-                        <input type="search" id="search-box" placeholder="search here..."/>
+                        <input type="search" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} />
                         <label for="search-box" class="fas fa-search"></label>
+                        {<Link to={`/posts/lost/${keyword}/1`}> 
+                            // TODO button here
+                        </Link>}
                     </form>
-                
+
                     <div class = "create-form">
-                    <h3>Lost</h3>
-                    <div class = "box">
-                        <div class="content">
+                        <h3>Lost</h3>
+                        <div class = "box">
+                            <div class="content">
                                 <h3>Create adopt pet post</h3>
-                                <p>Title</p>
-                                <input type="text" placeholder="your title post" class="box"/>
+                                <p>Species</p>
+                                <input type="text" placeholder="pet species" class="box"  name="species" onChange={handlePostInput} />
                                 <p>Age</p>
-                                <input type="text" placeholder="Age of pet" class="box"/>
+                                <input type="text" placeholder="Age of pet" class="box" name="age"  onChange={handlePostInput} />
                                 <p>Gender</p>
-                                <input type="text" placeholder="gender of pet" class="box"/>
+                                <input type="text" placeholder="gender of pet" class="box" name="gender" onChange={handlePostInput} />
                                 <p>Post caption</p>
-                                <input type="text" placeholder="post info" class="box-info"/>
+                                <input type="text" placeholder="post info" class="box-info" name="info" onChange={handlePostInput} />
                                 <p>Location</p>
-                                <input type="text" placeholder="location" class="box"/>
+                                <input type="text" placeholder="location" class="box" name="location" onChange={handlePostInput} />
+                                <p>Spay</p>
+                                <input type="checkbox" id="spay" name="spay" onChange={handleSpayInput}/>
+                                <label for="spay"> Still spay</label>
                                 <p>Photo</p>
-                                <input type="file" accept="image/png, image/jpeg" value="Add photo" class="pics"/>
-                                
+                                <input type="file" accept="image/png, image/jpeg" value="Add photo" class="pics" onChange={fileSelectedHandler}/>
+                                                            
                             </div>
-                    </div>
-                    
-                    <input type="submit" value="Create" class="btn"/>
+                        </div>
+                        {<Link to="/posts/lost/all/1"> 
+                            <input type="submit" value="Create" class="btn" onClick={postUploadHandler}/>
+                        </Link>}
+                        
                     </div>
                 
                     
@@ -151,4 +221,4 @@ function ReadAllPost() {
     )
 }
 
-export default ReadAllPost
+export default ReadAllPostLost

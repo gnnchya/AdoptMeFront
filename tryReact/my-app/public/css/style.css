@@ -76,6 +76,24 @@ section{
     color:#fff;
 }
 
+.btn-AL{
+    margin-top: 1rem;
+    width: 50%;
+    display: inline-block;
+    padding:.8rem 3rem;
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    border:.2rem solid var(--black);
+    color:var(--black);
+    cursor: pointer;
+    background: none;
+}
+
+.btn-AL:hover{
+    background: var(--orange);
+    color:#fff;
+}
+
 .header{
     position: fixed;
     top:0; left:0; right: 0;
@@ -444,6 +462,24 @@ section{
     gap:1.5rem;
 }
 
+.blogs .box-container .icons div{
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    color:var(--black);
+    font-size: 2rem;
+    margin-left: .3rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+.blogs .box-container .icons div:hover{
+    background: var(--orange);
+    color:#fff;
+}
+
 .blogs .box-container .box{
     overflow: hidden;
     border-radius: .5rem;
@@ -498,6 +534,32 @@ section{
     padding:.5rem 0;
 }
 
+.blogs .box-container .box h3 {
+    padding-bottom: .5rem;
+    color:var(--black);
+    font-size: 2.2rem;
+}
+
+.blogs .box-container .box h3 i{
+    color:var(--orange);
+}
+
+.blogs .box-container .box .links{
+    display: block;
+    font-size: 1.5rem;
+    color:var(--light-color);
+    padding:1rem 0;
+}
+
+.blogs .box-container .box .links i{
+    color:var(--orange);
+    padding-right: .5rem;
+}
+
+.blogs .box-container .box .links:hover i{
+    padding-right: 2rem;
+}
+
 
 .info .info-slider{
     padding:1rem;
@@ -520,9 +582,9 @@ section{
 }
 
 .info .info-slider .box img{
-    height:10rem;
-    width:10rem;
-    border-radius: 50%;
+    height:50rem;
+    width:50rem;
+    border-radius: 100%;
 }
 
 .info .info-slider .box p{
@@ -538,13 +600,25 @@ section{
     font-size: 2.2rem;
 }
 
-.info .info-slider .box .stars i{
+.info .info-slider .box h3 i{
     color:var(--orange);
-    font-size: 1.7rem;
 }
 
+.info .info-slider .box .links{
+    display: block;
+    font-size: 1.5rem;
+    color:var(--light-color);
+    padding:1rem 0;
+}
 
+.info .info-slider .box .links i{
+    color:var(--orange);
+    padding-right: .5rem;
+}
 
+.info .info-slider .box .links:hover i{
+    padding-right: 2rem;
+}
 
 /* media queries  */
 
