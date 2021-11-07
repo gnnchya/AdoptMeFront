@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import {Link} from "react-router-dom";
-import {createPost, getMenu } from '../actions/posts'
-// import PostList from '../components/PostList'
+import {createPost, uploadPic } from '../actions/posts'
+import generateUploadURL from "../s3.js"
+
 export default CreateMenu
 
 function CreateMenu() {
@@ -14,13 +15,38 @@ function CreateMenu() {
     const [amount, setAmount] = useState("")
     const [available, setAvailable] = useState(false)
 
+    state = {
+
+        selectedFile : null,
+        picURL : null
+    }
+
+    fileSelectedHandler = event => {
+        event.preventDefault()
+        this.setState({
+            selectedFile : event.target.files[0]
+        })
+
+        const {url} = await generateUploadURL()
+        var options = {
+            headers: {
+              'Content-Type': this.state.selectedFile.type
+            }
+          };
+
+        this.setState({
+            picURL : await uploadPic(url, this.state.selectedFile, opions)
+        })
+
+    }
 
 
     const addClick = async (e) => {
         try {
             e.preventDefault()
-            const tempIngredients ={item_name:itemName, amount: +amount}
-            const temp = {...menu, price:+menu.price, category:[...categories, category], ingredient:[...ingredients, tempIngredients], available:available}
+
+            const tempIngredients = {item_name:itemName, amount: +amount}
+            const temp = {...menu, price:+menu.price, category:[...categories, category], ingredient:[...ingredients, tempIngredients], available:available, picURL: this.state.picURL}
             const response = await createPost(temp)
             console.log(response)
             
@@ -65,6 +91,9 @@ function CreateMenu() {
 
     // console.log(category)
     return(
+
+        
+
         <div className="v1_3">
 
         <form className="form">
@@ -124,7 +153,7 @@ function CreateMenu() {
                 {<Link to="/homepage"><span className="v6_194">Create Menu</span></Link>}
             </button>
 
-            </form >
+        </form >
 
             <div className="v6_3"></div>
             <div className="v6_2"></div>
@@ -147,6 +176,9 @@ function CreateMenu() {
             </span>
             <Link to="/homepage"><span className="v6_32">POS COFFEE</span></Link>
            
+            <script src="../handleSubmit"> </script>   
         </div>
+
+        
     )
 }

@@ -7,13 +7,10 @@ import {
     useParams
 } from "react-router-dom"; 
 import HomePage from './pages/homePage';
-import ReadAllPost from './pages/readAllPost';
-import ReadPost from './pages/readPost';
+import ReadAllPostAdopt from './pages/readAllPostAdopt';
+import ReadAllPostLost from './pages/readAllPostLost';
+import ReadPost from './pages/readPostLost';
 import UpdatePost from './pages/updatePost';
-import CreatePost from './pages/createPost';
-import DeletePost from './pages/deletePost';
-import SearchPost from './pages/searchPost'
-import FilterPost from './pages/filterPost'
 import React, { Component }  from 'react';
 
 function App() {
@@ -24,29 +21,26 @@ function App() {
                 <Route exact path="/">
                     <HomePage />
                 </Route>
-                <Route exact path="/homepage">
+                <Route exact path="/home">
                     <HomePage />
                 </Route>
-                <Route exact path="/posts/:page">
-                    <ReadAllPost />
+                <Route exact path="/posts/adopt/dog/:page">
+                    <ReadAllPostAdopt />
+                </Route>
+                <Route exact path="/posts/adopt/cat/:page">
+                    <ReadAllPostAdopt />
+                </Route>
+                <Route exact path="/posts/adopt/bunny/:page">
+                    <ReadAllPostAdopt />
+                </Route>
+                <Route exact path="/posts/lost/lost/:page">
+                    <ReadAllPostLost />
                 </Route>
                 <Route exact path="/post/:id" >
                     <ReadPost />
                 </Route>
-                <Route exact path="/post/:id">
+                <Route exact path="/updatePost/:id">
                     <UpdatePost />
-                </Route>
-                <Route exact path="/createPost">
-                    <CreatePost />
-                </Route>
-                <Route exact path="/deletePost/:id">
-                    <DeletePost />
-                </Route>
-                <Route exact path="/searchPost/:keyword">
-                    <SearchPost />
-                </Route>
-                <Route exact path="/filterPost">
-                    <FilterPost />
                 </Route>
             </Switch>
         </Router>
