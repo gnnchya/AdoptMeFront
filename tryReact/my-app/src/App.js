@@ -25,10 +25,10 @@ function App() {
                 <Route exact path="/home">
                     <HomePage />
                 </Route>
-                <Route exact path="/posts/adopt/:keyword/:page">
+                <Route exact path="/posts/adopt/:page/:keyword">
                     <ReadAllPostAdopt />
                 </Route>
-                <Route exact path="/posts/lost/:keyword/:page">
+                <Route exact path="/posts/lost/::page/:keyword">
                     <ReadAllPostLost />
                 </Route>
                 <Route exact path="/post/lost/:id" >

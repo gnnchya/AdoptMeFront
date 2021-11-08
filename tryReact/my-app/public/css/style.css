@@ -188,6 +188,8 @@ section{
 }
 
 .header .create-form{
+    height: auto;
+    max-height: calc(100vh - 60px);
     position: absolute;
     top:110%; right:-110%;
     padding:1rem;
@@ -195,6 +197,7 @@ section{
     box-shadow: var(--box-shadow);
     width:35rem;
     background: #fff;
+    
 }
 
 .header .create-form.active{
@@ -203,12 +206,15 @@ section{
 }
 
 .header .create-form .box{
-    display: flex;
+    max-height: 450px;
     align-items: center;
     gap:1rem;
     position: relative;
     margin:1rem 0;
+    overflow-y: scroll;
 }
+
+
 .header .create-form .box-info{
     width: 115%;
     margin:.7rem 0;
@@ -225,7 +231,9 @@ section{
     height:10rem;
 }
 
-.header .create-form .box .fa-pen{
+
+
+/* .header .create-form .box .fa-pen{
     font-size: 2rem;
     position: absolute;
     top:50%; right:2rem;
@@ -236,7 +244,7 @@ section{
 
 .header .create-form .box .fa-pen:hover{
     color:var(--orange);
-}
+} */
 
 .header .create-form .box .fa-camera{
     font-size: 1.6rem;
@@ -261,6 +269,7 @@ section{
     padding-bottom: 1rem;
 }
 
+
 .header .create-form .box .content .info{
     width: 100%;
     margin:.5rem 0;
@@ -272,17 +281,55 @@ section{
     text-transform: none;
 }
 
-.header .create-form .total{
-    font-size: 2.5rem;
-    padding:1rem 0;
-    text-align: center;
-    color:var(--black);
-} */
+
+.header .create-form .spay {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  gap: .5rem;
+  padding: 1rem 0;
+}
+
+.header .create-form .spay label {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.header .create-form .photo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: .5rem;
+  padding: 1rem 0;
+}
+
+.header .create-form .photo label {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}.
+
+.header .create-form .box .btn {
+  width: 100%;
+  text-align: center;
+  margin: 1.5rem 0;
+}
 
 .header .create-form .btn{
     display: block;
     text-align: center;
     margin:1rem;
+}
+
+.header .create-form .btn:hover {
+  background: var(--black);
 }
 
 .header .create-form p{

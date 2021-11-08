@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import {readAllPost } from '../actions/posts'
-// import PostList from '../components/PostList'
+import {uploadPic, createPost, readAllPostAdopt } from "../actions/posts.js";
+import {generateUploadURL} from '../s3.js'
 
 function ReadAllPostAdopt() {
     let limit = 100
-    let {keyword, page} = useParams()
+    let {page, keywords} = useParams()
 
-    const petType = keyword
+    const petType = keywords
     const [postItem, setPostItems] = useState([])
     useEffect(() => {
         getList()
@@ -17,17 +17,12 @@ function ReadAllPostAdopt() {
     const [keyword, setKeyword] = useState("")
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
-
-    state = {
-
-        selectedFile : null,
-        picURL : null
-    }
+    const [file, setFile] = useState({}) 
 
     
     const getList = async (e) => {
         try {
-            const response = await readAllPost('adopt',String(keyword),limit,Number(page))
+            const response = await readAllPostAdopt(String(keyword),limit,Number(page))
             console.log(response.data.data)
             // alert(response.data.data[0])
             if (response.status === 200) {
@@ -61,28 +56,26 @@ function ReadAllPostAdopt() {
 
     const fileSelectedHandler = event => {
         event.preventDefault()
-        this.setState({
-            selectedFile : event.target.files[0]
-        })
+        const name = event.target.name
+        const value = event.target.value
+        setFile((oldValue) => ({ ...oldValue, [name]: value }))
     }
 
-    const postUploadHandler = event =>{
+    const postUploadHandler = async (event) =>{
         try {
             event.preventDefault()
-            const {url} = await generateUploadURL()
+            const {url} =  await generateUploadURL()
             var options = {
                 headers: {
-                'Content-Type': this.state.selectedFile.type
+                'Content-Type': file.picFile
                 }
             };
 
-            this.setState({
-                picURL : await uploadPic(url, this.state.selectedFile, options)
-            })
-
-            const tempAnimal = {type:"lost", age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: this.state.picURL, medical_condition: ""}
-            const temp = {...postInfo, animal:tempAnimal, adopt: false}
-            const response = await createPost(temp)
+            const picURL = await uploadPic(url, file.picFile, options) 
+               
+            const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: picURL, medical_condition: postInfo.medical_condition}
+            const temp = {...postInfo, animal:tempAnimal, UID: "", location: postInfo.location}
+            const response =  await createPost(temp)
             console.log(response)
             
 
@@ -96,9 +89,6 @@ function ReadAllPostAdopt() {
             // }
             alert(error)
         }
-
-        
-
 
     }
 
@@ -115,8 +105,8 @@ function ReadAllPostAdopt() {
 
                     <nav class="navbar">
                         <a href="/home">home</a>
-                        <a href="/posts/adopt/all/1">Adoption</a>
-                        <a href="/posts/lost/all/1">Lost</a>
+                        <a href="/posts/adopt/1">Adoption</a>
+                        <a href="/posts/lost/1">Lost</a>
                     </nav>
 
                     <div class="icons">
@@ -129,8 +119,10 @@ function ReadAllPostAdopt() {
                     <form action="" class="search-form">
                         <input type="search" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} />
                         <label for="search-box" class="fas fa-search"></label>
-                        {<Link to={`/posts/adopt/${keyword}/1`}> 
-                            // TODO button here
+                        {<Link to={`/posts/adopt/1/${keyword}`}> 
+                        <div class= "icons">
+                            <a href = "#"> <div class="fas fa-search" id="create-btn"> </div></a>
+                        </div>
                         </Link>}
                     </form>
 
@@ -149,17 +141,26 @@ function ReadAllPostAdopt() {
                                 <input type="text" placeholder="post info" class="box-info" name="info" onChange={handlePostInput} />
                                 <p>Location</p>
                                 <input type="text" placeholder="location" class="box" name="location" onChange={handlePostInput} />
+                                <p>Medical Condition</p>
+                                <input type="text" placeholder="medical condition" class="box" name="medical_condition" onChange={handlePostInput} />
                                 <p>Spay</p>
-                                <input type="checkbox" id="spay" name="spay" onChange={handleSpayInput}/>
-                                <label for="spay"> Still spay</label>
+                                <div class="spay">
+                                    <input type="checkbox" name="spay" id="spay" onChange={handleSpayInput}/>
+                                    <label for="spay">Still spay</label>
+                                </div>
                                 <p>Photo</p>
-                                <input type="file" accept="image/png, image/jpeg" value="Add photo" class="pics" onChange={fileSelectedHandler}/>
-                                                            
+                                <div class="photo">
+                                    <input type="file" accept="image/png, image/jpeg" value="Add photo" class="pics" onChange={fileSelectedHandler}/>
+                                </div>
+                                            
                             </div>
-                        </div>
-                        {<Link to="/posts/lost/all/1"> 
+
+                            {<Link to={{pathname:"/posts/adopt/1"}}> 
                             <input type="submit" value="Create" class="btn" onClick={postUploadHandler}/>
-                        </Link>}
+                            </Link>}
+
+                        </div>
+                        
                         
                     </div>
 
@@ -176,6 +177,8 @@ function ReadAllPostAdopt() {
 
                     </header>
 
+                <h1 class="heading"> our <span> Dog </span> </h1>
+
                 <section class="adoption" id="adoption">
 
                     <h1 class="heading"> our <span> `${petType}` </span> </h1>
@@ -184,14 +187,14 @@ function ReadAllPostAdopt() {
 
                         {postItem.map((item, index) => {
                         return (
-                            <div class="box">
+                            <div class="box" key={index}>
                                 <Link to={{pathname:`/post/${item.id}`}} >
 
                                 {item.AnimalStruct.map((animal, index) => {
                                     <div>
                                         <img src={animal.image} alt=""/>
                                         <h3 key={index}>{animal.type}</h3>
-                                        <p key={index}>{animal.GeneralInformation} </p>
+                                        <p key={index}>{animal.generalInformation} </p>
                                     </div>
                                 })}
                                 <a href={`/post/${item.id}`} class="btn">See more</a>
@@ -207,7 +210,7 @@ function ReadAllPostAdopt() {
                 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
                 
-                <script src="script.js"></script>
+                <script src="../script.js"></script>
 
             </body>
 
