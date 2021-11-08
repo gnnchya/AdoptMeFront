@@ -1,3 +1,4 @@
+import './App.css';
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,7 +17,6 @@ import React, { Component }  from 'react';
 
 function App() {
     return (
-        // <TestAxios></TestAxios>
         <Router>
             <Switch>
                 <Route exact path="/">
@@ -28,7 +28,7 @@ function App() {
                 <Route exact path="/posts/adopt/:page/:keyword">
                     <ReadAllPostAdopt />
                 </Route>
-                <Route exact path="/posts/lost/::page/:keyword">
+                <Route exact path="/posts/lost/:page/:keyword">
                     <ReadAllPostLost />
                 </Route>
                 <Route exact path="/post/lost/:id" >

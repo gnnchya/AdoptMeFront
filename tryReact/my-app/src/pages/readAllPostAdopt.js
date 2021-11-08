@@ -6,15 +6,15 @@ import {generateUploadURL} from '../s3.js'
 
 function ReadAllPostAdopt() {
     let limit = 100
-    let {page, keywords} = useParams()
+    const {page, keyword} = useParams();
 
-    const petType = keywords
+    const petType = keyword
     const [postItem, setPostItems] = useState([])
     useEffect(() => {
         getList()
     }, [])
 
-    const [keyword, setKeyword] = useState("")
+    const [keywords, setKeyword] = useState("")
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
@@ -22,7 +22,7 @@ function ReadAllPostAdopt() {
     
     const getList = async (e) => {
         try {
-            const response = await readAllPostAdopt(String(keyword),limit,Number(page))
+            const response = await readAllPostAdopt(String(keywords),limit,Number(page))
             console.log(response.data.data)
             // alert(response.data.data[0])
             if (response.status === 200) {
@@ -104,9 +104,15 @@ function ReadAllPostAdopt() {
                     <a href="#home" class="logo"> <i class="fas fa-paw"></i> Adopt </a>
 
                     <nav class="navbar">
-                        <a href="/home">home</a>
-                        <a href="/posts/adopt/1">Adoption</a>
-                        <a href="/posts/lost/1">Lost</a>
+                        {<Link to={{pathname:"/home"}}> 
+                        <a>home</a>
+                        </Link>}
+                        {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                        <a>Adoption</a>
+                        </Link>}
+                        {<Link to={{pathname:"/posts/lost/1/all"}}> 
+                        <a>Lost</a>
+                        </Link>}
                     </nav>
 
                     <div class="icons">
@@ -119,7 +125,7 @@ function ReadAllPostAdopt() {
                     <form action="" class="search-form">
                         <input type="search" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} />
                         <label for="search-box" class="fas fa-search"></label>
-                        {<Link to={`/posts/adopt/1/${keyword}`}> 
+                        {<Link to={`/posts/adopt/1/${keywords.keyword}`}> 
                         <div class= "icons">
                             <a href = "#"> <div class="fas fa-search" id="create-btn"> </div></a>
                         </div>
@@ -150,13 +156,13 @@ function ReadAllPostAdopt() {
                                 </div>
                                 <p>Photo</p>
                                 <div class="photo">
-                                    <input type="file" accept="image/png, image/jpeg" value="Add photo" class="pics" onChange={fileSelectedHandler}/>
+                                    <input type="file" accept="image/png, image/jpeg" class="pics" onChange={fileSelectedHandler}/>
                                 </div>
                                             
                             </div>
 
                             {<Link to={{pathname:"/posts/adopt/1"}}> 
-                            <input type="submit" value="Create" class="btn" onClick={postUploadHandler}/>
+                            <input type="submit" class="btn" onClick={postUploadHandler}/>
                             </Link>}
 
                         </div>
@@ -172,7 +178,7 @@ function ReadAllPostAdopt() {
                         <input type="password" placeholder="your password" class="box"/>
                         <p>forget your password <a href="#">click here</a></p>
                         <p>don't have an account <a href="#">create now</a></p>
-                        <input type="submit" value="login now" class="btn"/>
+                        <input type="submit" class="btn"/>
                     </form>
 
                     </header>
@@ -181,12 +187,12 @@ function ReadAllPostAdopt() {
 
                 <section class="adoption" id="adoption">
 
-                    <h1 class="heading"> our <span> `${petType}` </span> </h1>
+                    <h1 class="heading"> our <span> {`${petType}`} </span> </h1>
 
                     <div class="box-container">
 
                         {postItem.map((item, index) => {
-                        return (
+                        
                             <div class="box" key={index}>
                                 <Link to={{pathname:`/post/${item.id}`}} >
 
@@ -200,7 +206,7 @@ function ReadAllPostAdopt() {
                                 <a href={`/post/${item.id}`} class="btn">See more</a>
                                 </Link>
                             </div>
-                            )
+                            
                         })}
 
                     </div>

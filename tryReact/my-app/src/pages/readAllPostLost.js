@@ -6,21 +6,22 @@ import {generateUploadURL} from '../s3.js'
 
 function ReadAllPostLost() {
     let limit = 100
-    let {page, keywords} = useParams()
+    let {page} = useParams()
+
 
     const [postItem, setPostItems] = useState([])
     useEffect(() => {
         getList()
     }, [])
 
-    const [keyword, setKeyword] = useState("")
+    const [keywords, setKeyword] = useState("")
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
     
     const getList = async (e) => {
         try {
-            const response = await readAllPostLost('lost',String(keyword),limit,Number(page))
+            const response = await readAllPostLost('lost',String(keywords),limit,Number(page))
             console.log(response.data.data)
             // alert(response.data.data[0])
             if (response.status === 200) {
@@ -99,9 +100,15 @@ function ReadAllPostLost() {
                     <a href="index.html" class="logo"> <i class="fas fa-paw"></i> Adopt </a>
                 
                     <nav class="navbar">
-                        <a href="/home">home</a>
-                        <a href="/posts/adopt/1">Adoption</a>
-                        <a href="/posts/lost/1">Lost</a>
+                        {<Link to={{pathname:"/home"}}> 
+                        <a>home</a>
+                        </Link>}
+                        {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                        <a>Adoption</a>
+                        </Link>}
+                        {<Link to={{pathname:"/posts/lost/1/all"}}> 
+                        <a>Lost</a>
+                        </Link>}
                     </nav>
                 
                     <div class="icons">
@@ -114,7 +121,7 @@ function ReadAllPostLost() {
                     <form action="" class="search-form">
                         <input type="search" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} />
                         <label for="search-box" class="fas fa-search"></label>
-                        {<Link to={`/posts/lost/1/${keyword}`}> 
+                        {<Link to={`/posts/lost/1/${keywords.keyword}`}> 
                         <div class= "icons">
                             <a href = "#"> <div class="fas fa-search" id="create-btn"> </div></a>
                         </div>
@@ -145,13 +152,13 @@ function ReadAllPostLost() {
                                 </div>
                                 <p>Photo</p>
                                 <div class="photo">
-                                    <input type="file" accept="image/png, image/jpeg" value="Add photo" class="pics" onChange={fileSelectedHandler}/>
+                                    <input type="file" accept="image/png, image/jpeg" class="pics" onChange={fileSelectedHandler}/>
                                 </div>
                                             
                             </div>
 
                             {<Link to={{pathname:"/posts/lost/1"}}> 
-                            <input type="submit" value="Create" class="btn" onClick={postUploadHandler}/>
+                            <input type="submit"  class="btn" onClick={postUploadHandler}/>
                             </Link>}
 
                         </div>
@@ -167,7 +174,7 @@ function ReadAllPostLost() {
                         <input type="password" placeholder="your password" class="box"/>
                         <p>forget your password <a href="#">click here</a></p>
                         <p>don't have an account <a href="#">create now</a></p>
-                        <input type="submit" value="login now" class="btn"/>
+                        <input type="submit" class="btn"/>
                     </form>
                 
                 </header>
@@ -181,27 +188,27 @@ function ReadAllPostLost() {
                     <div class="box-container">
 
                     {postItem.map((item, index) => {
-                        return (
-                            <div class="box" key={index}>
-                                <Link to={{pathname:`/post/${item.id}`}} >
-                                    {item.AnimalStruct.map((animal, index) => {
-                                        <div>
-                                            <img src={animal.image} alt=""/>
-                                            <div class="content">
-                                                <div class="icons">
-                                                    <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a>
-                                                    <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
-                                                </div>
-                                                <h3 key={index}>{animal.type}</h3>
-                                                <p key={index}>{animal.generalInformation}</p>
-                                                <a href={`/post/${item.id}`} class="btn">See more</a>
+                       
+                        <div class="box" key={index}>
+                            <Link to={{pathname:`/post/${item.id}`}} >
+                                {item.AnimalStruct.map((animal, index) => {
+                                    <div>
+                                        <img src={animal.image} alt=""/>
+                                        <div class="content">
+                                            <div class="icons">
+                                                <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a>
+                                                <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
                                             </div>
+                                            <h3 key={index}>{animal.type}</h3>
+                                            <p key={index}>{animal.generalInformation}</p>
+                                            <a href={`/post/${item.id}`} class="btn">See more</a>
                                         </div>
-                                    })}
-                                    
-                                </Link>
-                            </div>
-                            )
+                                    </div>
+                                })}
+                                
+                            </Link>
+                        </div>
+                        
                         })}                
                 
                     </div>

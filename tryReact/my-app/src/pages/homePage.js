@@ -4,11 +4,13 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import {uploadPic, createPost, readAllPostLost } from "../actions/posts.js";
 import {generateUploadURL} from '../s3.js'
 
+
+
 function HomePage(){
 
     let limit = 3
     let {page, keyword} = useParams()
-
+   
     const [postItem, setPostItems] = useState([])
     useEffect(() => {
         getList()
@@ -52,6 +54,8 @@ function HomePage(){
         setFile((oldValue) => ({ ...oldValue, [name]: value }))
     }
 
+
+
     const postUploadHandler = async (event) =>{
         try {
             event.preventDefault()
@@ -87,6 +91,11 @@ function HomePage(){
     return(
         <div>
            <body>
+
+           <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+            <script src="../home.js"></script>
+
+
             <header class="header">
             
                 <a href="#home" class="logo"> <i class="fas fa-paw"></i> Adopt </a>
@@ -98,13 +107,11 @@ function HomePage(){
                 </nav>
             
                 <div class="icons">
-                    <div class="fas fa-bars" id="menu-btn"></div>
-                    <div class="fas fa-search" id="search-btn"></div>
-                    <div class="fas fa-pen" id="create-btn"></div>
-                    <div class="fas fa-user" id="login-btn"></div>
+                    <div class="fas fa-bars" id="menu-btn" ></div>
+                    <div class="fas fa-pen" id="create-btn" ></div>
+                    <div class="fas fa-user" id="login-btn" ></div>
                 </div>
         
-            
                 <div class = "create-form">
                         <h3>Lost</h3>
                         <div class = "box">
@@ -129,13 +136,13 @@ function HomePage(){
                                 </div>
                                 <p>Photo</p>
                                 <div class="photo">
-                                    <input type="file" accept="image/png, image/jpeg" value="Add photo" name="picFile" class="pics" onChange={fileSelectedHandler}/>
+                                    <input type="file" accept="image/png, image/jpeg" name="picFile" class="pics" onChange={fileSelectedHandler}/>
                                 </div>
                                             
                             </div>
 
                             {<Link to="/posts/lost/1"> 
-                            <input type="submit" value="Create" class="btn" onClick={postUploadHandler}/>
+                            <input type="submit" class="btn" onClick={postUploadHandler}/>
                             </Link>}
 
                         </div>
@@ -151,7 +158,7 @@ function HomePage(){
                     <input type="password" placeholder="your password" class="box"/>
                     <p>forget your password <a href="#">click here</a></p>
                     <p>don't have an account <a href="#">create now</a></p>
-                    <input type="submit" value="login now" class="btn"/>
+                    <input type="submit" class="btn"/>
                 </form>
             
             </header>
@@ -161,39 +168,55 @@ function HomePage(){
                 <div class="content">
                     <h3>Adopt and <span>help</span> animal</h3>
                     <p>With more adoptable pets than ever, we have an urgent need for pet adopters. Search for dogs, cats, and other available pets for adoption near you.</p>
-                    <a href="/posts/adopt/all/1" class="btn">adoption</a>
+                    {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                        <a class="btn">adoption</a>
+                    </Link>}
+                    
                 </div>
 
             </section>
 
             <section class="adoption" id="adoption">
 
-                <a  href= "/posts/adopt/1"><h1 class="heading"> our <span> Adoption</span> </h1></a>
+                {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                <a ><h1 class="heading"> our <span> Adoption</span> </h1></a>
+                </Link>}
+                
 
 
                 <div class="box-container">
 
                     <div class="box">
-                        <img src="https://cdn-icons.flaticon.com/png/512/3093/premium/3093463.png?token=exp=1636225889~hmac=3ac19dafd1d886e7605b29bb4d186449" alt=""/>
+                        <img src="../../public/images/cat-icon" alt=""/>
                         <h3>Dog</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt, earum!</p>
-                        <a href="adoption.html" class="btn">See more</a>
+                        <p>View all our DOGS available for adoption!</p>
+                        {<Link to={{pathname:"/posts/adopt/1/dog"}}> 
+                        <a class="btn">See more Dogs</a>
+                        </Link>}
+                        
                 
                     </div>
 
                     <div class="box">
-                        <img src="https://cdn-icons.flaticon.com/png/512/906/premium/906265.png?token=exp=1636225948~hmac=7cc5c0accba656d3af432ddd081649fc" alt=""/>
+                        <img src="../../public/images/dog-icon" alt=""/>
                         <h3>Cat</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt, earum!</p>
-                        <a href="adoption.html" class="btn">See more</a>
+                        <p>View all our CATS available for adoption!</p>
+                        
+                        {<Link to={{pathname:"/posts/adopt/1/cat"}}> 
+                        <a href="/posts/adopt/1/cat" class="btn">See more Cats</a>
+                        </Link>}
                         
                     </div>
 
                     <div class="box">
                         <img src="https://cdn-icons-png.flaticon.com/512/185/185810.png" alt=""/>
                         <h3>Bunny</h3>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt, earum!</p>
-                        <a href="adoption.html" class="btn">See more</a>
+                        <p>View all our BUNNIES available for adoption!</p>
+                        
+                        {<Link to={{pathname:"/posts/adopt/1/bunny"}}> 
+                        <a href="/posts/adopt/1/bunny" class="btn">See more Bunnies</a>
+                        </Link>}
+                        
                         
                     </div>
                 
@@ -203,34 +226,37 @@ function HomePage(){
 
             <section class="blogs" id="blogs">
 
-                <a  href= "lost.html"><h1 class="heading"> our <span>lost and found</span> </h1></a>
+                {<Link to={{pathname:"/posts/lost/1/all"}}> 
+                <a ><h1 class="heading"> our <span>lost and found</span> </h1></a>
+                </Link>}
+             
 
                 
 
                <div class="box-container">
 
                     {postItem.map((item, index) => {
-                        return (
-                            <div class="box" key={index}>
-                                <Link to={{pathname:`/post/${item.id}`}} >
-                                    {item.AnimalStruct.map((animal, index) => {
-                                        <div>
-                                            <img src={animal.image} alt=""/>
-                                            <div class="content">
-                                                <div class="icons">
-                                                    <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a>
-                                                    <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
-                                                </div>
-                                                <h3 key={index}>{animal.type}</h3>
-                                                <p key={index}>{animal.generalInformation}</p>
-                                                <a href={`/post/${item.id}`} class="btn">See more</a>
+                        
+                        <div class="box" key={index}>
+                            <Link to={{pathname:`/post/${item.id}`}} >
+                                {item.AnimalStruct.map((animal, index) => {
+                                    <div>
+                                        <img src={animal.image} alt=""/>
+                                        <div class="content">
+                                            <div class="icons">
+                                                <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a>
+                                                <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
                                             </div>
+                                            <h3 key={index}>{animal.type}</h3>
+                                            <p key={index}>{animal.generalInformation}</p>
+                                            <a href={`/post/${item.id}`} class="btn">See more</a>
                                         </div>
-                                    })}
-                                    
-                                </Link>
-                            </div>
-                            )
+                                    </div>
+                                })}
+                                
+                            </Link>
+                        </div>
+                            
                         })}                
                 
                     </div>
@@ -238,8 +264,7 @@ function HomePage(){
             </section>
 
 
-            <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-            <script src="../home.js"></script>
+            
 
             </body>
         </div>
