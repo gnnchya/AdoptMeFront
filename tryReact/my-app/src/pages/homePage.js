@@ -16,7 +16,7 @@ function HomePage(){
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
     
-    const getList = async (e) => {
+    const getList = (e) => {
         // try {
         //     const response = await readAllPostLost("all",limit,1)
         //     console.log(response.data.data)
@@ -35,7 +35,7 @@ function HomePage(){
         })
 
         } catch (error) {
-            //     alert(error)
+                alert(error)
          }
 
 
