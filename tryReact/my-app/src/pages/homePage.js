@@ -8,7 +8,6 @@ import {generateUploadURL} from '../s3.js'
 function HomePage(){
 
     let limit = 3
-    let {page, keyword} = useParams()
    
     const [postItem, setPostItems] = useState([])
     useEffect(() => {
@@ -21,7 +20,7 @@ function HomePage(){
     
     const getList = async (e) => {
         try {
-            const response = await readAllPostLost('adopt',String(keyword),limit,Number(page))
+            const response = await readAllPostLost("all",limit,1)
             console.log(response.data.data)
             // alert(response.data.data[0])
             if (response.status === 200) {

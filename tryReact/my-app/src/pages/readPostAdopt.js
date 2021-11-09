@@ -103,7 +103,9 @@ function ReadPostAdopting() {
 
         <header class="header">
                 
-                <a href="index.html" class="logo"> <i class="fas fa-paw"></i> Adopt </a>
+                {<Link to={{pathname:"/home"}}> 
+                <a class="logo"> <i class="fas fa-paw"></i> Adopt </a>
+                </Link>}
             
                 <nav class="navbar">
                     {<Link to={{pathname:"/home"}}> 

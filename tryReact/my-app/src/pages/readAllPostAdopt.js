@@ -62,6 +62,11 @@ function ReadAllPostAdopt() {
         setFile((oldValue) => ({ ...oldValue, [name]: value }))
     }
 
+    const searchHandler = event => {
+        event.preventDefault()
+        this.props.history.push(`/posts/adopt/1/${keywords.keyword}`)
+    }
+
     const postUploadHandler = async (event) =>{
         try {
             event.preventDefault()
@@ -102,7 +107,10 @@ function ReadAllPostAdopt() {
                 
                 <header class="header">
 
-                    <a href="#home" class="logo"> <i class="fas fa-paw"></i> Adopt </a>
+                    {<Link to={{pathname:"/home"}}> 
+                    <a class="logo"> <i class="fas fa-paw"></i> Adopt </a>
+                    </Link>}
+                    
 
                     <nav class="navbar">
                         {<Link to={{pathname:"/home"}}> 
@@ -116,22 +124,23 @@ function ReadAllPostAdopt() {
                         </Link>}
                     </nav>
 
+                   
+
+                    <form action="" class="search-form">
+                        <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput}  />
+                        <label for="search-box" class="fas fa-search"></label>
+                        {/* {<Link to={`/posts/adopt/1/${keywords.keyword}`}> 
+                        <div class= "icons">
+                            <a href = "#"> <div class="fas fa-search" id="create-btn" disabled={keywords}> </div></a>
+                        </div>
+                        </Link>} */}
+                    </form>
+
                     <div class="icons">
                         <div class="fas fa-bars" id="menu-btn"></div>
-                        <div class="fas fa-search" id="search-btn"></div>
                         <div class="fas fa-pen" id="create-btn"></div>
                         <div class="fas fa-user" id="login-btn"></div>
                     </div>
-
-                    <form action="" class="search-form">
-                        <input type="search" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} />
-                        <label for="search-box" class="fas fa-search"></label>
-                        {<Link to={`/posts/adopt/1/${keywords.keyword}`}> 
-                        <div class= "icons">
-                            <a href = "#"> <div class="fas fa-search" id="create-btn"> </div></a>
-                        </div>
-                        </Link>}
-                    </form>
 
                     <div class = "create-form">
                         <h3>Lost</h3>
