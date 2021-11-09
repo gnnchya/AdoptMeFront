@@ -26,13 +26,13 @@ function ReadPostAdopting() {
 
     const getList = async (e) => {
         try {
-            const response = await readPostAdopt(id)
-            console.log(response.data.data)
-            // alert(response.data.data[0])
-            if (response.status === 200) {
-                setPostItems(response.data.data || [])
-            }
-
+            axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost?keyword=${keyword}&limit=${limit}&page=${page}`
+            ).then((response) => {
+                console.log(response);
+                const temp = response.data.data
+                setPostItems(temp|| [])
+                console.log(postItem)
+            })
         } catch (error) {
             alert(error)
         }
@@ -198,33 +198,34 @@ function ReadPostAdopting() {
                 <div class="swiper-wrapper">
 
                 {postItem.map((item, index) => {
+                    return(
                     <div class="swiper-slide box" >
-                        {item.AnimalStruct.map((animal, index) => {
+
                             <div>
-                            <img src={animal.image} alt="" key={index}/>
+                            <img src={item.animal.image} alt="" key={index}/>
 
                             <div class="box">
                             <h3>info</h3>
-                            <a href="#" class="links" key={index}> <i class="fas fa-paw"></i> {animal.type} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-dog"></i> {animal.species} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-birthday-cake"></i> {animal.age} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {animal.medical_condition} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {animal.gender} </a>
-                            <a href="#" class="links" key={index}> <i class="fab fa-font-awesome"></i> {animal.spay} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-paw"></i> {item.animal.type} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-dog"></i> {item.animal.species} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-birthday-cake"></i> {item.animal.age} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {aitem.nimal.medical_condition} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {item.animal.gender} </a>
+                            <a href="#" class="links" key={index}> <i class="fab fa-font-awesome"></i> {item.animal.spay} </a>
                             <a href="#" class="links" key={index}> <i class="fas fa-map-marker-alt"></i> {item.location}</a>
                             <a href="#" class="links" key={index}> <i class="fas fa-check"></i> {item.adopt}  </a>
                             </div>
 
-                            <p>{animal.generalInformation}</p>
-                            <h3>{animal.type}</h3>
+                            <p>{item.animal.generalInformation}</p>
+                            <h3>{item.animal.type}</h3>
 
                             <a  type = "submit"
                             href="#" class="btn">Adopt</a>
                             </div>
-                        })} 
+
                     </div>
                     
-                
+                    )
                 })}  
                     
                 </div>

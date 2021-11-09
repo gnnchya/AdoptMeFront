@@ -14,23 +14,26 @@ function ReadAllPostLost() {
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
+
+    useEffect(() => {
+        getList()
+    }, []);
     
     const getList = async (e) => {
         try {
-            const response = await readAllPostLost(String(keyword),limit,Number(page))
-            console.log(response.data.data)
-            // alert(response.data.data[0])
-            if (response.status === 200) {
-                setPostItems(response.data.data || [])
-            }
+            axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost?keyword=${keyword}&limit=${limit}&page=${page}`)
+            .then((response) => {
+                console.log(response);
+                const temp = response.data.data
+                setPostItems(temp|| [])
+                console.log(postItem)
+            })
         } catch (error) {
             alert(error)
         }
     }
 
-    useEffect(() => {
-        getList()
-    }, [])
+   
 
     const handleChangeInput = (e) => {
         e.preventDefault()
@@ -192,27 +195,26 @@ function ReadAllPostLost() {
                     <div class="box-container">
 
                     {postItem.map((item, index) => {
-                       
+                       return(
                         <div class="box" key={index}>
                             <Link to={{pathname:`/post/${item.id}`}} >
-                                {item.AnimalStruct.map((animal, index) => {
+                                
                                     <div>
-                                        <img src={animal.image} alt=""/>
+                                        <img src={item.animal.image} alt=""/>
                                         <div class="content">
                                             <div class="icons">
                                                 <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a>
                                                 <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
                                             </div>
-                                            <h3 key={index}>{animal.type}</h3>
-                                            <p key={index}>{animal.generalInformation}</p>
+                                            <h3 key={index}>{item.animal.type}</h3>
+                                            <p key={index}>{item.animal.generalInformation}</p>
                                             <a href={`/post/${item.id}`} class="btn">See more</a>
                                         </div>
                                     </div>
-                                })}
                                 
                             </Link>
                         </div>
-                        
+                       )
                         })}                
                 
                     </div>

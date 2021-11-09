@@ -9,29 +9,31 @@ function ReadAllPostAdopt() {
     const {page, keyword} = useParams();
 
     const petType = keyword
-    const [postItem, setPostItems] = useState([])
+    const [postItem, setPostItems] = useState({})
     const [keywords, setKeyword] = useState("")
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
 
-    
+    useEffect(() => {
+        getList()
+    }, []);
+
     const getList = async (e) => {
         try {
-            const response = await readAllPostAdopt(String(keyword),limit,Number(page))
-            console.log(response.data.data)
-            // alert(response.data.data[0])
-            if (response.status === 200) {
-                setPostItems(response.data.data || [])
-            }
+            axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost?keyword=${keyword}&limit=${limit}&page=${page}`
+            ).then((response) => {
+                console.log(response);
+                const temp = response.data.data
+                setPostItems(temp|| [])
+                console.log(postItem)
+            })
         } catch (error) {
             alert(error)
         }
     }
 
-    useEffect(() => {
-        getList()
-    }, [])
+    
 
 
     const handleChangeInput = (e) => {
@@ -197,21 +199,19 @@ function ReadAllPostAdopt() {
                     <div class="box-container">
 
                         {postItem.map((item, index) => {
-                        
+                            return(
                             <div class="box" key={index}>
                                 <Link to={{pathname:`/post/${item.id}`}} >
-
-                                {item.AnimalStruct.map((animal, index) => {
                                     <div>
-                                        <img src={animal.image} alt=""/>
-                                        <h3 key={index}>{animal.type}</h3>
-                                        <p key={index}>{animal.generalInformation} </p>
+                                        <img src={item.animal.image}  key={index} alt=""/>
+                                        <h3 key={index}>{item.animal.type}</h3>
+                                        <p key={index}>{item.animal.generalInformation} </p>
                                     </div>
-                                })}
+                                
                                 <a href={`/post/${item.id}`} class="btn">See more</a>
                                 </Link>
                             </div>
-                            
+                            )
                         })}
 
                     </div>
