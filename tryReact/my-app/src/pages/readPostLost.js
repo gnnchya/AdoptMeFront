@@ -115,23 +115,24 @@ function ReadPostLost() {
                     <a>Lost</a>
                     </Link>}
                 </nav>
+
+                <form action="" class="search-form">
+                        <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>
+                        
+                        {<Link to={`/posts/lost/1/${keywords.keyword}`}> 
+                        <div class= "icons">
+                        <label for="search-box" class="fas fa-search"></label>
+                        </div>
+                        </Link>}
+                </form>
             
                 <div class="icons">
                     <div class="fas fa-bars" id="menu-btn"></div>
-                    <div class="fas fa-search" id="search-btn"></div>
                     <div class="fas fa-pen" id="create-btn"></div>
                     <div class="fas fa-user" id="login-btn"></div>
                 </div>
             
-                <form action="" class="search-form">
-                    <input type="search" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} />
-                    <label for="search-box" class="fas fa-search"></label>
-                    {<Link to={`/posts/lost/1/${keywords.keyword}`}> 
-                    <div class= "icons">
-                        <a href = "#"> <div class="fas fa-search" id="create-btn"> </div></a>
-                    </div>
-                    </Link>}
-                </form>
+               
 
                 <div class = "create-form">
                     <h3>Lost</h3>

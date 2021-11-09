@@ -114,13 +114,13 @@ function ReadAllPostLost() {
                     </nav>
 
                     <form action="" class="search-form">
-                        <input type="search" placeholder="search here..." id="search-box" name="keyword" onChange={handleChangeInput} />
-                        <label for="search-box" class="fas fa-search"></label>
-                        {/* {<Link to={`/posts/lost/1/${keywords.keyword}`}> 
+                        <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>
+                        
+                        {<Link to={`/posts/adopt/1/${keywords.keyword}`}> 
                         <div class= "icons">
-                            <a href = "#"> <div class="fas fa-search" id="create-btn"> </div></a>
+                        <label for="search-box" class="fas fa-search"></label>
                         </div>
-                        </Link>} */}
+                        </Link>}
                     </form>
 
                 

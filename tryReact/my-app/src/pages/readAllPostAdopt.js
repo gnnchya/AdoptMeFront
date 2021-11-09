@@ -62,11 +62,6 @@ function ReadAllPostAdopt() {
         setFile((oldValue) => ({ ...oldValue, [name]: value }))
     }
 
-    const searchHandler = event => {
-        event.preventDefault()
-        this.props.history.push(`/posts/adopt/1/${keywords.keyword}`)
-    }
-
     const postUploadHandler = async (event) =>{
         try {
             event.preventDefault()
@@ -127,13 +122,13 @@ function ReadAllPostAdopt() {
                    
 
                     <form action="" class="search-form">
-                        <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput}  />
-                        <label for="search-box" class="fas fa-search"></label>
-                        {/* {<Link to={`/posts/adopt/1/${keywords.keyword}`}> 
+                        <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>
+                        
+                        {<Link to={`/posts/adopt/1/${keywords.keyword}`}> 
                         <div class= "icons">
-                            <a href = "#"> <div class="fas fa-search" id="create-btn" disabled={keywords}> </div></a>
+                        <label for="search-box" class="fas fa-search"></label>
                         </div>
-                        </Link>} */}
+                        </Link>}
                     </form>
 
                     <div class="icons">
