@@ -4,13 +4,16 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import {uploadPic, createPost, readAllPostLost } from "../actions/posts.js";
 import {generateUploadURL} from '../s3.js'
 import axios from 'axios'
+import imagecat from '../images/cat-icon.png'
+import imagedog from '../images/dog-icon.png'
+
 
 
 function HomePage(){
 
     let limit = 3
    
-    const [postItem, setPostItems] = useState({})
+    const [postItem, setPostItems] = useState([])
 
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
@@ -37,8 +40,7 @@ function HomePage(){
         axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
         ).then((response) => {
             console.log(response);
-            const temp = response.data.data
-            setPostItems(temp|| [])
+            setPostItems(response.data.data || [])
             console.log(postItem)
         })
 
@@ -204,7 +206,7 @@ function HomePage(){
                 <div class="box-container">
 
                     <div class="box">
-                        <img src="../images/dog-icon" alt=""/>
+                        <img src={imagedog} alt=""/>
                         <h3>Dog</h3>
                         <p>View all our DOGS available for adoption!</p>
                         {<Link to={{pathname:"/posts/adopt/1/dog"}}> 
@@ -215,7 +217,7 @@ function HomePage(){
                     </div>
 
                     <div class="box">
-                        <img src="../images/cat-icon"  alt=""/>
+                        <img src={imagecat}  alt=""/>
                         <h3>Cat</h3>
                         <p>View all our CATS available for adoption!</p>
                         
@@ -248,31 +250,28 @@ function HomePage(){
                 </Link>}
              
 
-                
-
                <div class="box-container">
 
                     {postItem.map((item, index) => {
-                        
-                        <div class="box" key={index}>
+                        return (
+                            <div class="box" key={index}>
                             <Link to={{pathname:`/post/${item.id}`}} >
-                                {item.AnimalStruct.map((animal, index) => {
                                     <div>
-                                        <img src={animal.image} alt=""/>
+                                        <img src={item.animal.image} alt=""/>
                                         <div class="content">
                                             <div class="icons">
                                                 <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a>
-                                                <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
+                                                <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.post_at)} </a>
                                             </div>
-                                            <h3 key={index}>{animal.type}</h3>
-                                            <p key={index}>{animal.generalInformation}</p>
+                                            <h3 key={index}>{item.animal.type}</h3>
+                                            <p key={index}>{item.animal.general_information}</p>
                                             <a href={`/post/${item.id}`} class="btn">See more</a>
                                         </div>
                                     </div>
-                                })}
                                 
                             </Link>
                         </div>
+                        )
                             
                         })}                
                 
