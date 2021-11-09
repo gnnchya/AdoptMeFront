@@ -8,7 +8,7 @@ function ReadAllPostAdopt() {
     const {page, keyword} = useParams();
 
     const petType = keyword
-    const [postItem, setPostItems] = useState({})
+    const [postItem, setPostItems] = useState([])
     const [keywords, setKeyword] = useState("")
 
     

@@ -8,7 +8,7 @@ import axios from 'axios'
 function ReadPostLost() {
     // const customer_id = "c3ok6a2mvdvh8i865tag"
 
-    const [postItem, setPostItems] = useState([])
+    const [postItem, setPostItems] = useState({})
     const [keywords, setKeyword] = useState("")
 
 
@@ -22,7 +22,7 @@ function ReadPostLost() {
             axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost/${id}`
             ).then((response) => {
                 console.log(response);
-                setPostItems(response.data.data|| [])
+                setPostItems(response.data.data)
                 console.log(postItem)
             })
         } catch (error) {
@@ -95,10 +95,10 @@ function ReadPostLost() {
             
                 <div class="box-container">
                 
-                {postItem.map((item, index) => {
+                {/* {postItem.map((item, index) => { */}
                     <div class="box">
                             <div>
-                            <img src={item.animal.image} alt="" key={index}/>
+                            <img src={postItem.animal.image} alt="" key={index}/>
                             <div class= "icons">
                                 {<Link to={{pathname:{}`/updatePost/${id}`}}> 
                                     <a> <div class="fas fa-pen" id="create-btn"> </div></a>
@@ -107,22 +107,22 @@ function ReadPostLost() {
 
                             <div class="content">
                                 <div class="icons">
-                                    <a href="#"> <i class="fas fa-user"></i> {item.uid} </a>
-                                    <a href="#"> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)}</a>
+                                    <a href="#"> <i class="fas fa-user"></i> {postItem.uid} </a>
+                                    <a href="#"> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(postItem.postAt)}</a>
                                 </div>
-                                <h3>{item.animal.species}</h3>
-                                <p>{item.animal.generalInformation}</p>
+                                <h3>{postItem.animal.species}</h3>
+                                <p>{postItem.animal.generalInformation}</p>
                                 <div class="box">
                                     <div class="box">
                                         <h3>info</h3>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-paw"></i> {item.animal.type} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-dog"></i> {item.animal.species} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-birthday-cake"></i> {item.animal.age} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {item.animal.medical_condition} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {item.animal.gender} </a>
-                                        <a href="#" class="links" key={index}> <i class="fab fa-font-awesome"></i> {item.animal.spay} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-map-marker-alt"></i> {item.location}</a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-check"></i> {item.adopt}  </a>
+                                        <a href="#" class="links" key={index}> <i class="fas fa-paw"></i> {postItem.animal.type} </a>
+                                        <a href="#" class="links" key={index}> <i class="fas fa-dog"></i> {postItem.animal.species} </a>
+                                        <a href="#" class="links" key={index}> <i class="fas fa-birthday-cake"></i> {postItem.animal.age} </a>
+                                        <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {postItem.animal.medical_condition} </a>
+                                        <a href="#" class="links" key={index}> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {postItem.animal.gender} </a>
+                                        <a href="#" class="links" key={index}> <i class="fab fa-font-awesome"></i> {postItem.animal.spay} </a>
+                                        <a href="#" class="links" key={index}> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
+                                        <a href="#" class="links" key={index}> <i class="fas fa-check"></i> {postItem.adopt}  </a>
                                     </div>
                                     
                                     <h3>contact info</h3>
@@ -139,7 +139,7 @@ function ReadPostLost() {
                     </div>
                     
                 
-                })}           
+                {/* })}            */}
                     
             
             
