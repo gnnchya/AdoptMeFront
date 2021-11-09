@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import testUtils from 'react-dom/test-utils';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import axios from 'axios'
+import { uploadPic, createPost, readPostLost} from '../actions/posts'
+import {generateUploadURL} from '../s3.js'
 // import PostList from '../components/PostList'
 
 function ReadPostLost() {
@@ -10,7 +11,9 @@ function ReadPostLost() {
 
     const [postItem, setPostItems] = useState([])
     const [keywords, setKeyword] = useState("")
-
+    const [postInfo, setPostInfo] = useState("") 
+    const [spay, setSpay] = useState(false)
+    const [file, setFile] = useState({}) 
 
     useEffect(() => {
         getList()
@@ -37,6 +40,59 @@ function ReadPostLost() {
         const value = e.target.value
         setKeyword((oldValue) => ({ ...oldValue, [name]: value }))
     }
+
+    const handlePostInput = (e) =>{
+        e.preventDefault()
+        const name = e.target.name
+        const value = e.target.value
+        setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
+    }
+   
+    const handleSpayInput = (e) =>{
+        e.preventDefault()
+        const name = e.target.name
+        const value = e.target.value
+        setSpay((oldValue) => ({ ...oldValue, [name]: value }))
+    }
+
+    const fileSelectedHandler = event => {
+        event.preventDefault()
+        const name = event.target.name
+        const value = event.target.value
+        setFile((oldValue) => ({ ...oldValue, [name]: value }))
+    }
+
+    const postUploadHandler = async (event) =>{
+        try {
+            event.preventDefault()
+            const {url} =  await generateUploadURL()
+            var options = {
+                headers: {
+                'Content-Type': file.picFile
+                }
+            };
+
+            const picURL = await uploadPic(url, file.picFile, options) 
+               
+            const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: picURL, medical_condition: postInfo.medical_condition}
+            const temp = {...postInfo, animal:tempAnimal, UID: "", location: postInfo.location}
+            const response =  await createPost(temp)
+            console.log(response)
+            
+
+            if (response.status === 201) {
+                console.log("create", response)
+                alert("created")
+            }
+        } catch (error) {
+            // if (error.status === 422){
+            //     alert("422")
+            // }
+            alert(error)
+        }
+
+    }
+
 
     return (
         <div>
@@ -75,7 +131,49 @@ function ReadPostLost() {
                     <div class="fas fa-pen" id="create-btn"></div>
                     <div class="fas fa-user" id="login-btn"></div>
                 </div>
+            
+               
 
+                <div class = "create-form">
+                    <h3>Lost</h3>
+                    <div class = "box">
+                        <div class="content">
+                            <h3>Create adopt pet post</h3>
+                            <p>Species</p>
+                            <input type="text" placeholder="pet species" class="box"  name="species" onChange={handlePostInput} />
+                            <p>Age</p>
+                            <input type="text" placeholder="Age of pet" class="box" name="age"  onChange={handlePostInput} />
+                            <p>Gender</p>
+                            <input type="text" placeholder="gender of pet" class="box" name="gender" onChange={handlePostInput} />
+                            <p>Post caption</p>
+                            <input type="text" placeholder="post info" class="box-info" name="info" onChange={handlePostInput} />
+                            <p>Location</p>
+                            <input type="text" placeholder="location" class="box" name="location" onChange={handlePostInput} />
+                            <p>Medical Condition</p>
+                            <input type="text" placeholder="medical condition" class="box" name="medical_condition" onChange={handlePostInput} />
+                            <p>Spay</p>
+                            <div class="spay">
+                                <input type="checkbox" name="spay" id="spay" onChange={handleSpayInput}/>
+                                <label for="spay">Still spay</label>
+                            </div>
+                            <p>Photo</p>
+                            <div class="photo">
+                                <input type="file" accept="image/png, image/jpeg" class="pics" onChange={fileSelectedHandler}/>
+                            </div>
+                                        
+                        </div>
+
+                        {<Link to={{pathname:"/posts/lost/1"}}> 
+                        <input type="submit"  class="btn" onClick={postUploadHandler}/>
+                        </Link>}
+
+                    </div>
+                    
+                    
+                </div>
+            
+                
+            
                 <form action="" class="login-form">
                     <h3>login now</h3>
                     <input type="email" placeholder="your email" class="box"/>

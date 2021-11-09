@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import {uploadPic, createPost, readAllPostLost } from "../actions/posts.js";
-import {generateUploadURL} from '../s3.js'
+import axios from 'axios'
 
 function ReadAllPostLost() {
     let limit = 100
@@ -11,9 +10,6 @@ function ReadAllPostLost() {
 
     const [postItem, setPostItems] = useState([])
     const [keywords, setKeyword] = useState("")
-    const [postInfo, setPostInfo] = useState("") 
-    const [spay, setSpay] = useState(false)
-    const [file, setFile] = useState({}) 
 
     useEffect(() => {
         getList()
@@ -40,58 +36,6 @@ function ReadAllPostLost() {
         const name = e.target.name
         const value = e.target.value
         setKeyword((oldValue) => ({ ...oldValue, [name]: value }))
-    }
-
-    const handlePostInput = (e) =>{
-        e.preventDefault()
-        const name = e.target.name
-        const value = e.target.value
-        setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
-    }
-   
-    const handleSpayInput = (e) =>{
-        e.preventDefault()
-        const name = e.target.name
-        const value = e.target.value
-        setSpay((oldValue) => ({ ...oldValue, [name]: value }))
-    }
-
-    const fileSelectedHandler = event => {
-        event.preventDefault()
-        const name = event.target.name
-        const value = event.target.value
-        setFile((oldValue) => ({ ...oldValue, [name]: value }))
-    }
-
-    const postUploadHandler = async (event) =>{
-        try {
-            event.preventDefault()
-            const {url} =  await generateUploadURL()
-            var options = {
-                headers: {
-                'Content-Type': file.picFile
-                }
-            };
-
-            const picURL = await uploadPic(url, file.picFile, options) 
-               
-            const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: picURL, medical_condition: postInfo.medical_condition}
-            const temp = {...postInfo, animal:tempAnimal, UID: "", location: postInfo.location}
-            const response =  await createPost(temp)
-            console.log(response)
-            
-
-            if (response.status === 201) {
-                console.log("create", response)
-                alert("created")
-            }
-        } catch (error) {
-            // if (error.status === 422){
-            //     alert("422")
-            // }
-            alert(error)
-        }
-
     }
 
 
