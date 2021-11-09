@@ -16,6 +16,12 @@ function HomePage(){
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
     
+
+    useEffect(() => {
+        console.log("before getiing response")
+        getList()
+    }, []);
+
     const getList = (e) => {
         // try {
         //     const response = await readAllPostLost("all",limit,1)
@@ -30,8 +36,10 @@ function HomePage(){
         try {
         axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
         ).then((response) => {
-            console.log(response)
-            setPostItems(response.data.data || [])
+            console.log(response);
+            const temp = response.data.data
+            setPostItems(temp|| [])
+            console.log(postItem)
         })
 
         } catch (error) {
@@ -41,9 +49,6 @@ function HomePage(){
 
     }
 
-    useEffect(() => {
-        getList()
-    }, [])
 
     const handlePostInput = (e) =>{
         e.preventDefault()
