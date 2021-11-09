@@ -9,9 +9,11 @@ import axios from 'axios'
 function ReadPostAdopting() {
     // const customer_id = "c3ok6a2mvdvh8i865tag"
 
-    const [postItem, setPostItems] = useState([])
+    const [postItem, setPostItems] = useState({})
 
     const [keywords, setKeyword] = useState("")
+
+    const [animal,setAnimal] = useState({})
 
     const handleChangeInput = (e) => {
         e.preventDefault()
@@ -32,7 +34,8 @@ function ReadPostAdopting() {
             axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost/${id}`
             ).then((response) => {
                 console.log(response);
-                setPostItems(response.data.data|| [])
+                setPostItems(response.data.data)
+                setAnimal(response.data.data.animal)
                 console.log(postItem)
             })
         } catch (error) {
@@ -105,22 +108,22 @@ function ReadPostAdopting() {
                     <div class="swiper-slide box" >
 
                             <div>
-                            <img src={postItem.animal.image} alt=""/>
+                            <img src={animal.image} alt=""/>
 
                             <div class="box">
                             <h3>info</h3>
-                            <a href="#" class="links"> <i class="fas fa-paw"></i> {postItem.animal.type} </a>
-                            <a href="#" class="links"> <i class="fas fa-dog"></i> {postItem.animal.species} </a>
-                            <a href="#" class="links"> <i class="fas fa-birthday-cake"></i> {postItem.animal.age} </a>
-                            <a href="#" class="links"> <i class="fas fa-hospital"></i> {postItem.nimal.medical_condition} </a>
-                            <a href="#" class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {postItem.animal.gender} </a>
-                            <a href="#" class="links"> <i class="fab fa-font-awesome"></i> {postItem.animal.spay} </a>
+                            <a href="#" class="links"> <i class="fas fa-paw"></i> {animal.type} </a>
+                            <a href="#" class="links"> <i class="fas fa-dog"></i> {animal.species} </a>
+                            <a href="#" class="links"> <i class="fas fa-birthday-cake"></i> {animal.age} </a>
+                            <a href="#" class="links"> <i class="fas fa-hospital"></i> {animal.medical_condition} </a>
+                            <a href="#" class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {animal.gender} </a>
+                            <a href="#" class="links"> <i class="fab fa-font-awesome"></i> {String(animal.spay)} </a>
                             <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
-                            <a href="#" class="links"> <i class="fas fa-check"></i> {postItem.adopt}  </a>
+                            <a href="#" class="links"> <i class="fas fa-check"></i> {String(postItem.adopt)}  </a>
                             </div>
 
-                            <p>{postItem.animal.generalInformation}</p>
-                            <h3>{postItem.animal.type}</h3>
+                            <p>{animal.general_information}</p>
+                            <h3>{animal.type}</h3>
 
                             <a  type = "submit"
                             href="#" class="btn">Adopt</a>

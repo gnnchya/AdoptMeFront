@@ -8,7 +8,7 @@ import axios from 'axios'
 function ReadPostLost() {
     // const customer_id = "c3ok6a2mvdvh8i865tag"
 
-    const [postItem, setPostItems] = useState([])
+    const [postItem, setPostItems] = useState({})
     const [keywords, setKeyword] = useState("")
     const [animal, setAnimal] = useState({})
 
@@ -23,7 +23,7 @@ function ReadPostLost() {
             axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost/${id}`
             ).then((response) => {
                 console.log(response);
-                setPostItems(response.data.data || [])
+                setPostItems(response.data.data)
                 setAnimal(response.data.data.animal)
                 console.log(postItem)
             })
@@ -123,9 +123,9 @@ function ReadPostLost() {
                                         <a href="#" class="links"> <i class="fas fa-birthday-cake"></i> {animal.age} </a>
                                         <a href="#" class="links"> <i class="fas fa-hospital"></i> {animal.medical_condition} </a>
                                         <a href="#" class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {animal.gender} </a>
-                                        <a href="#" class="links"> <i class="fab fa-font-awesome"></i> {animal.spay} </a>
-                                        <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
-                                        <a href="#" class="links"> <i class="fas fa-check"></i> {postItem.found}  </a>
+                                        <a href="#" class="links"> <i class="fab fa-font-awesome"></i> {String(animal.spay)} </a>
+                                        <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {postItem.lost_location}</a>
+                                        <a href="#" class="links"> <i class="fas fa-check"></i> {String(postItem.found)}  </a>
                                     </div>
                                     
                                     <h3>contact info</h3>
