@@ -10,10 +10,6 @@ function ReadAllPostAdopt() {
 
     const petType = keyword
     const [postItem, setPostItems] = useState([])
-    useEffect(() => {
-        getList()
-    }, [])
-
     const [keywords, setKeyword] = useState("")
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
@@ -22,7 +18,7 @@ function ReadAllPostAdopt() {
     
     const getList = async (e) => {
         try {
-            const response = await readAllPostAdopt(String(keywords),limit,Number(page))
+            const response = await readAllPostAdopt(String(keyword),limit,Number(page))
             console.log(response.data.data)
             // alert(response.data.data[0])
             if (response.status === 200) {
@@ -32,6 +28,11 @@ function ReadAllPostAdopt() {
             alert(error)
         }
     }
+
+    useEffect(() => {
+        getList()
+    }, [])
+
 
     const handleChangeInput = (e) => {
         e.preventDefault()

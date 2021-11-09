@@ -6,14 +6,10 @@ import {generateUploadURL} from '../s3.js'
 
 function ReadAllPostLost() {
     let limit = 100
-    let {page} = useParams()
+    let {page, keyword} = useParams()
 
 
     const [postItem, setPostItems] = useState([])
-    useEffect(() => {
-        getList()
-    }, [])
-
     const [keywords, setKeyword] = useState("")
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
@@ -21,7 +17,7 @@ function ReadAllPostLost() {
     
     const getList = async (e) => {
         try {
-            const response = await readAllPostLost('lost',String(keywords),limit,Number(page))
+            const response = await readAllPostLost(String(keyword),limit,Number(page))
             console.log(response.data.data)
             // alert(response.data.data[0])
             if (response.status === 200) {
@@ -31,6 +27,10 @@ function ReadAllPostLost() {
             alert(error)
         }
     }
+
+    useEffect(() => {
+        getList()
+    }, [])
 
     const handleChangeInput = (e) => {
         e.preventDefault()
