@@ -10,9 +10,6 @@ function HomePage(){
     let limit = 3
    
     const [postItem, setPostItems] = useState([])
-    useEffect(() => {
-        getList()
-    }, [])
 
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
@@ -30,6 +27,10 @@ function HomePage(){
             alert(error)
         }
     }
+
+    useEffect(() => {
+        getList()
+    }, [])
 
     const handlePostInput = (e) =>{
         e.preventDefault()
