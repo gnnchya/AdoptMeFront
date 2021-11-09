@@ -19,7 +19,7 @@ function ReadPostAdopting() {
         const value = e.target.value
         setKeyword((oldValue) => ({ ...oldValue, [name]: value }))
     }
-    
+
     useEffect(() => {
         getList()
     }, [])
@@ -29,11 +29,10 @@ function ReadPostAdopting() {
 
     const getList = async (e) => {
         try {
-            axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost?keyword=${keyword}&limit=${limit}&page=${page}`
+            axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost/${id}`
             ).then((response) => {
                 console.log(response);
-                const temp = response.data.data
-                setPostItems(temp|| [])
+                setPostItems(response.data.data|| [])
                 console.log(postItem)
             })
         } catch (error) {
@@ -113,7 +112,7 @@ function ReadPostAdopting() {
                             <a href="#" class="links" key={index}> <i class="fas fa-paw"></i> {item.animal.type} </a>
                             <a href="#" class="links" key={index}> <i class="fas fa-dog"></i> {item.animal.species} </a>
                             <a href="#" class="links" key={index}> <i class="fas fa-birthday-cake"></i> {item.animal.age} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {aitem.nimal.medical_condition} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {item.nimal.medical_condition} </a>
                             <a href="#" class="links" key={index}> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {item.animal.gender} </a>
                             <a href="#" class="links" key={index}> <i class="fab fa-font-awesome"></i> {item.animal.spay} </a>
                             <a href="#" class="links" key={index}> <i class="fas fa-map-marker-alt"></i> {item.location}</a>

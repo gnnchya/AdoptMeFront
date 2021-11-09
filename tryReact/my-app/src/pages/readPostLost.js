@@ -19,11 +19,10 @@ function ReadPostLost() {
     console.log("iddd", id)
     const getList = async (e) => {
         try {
-            axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost?keyword=${keyword}&limit=${limit}&page=${page}`)
-            .then((response) => {
+            axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost/${id}`
+            ).then((response) => {
                 console.log(response);
-                const temp = response.data.data
-                setPostItems(temp|| [])
+                setPostItems(response.data.data|| [])
                 console.log(postItem)
             })
         } catch (error) {
@@ -111,8 +110,8 @@ function ReadPostLost() {
                                     <a href="#"> <i class="fas fa-user"></i> {item.uid} </a>
                                     <a href="#"> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)}</a>
                                 </div>
-                                <h3>{animal.species}</h3>
-                                <p>{animal.generalInformation}</p>
+                                <h3>{item.animal.species}</h3>
+                                <p>{item.animal.generalInformation}</p>
                                 <div class="box">
                                     <div class="box">
                                         <h3>info</h3>

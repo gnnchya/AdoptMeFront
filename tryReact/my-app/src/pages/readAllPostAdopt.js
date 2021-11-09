@@ -22,14 +22,12 @@ function ReadAllPostAdopt() {
             axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost?keyword=${keyword}&limit=${limit}&page=${page}`
             ).then((response) => {
                 console.log(response);
-                const temp = response.data.data
-                setPostItems(temp|| [])
+                setPostItems(response.data.data|| [])
                 console.log(postItem)
             })
         } catch (error) {
             alert(error)
         }
-    }
     }
 
     const handleChangeInput = (e) => {
