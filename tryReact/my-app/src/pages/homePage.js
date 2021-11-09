@@ -125,46 +125,7 @@ function HomePage(){
                     <div class="fas fa-bars" id="menu-btn" ></div>
                     <div class="fas fa-pen" id="create-btn" ></div>
                     <div class="fas fa-user" id="login-btn" ></div>
-                </div>
-        
-                <div class = "create-form">
-                        <h3>Lost</h3>
-                        <div class = "box">
-                            <div class="content">
-                                <h3>Create adopt pet post</h3>
-                                <p>Species</p>
-                                <input type="text" placeholder="pet species" class="box"  name="species" onChange={handlePostInput} />
-                                <p>Age</p>
-                                <input type="text" placeholder="Age of pet" class="box" name="age"  onChange={handlePostInput} />
-                                <p>Gender</p>
-                                <input type="text" placeholder="gender of pet" class="box" name="gender" onChange={handlePostInput} />
-                                <p>Post caption</p>
-                                <input type="text" placeholder="post info" class="box-info" name="info" onChange={handlePostInput} />
-                                <p>Location</p>
-                                <input type="text" placeholder="location" class="box" name="location" onChange={handlePostInput} />
-                                <p>Medical Condition</p>
-                                <input type="text" placeholder="medical condition" class="box" name="medical_condition" onChange={handlePostInput} />
-                                <p>Spay</p>
-                                <div class="spay">
-                                    <input type="checkbox" name="spay" id="spay" onChange={handleSpayInput}/>
-                                    <label for="spay">Still spay</label>
-                                </div>
-                                <p>Photo</p>
-                                <div class="photo">
-                                    <input type="file" accept="image/png, image/jpeg" name="picFile" class="pics" onChange={fileSelectedHandler}/>
-                                </div>
-                                            
-                            </div>
-
-                            {<Link to="/posts/lost/1"> 
-                            <input type="submit" class="btn" onClick={postUploadHandler}/>
-                            </Link>}
-
-                        </div>
-                        
-                        
-                    </div>
-            
+                </div>            
                 
             
                 <form action="" class="login-form">
