@@ -100,27 +100,27 @@ function ReadPostAdopting() {
 
                 <div class="swiper-wrapper">
 
-                {postItem.map((item, index) => {
-                    return(
+                {/* {postItem.map((item, index) => { */}
+                    {/* return( */}
                     <div class="swiper-slide box" >
 
                             <div>
-                            <img src={item.animal.image} alt="" key={index}/>
+                            <img src={postItem.animal.image} alt="" key={index}/>
 
                             <div class="box">
                             <h3>info</h3>
-                            <a href="#" class="links" key={index}> <i class="fas fa-paw"></i> {item.animal.type} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-dog"></i> {item.animal.species} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-birthday-cake"></i> {item.animal.age} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {item.nimal.medical_condition} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {item.animal.gender} </a>
-                            <a href="#" class="links" key={index}> <i class="fab fa-font-awesome"></i> {item.animal.spay} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-map-marker-alt"></i> {item.location}</a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-check"></i> {item.adopt}  </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-paw"></i> {postItem.animal.type} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-dog"></i> {postItem.animal.species} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-birthday-cake"></i> {postItem.animal.age} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {postItem.nimal.medical_condition} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {postItem.animal.gender} </a>
+                            <a href="#" class="links" key={index}> <i class="fab fa-font-awesome"></i> {postItem.animal.spay} </a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
+                            <a href="#" class="links" key={index}> <i class="fas fa-check"></i> {postItem.adopt}  </a>
                             </div>
 
-                            <p>{item.animal.generalInformation}</p>
-                            <h3>{item.animal.type}</h3>
+                            <p>{postItem.animal.generalInformation}</p>
+                            <h3>{postItem.animal.type}</h3>
 
                             <a  type = "submit"
                             href="#" class="btn">Adopt</a>
@@ -128,8 +128,8 @@ function ReadPostAdopting() {
 
                     </div>
                     
-                    )
-                })}  
+                    {/* ) */}
+                {/* })}   */}
                     
                 </div>
 

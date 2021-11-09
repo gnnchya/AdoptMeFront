@@ -8,7 +8,7 @@ import axios from 'axios'
 function ReadPostLost() {
     // const customer_id = "c3ok6a2mvdvh8i865tag"
 
-    const [postItem, setPostItems] = useState({})
+    const [postItem, setPostItems] = useState([])
     const [keywords, setKeyword] = useState("")
 
 
@@ -22,7 +22,7 @@ function ReadPostLost() {
             axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost/${id}`
             ).then((response) => {
                 console.log(response);
-                setPostItems(response.data.data)
+                setPostItems(response.data.data || [])
                 console.log(postItem)
             })
         } catch (error) {
@@ -96,6 +96,7 @@ function ReadPostLost() {
                 <div class="box-container">
                 
                 {/* {postItem.map((item, index) => { */}
+                    {/* return( */}
                     <div class="box">
                             <div>
                             <img src={postItem.animal.image} alt="" key={index}/>
@@ -137,7 +138,7 @@ function ReadPostLost() {
                             </div>
                             </div>
                     </div>
-                    
+                    {/* ) */}
                 
                 {/* })}            */}
                     
