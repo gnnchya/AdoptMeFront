@@ -98,8 +98,6 @@ function ReadAllPostLost() {
                     {postItem.map((item, index) => {
                        return(
                         <div class="box" key={index}>
-                            <Link to={{pathname:`/post/lost/${item.id}`}} >
-                                
                                     <div>
                                         <img src={item.animal.image} alt=""/>
                                         <div class="content">
@@ -109,11 +107,12 @@ function ReadAllPostLost() {
                                             </div>
                                             <h3 key={index}>{item.animal.type}</h3>
                                             <p key={index}>{item.animal.generalInformation}</p>
-                                            <a href={`/post/${item.id}`} class="btn">See more</a>
+                                            <Link to={{pathname:`/post/lost/${item.id}`}} >
+                                            <a class="btn">See more</a>
+                                            </Link>
+                                            
                                         </div>
                                     </div>
-                                
-                            </Link>
                         </div>
                        )
                         })}                

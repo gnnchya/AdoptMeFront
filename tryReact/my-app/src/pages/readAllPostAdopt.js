@@ -103,15 +103,15 @@ function ReadAllPostAdopt() {
                         {postItem.map((item, index) => {
                             return(
                             <div class="box" key={index}>
-                                <Link to={{pathname:`/post/adopt/${item.id}`}} >
                                     <div>
                                         <img src={item.animal.image}  key={index} alt=""/>
                                         <h3 key={index}>{item.animal.type}</h3>
                                         <p key={index}>{item.animal.generalInformation} </p>
                                     </div>
                                 
-                                <a href={`/post/${item.id}`} class="btn">See more</a>
-                                </Link>
+                                    <Link to={{pathname:`/post/adopt/${item.id}`}} >
+                                            <a class="btn">See more</a>
+                                    </Link>
                             </div>
                             )
                         })}
