@@ -10,6 +10,7 @@ function ReadPostLost() {
 
     const [postItem, setPostItems] = useState([])
     const [keywords, setKeyword] = useState("")
+    const [animal, setAnimal] = useState({})
 
 
     useEffect(() => {
@@ -23,6 +24,7 @@ function ReadPostLost() {
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data || [])
+                setAnimal(response.data.data.animal)
                 console.log(postItem)
             })
         } catch (error) {
@@ -99,9 +101,9 @@ function ReadPostLost() {
                     {/* return( */}
                     <div class="box">
                             <div>
-                            <img src={postItem.animal.image} alt="" key={index}/>
+                            <img src={animal.image} alt=""/>
                             <div class= "icons">
-                                {<Link to={{pathname:{}`/updatePost/${id}`}}> 
+                                {<Link to={{pathname:`/updatePost/${id}`}}> 
                                     <a> <div class="fas fa-pen" id="create-btn"> </div></a>
                                 </Link>}
                             </div>
@@ -109,21 +111,21 @@ function ReadPostLost() {
                             <div class="content">
                                 <div class="icons">
                                     <a href="#"> <i class="fas fa-user"></i> {postItem.uid} </a>
-                                    <a href="#"> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(postItem.postAt)}</a>
+                                    <a href="#"> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(postItem.post_at)}</a>
                                 </div>
-                                <h3>{postItem.animal.species}</h3>
-                                <p>{postItem.animal.generalInformation}</p>
+                                <h3>{animal.species}</h3>
+                                <p>{animal.general_information}</p>
                                 <div class="box">
                                     <div class="box">
                                         <h3>info</h3>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-paw"></i> {postItem.animal.type} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-dog"></i> {postItem.animal.species} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-birthday-cake"></i> {postItem.animal.age} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {postItem.animal.medical_condition} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {postItem.animal.gender} </a>
-                                        <a href="#" class="links" key={index}> <i class="fab fa-font-awesome"></i> {postItem.animal.spay} </a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
-                                        <a href="#" class="links" key={index}> <i class="fas fa-check"></i> {postItem.adopt}  </a>
+                                        <a href="#" class="links"> <i class="fas fa-paw"></i> {animal.type} </a>
+                                        <a href="#" class="links"> <i class="fas fa-dog"></i> {animal.species} </a>
+                                        <a href="#" class="links"> <i class="fas fa-birthday-cake"></i> {animal.age} </a>
+                                        <a href="#" class="links"> <i class="fas fa-hospital"></i> {animal.medical_condition} </a>
+                                        <a href="#" class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {animal.gender} </a>
+                                        <a href="#" class="links"> <i class="fab fa-font-awesome"></i> {animal.spay} </a>
+                                        <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
+                                        <a href="#" class="links"> <i class="fas fa-check"></i> {postItem.found}  </a>
                                     </div>
                                     
                                     <h3>contact info</h3>

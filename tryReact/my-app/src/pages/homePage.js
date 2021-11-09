@@ -262,7 +262,7 @@ function HomePage(){
                                             <h3 key={index}>{item.animal.type}</h3>
                                             <p key={index}>{item.animal.general_information}</p>
                                             <Link to={{pathname:`/post/lost/${item.id}`}} >
-                                            <a class="btn">See more</a>
+                                            <div class="btn">See more</div>
                                             </Link>
                                         </div>
                                     </div>

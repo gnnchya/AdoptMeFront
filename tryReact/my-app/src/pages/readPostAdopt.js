@@ -105,18 +105,18 @@ function ReadPostAdopting() {
                     <div class="swiper-slide box" >
 
                             <div>
-                            <img src={postItem.animal.image} alt="" key={index}/>
+                            <img src={postItem.animal.image} alt=""/>
 
                             <div class="box">
                             <h3>info</h3>
-                            <a href="#" class="links" key={index}> <i class="fas fa-paw"></i> {postItem.animal.type} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-dog"></i> {postItem.animal.species} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-birthday-cake"></i> {postItem.animal.age} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-hospital"></i> {postItem.nimal.medical_condition} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {postItem.animal.gender} </a>
-                            <a href="#" class="links" key={index}> <i class="fab fa-font-awesome"></i> {postItem.animal.spay} </a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
-                            <a href="#" class="links" key={index}> <i class="fas fa-check"></i> {postItem.adopt}  </a>
+                            <a href="#" class="links"> <i class="fas fa-paw"></i> {postItem.animal.type} </a>
+                            <a href="#" class="links"> <i class="fas fa-dog"></i> {postItem.animal.species} </a>
+                            <a href="#" class="links"> <i class="fas fa-birthday-cake"></i> {postItem.animal.age} </a>
+                            <a href="#" class="links"> <i class="fas fa-hospital"></i> {postItem.nimal.medical_condition} </a>
+                            <a href="#" class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {postItem.animal.gender} </a>
+                            <a href="#" class="links"> <i class="fab fa-font-awesome"></i> {postItem.animal.spay} </a>
+                            <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
+                            <a href="#" class="links"> <i class="fas fa-check"></i> {postItem.adopt}  </a>
                             </div>
 
                             <p>{postItem.animal.generalInformation}</p>
