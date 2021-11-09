@@ -10,7 +10,7 @@ function HomePage(){
 
     let limit = 3
    
-    const [postItem, setPostItems] = useState([])
+    const [postItem, setPostItems] = useState({})
 
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
