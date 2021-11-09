@@ -251,7 +251,7 @@ function HomePage(){
                     {postItem.map((item, index) => {
                         return (
                             <div class="box" key={index}>
-                            <Link to={{pathname:`/post/${item.id}`}} >
+                            <Link to={{pathname:`/post/lost/${item.id}`}} >
                                     <div>
                                         <img src={item.animal.image} alt=""/>
                                         <div class="content">
