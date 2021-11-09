@@ -9,5 +9,5 @@ export const readAllPostLost = (limit,page) => axios.get(`http://127.0.0.1:8080/
 export const readPostAdopt = (id) => axios.get(`http://127.0.0.1:8080/AdoptionPost/${id}`)
 export const readPostLost = (id) => axios.get(`http://127.0.0.1:8080/LostPetPost/${id}`)
 export const updatePost = (data) => axios.put("http://127.0.0.1:8080/updatePost", data)
-export const deletePost = (id) => axios.delete(`http://127.0.0.1:8082/post/${id}`)
+export const deletePost = (id) => axios.delete(`http://127.0.0.1:8080/post/${id}`)
 export const uploadPic = (url, file, option) => axios.put(url, file, option)
