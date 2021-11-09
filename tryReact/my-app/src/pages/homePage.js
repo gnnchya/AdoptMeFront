@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import {uploadPic, createPost, readAllPostLost } from "../actions/posts.js";
 import {generateUploadURL} from '../s3.js'
+import axios from 'axios'
 
 
 function HomePage(){
@@ -16,16 +17,28 @@ function HomePage(){
     const [file, setFile] = useState({}) 
     
     const getList = async (e) => {
+        // try {
+        //     const response = await readAllPostLost("all",limit,1)
+        //     console.log(response.data.data)
+        //     // alert(response.data.data[0])
+        //     if (response.status === 200) {
+        //         setPostItems(response.data.data || [])
+        //     }
+        // } catch (error) {
+        //     alert(error)
+        // }
         try {
-            const response = await readAllPostLost("all",limit,1)
-            console.log(response.data.data)
-            // alert(response.data.data[0])
-            if (response.status === 200) {
-                setPostItems(response.data.data || [])
-            }
+        axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
+        ).then((response) => {
+            console.log(response)
+            setPostItems(response.data.data || [])
+        })
+
         } catch (error) {
-            alert(error)
-        }
+            //     alert(error)
+         }
+
+
     }
 
     useEffect(() => {
