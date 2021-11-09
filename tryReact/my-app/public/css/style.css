@@ -198,11 +198,11 @@ section{
     cursor: pointer;
 }
 
-.header .search-form label:hover{
+blogs .box-container .search-form label:hover{
     color:var(--orange);
 }
 
-.header .create-form{
+blogs .box-container .create-form{
     height: auto;
     max-height: calc(100vh - 60px);
     position: absolute;
@@ -215,13 +215,14 @@ section{
     
 }
 
-.header .create-form.active{
+blogs .box-container .create-form.active{
     right:2rem;
     transition: .4s linear;
 }
 
-.header .create-form .box{
-    max-height: 450px;
+blogs .box-container .create-form .box{
+    max-height: 600px;
+    max-width: 100;
     align-items: center;
     gap:1rem;
     position: relative;
@@ -230,7 +231,7 @@ section{
 }
 
 
-.header .create-form .box-info{
+blogs .box-container .create-form .box-info{
     width: 115%;
     margin:.7rem 0;
     background:#eee;
@@ -242,13 +243,13 @@ section{
 }
 
 
-.header .create-form .box img{
+blogs .box-container .create-form .box img{
     height:10rem;
 }
 
 
 
-/* .header .create-form .box .fa-pen{
+/* blogs .box-container .create-form .box .fa-pen{
     font-size: 2rem;
     position: absolute;
     top:50%; right:2rem;
@@ -257,11 +258,11 @@ section{
     transform: translateY(-50%);
 }
 
-.header .create-form .box .fa-pen:hover{
+blogs .box-container .create-form .box .fa-pen:hover{
     color:var(--orange);
 } */
 
-.header .create-form .box .fa-camera{
+blogs .box-container .create-form .box .fa-camera{
     font-size: 1.6rem;
     cursor: pointer;
     color:var(--light-color);
@@ -274,18 +275,24 @@ section{
     margin:1rem 0; */
 }
 
-.header .create-form .box .fa-camera:hover{
+blogs .box-container .create-form .box .fa-camera:hover{
     color:var(--orange);
 }
 
-.header .create-form .box .content h3{
+blogs .box-container .create-form .box .content .textarea{
+  width:100%;
+  resize: none;
+  height:15rem;
+}
+
+blogs .box-container .create-form .box .content h3{
     color:var(--black);
     font-size: 1.7rem;
     padding-bottom: 1rem;
 }
 
 
-.header .create-form .box .content .info{
+blogs .box-container .create-form .box .content .info{
     width: 100%;
     margin:.5rem 0;
     background:#eee;
@@ -297,7 +304,7 @@ section{
 }
 
 
-.header .create-form .spay {
+blogs .box-container .create-form .spay {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -308,13 +315,13 @@ section{
   padding: 1rem 0;
 }
 
-.header .create-form .spay label {
+blogs .box-container .create-form .spay label {
   font-size: 1.5rem;
   cursor: pointer;
   color: #666;
 }
 
-.header .create-form .photo {
+blogs .box-container .create-form .photo {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -325,29 +332,29 @@ section{
   padding: 1rem 0;
 }
 
-.header .create-form .photo label {
+blogs .box-container .create-form .photo label {
   font-size: 1.5rem;
   cursor: pointer;
   color: #666;
 }.
 
-.header .create-form .box .btn {
+blogs .box-container .create-form .box .btn {
   width: 100%;
   text-align: center;
   margin: 1.5rem 0;
 }
 
-.header .create-form .btn{
+blogs .box-container .create-form .btn{
     display: block;
     text-align: center;
     margin:1rem;
 }
 
-.header .create-form .btn:hover {
+blogs .box-container .create-form .btn:hover {
   background: var(--black);
 }
 
-.header .create-form p{
+blogs .box-container .create-form p{
     font-size: 1.7rem;
     padding:.5rem 0;
     color:var(--black-color);
@@ -681,6 +688,78 @@ section{
 .info .info-slider .box .links:hover i{
     padding-right: 2rem;
 }
+
+login .row{
+  padding: 2.5rem;
+  box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+  background:#fff;
+  display: flex;
+  flex-wrap: wrap;
+  gap:1.5rem;
+  border-radius: .5rem;
+}
+
+login .row .image{
+  flex:1 1 30rem;
+}
+
+login .row .image img{
+  height: 100%;
+  width:100%;
+  object-fit: cover;
+  border-radius: .5rem;
+}
+
+login .row form{
+  flex:1 1 50rem;
+  padding:1rem;
+}
+
+login .row form .inputBox{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+login .row form .inputBox input, login .row form textarea{
+  padding:1rem;
+  margin:1rem 0;
+  font-size: 1.2rem;
+  color:#333;
+  text-transform: none;
+  border:.1rem solid rgba(0,0,0,.3);
+  border-radius: .5rem;
+  width:49%;
+}
+
+login .row form textarea{
+  width:100%;
+  resize: none;
+  height:15rem;
+}
+
+login .row form .btn{
+  background:none;
+}
+
+login .row form .btn:hover{
+  background:var(--red);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* media queries  */
 
