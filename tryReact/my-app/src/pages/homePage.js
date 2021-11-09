@@ -261,7 +261,7 @@ function HomePage(){
                                             </div>
                                             <h3 key={index}>{item.animal.type}</h3>
                                             <p key={index}>{item.animal.general_information}</p>
-                                            <a href={`/post/${item.id}`} class="btn">See more</a>
+                                            <a href={`/post/lost/${item.id}`} class="btn">See more</a>
                                         </div>
                                     </div>
                                 
