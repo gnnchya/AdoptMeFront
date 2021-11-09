@@ -5,7 +5,6 @@ import {uploadPic, createPost, readAllPostLost } from "../actions/posts.js";
 import {generateUploadURL} from '../s3.js'
 
 
-
 function HomePage(){
 
     let limit = 3
@@ -187,7 +186,7 @@ function HomePage(){
                 <div class="box-container">
 
                     <div class="box">
-                        <img src="../../public/images/cat-icon" alt=""/>
+                        <img src="../images/dog-icon" alt=""/>
                         <h3>Dog</h3>
                         <p>View all our DOGS available for adoption!</p>
                         {<Link to={{pathname:"/posts/adopt/1/dog"}}> 
@@ -198,7 +197,7 @@ function HomePage(){
                     </div>
 
                     <div class="box">
-                        <img src="../../public/images/dog-icon" alt=""/>
+                        <img src="../images/cat-icon"  alt=""/>
                         <h3>Cat</h3>
                         <p>View all our CATS available for adoption!</p>
                         
