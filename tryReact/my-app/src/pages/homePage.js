@@ -4,10 +4,6 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import {uploadPic, createPost, readAllPostLost } from "../actions/posts.js";
 import {generateUploadURL} from '../s3.js'
 import axios from 'axios'
-import imagecat from '../images/cat-icon.png'
-import imagedog from '../images/dog-icon.png'
-
-
 
 function HomePage(){
 
@@ -206,7 +202,7 @@ function HomePage(){
                 <div class="box-container">
 
                     <div class="box">
-                        <img src={imagedog} alt=""/>
+                        <img src={process.env.PUBLIC_URL + './images/dog-icon.png'} alt="dog-icon"/>
                         <h3>Dog</h3>
                         <p>View all our DOGS available for adoption!</p>
                         {<Link to={{pathname:"/posts/adopt/1/dog"}}> 
@@ -217,7 +213,7 @@ function HomePage(){
                     </div>
 
                     <div class="box">
-                        <img src={imagecat}  alt=""/>
+                    <img src={process.env.PUBLIC_URL + './images/cat-icon.png'} alt="cat-icon"/>
                         <h3>Cat</h3>
                         <p>View all our CATS available for adoption!</p>
                         
