@@ -13,6 +13,7 @@ import ReadAllPostLost from './pages/readAllPostLost';
 import ReadPostLost from './pages/readPostLost';
 import ReadPostAdopt from './pages/readPostAdopt';
 import UpdatePost from './pages/updatePost';
+import CreatePost from './pages/createPost';
 import React, { Component }  from 'react';
 
 function App() {
@@ -39,6 +40,9 @@ function App() {
                 </Route>
                 <Route exact path="/updatePost/:id">
                     <UpdatePost />
+                </Route>
+                <Route exact path="/createPost">
+                    <CreatePost />
                 </Route>
             </Switch>
         </Router>

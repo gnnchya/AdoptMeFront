@@ -47,62 +47,6 @@ function HomePage(){
 
     }
 
-
-    const handlePostInput = (e) =>{
-        e.preventDefault()
-        const name = e.target.name
-        const value = e.target.value
-        setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
-    }
-   
-    const handleSpayInput = (e) =>{
-        e.preventDefault()
-        const name = e.target.name
-        const value = e.target.value
-        setSpay((oldValue) => ({ ...oldValue, [name]: value }))
-    }
-
-    const fileSelectedHandler = event => {
-        event.preventDefault()
-        const name = event.target.name
-        const value = event.target.value
-        setFile((oldValue) => ({ ...oldValue, [name]: value }))
-    }
-
-
-
-    const postUploadHandler = async (event) =>{
-        try {
-            event.preventDefault()
-            const {url} =  await generateUploadURL()
-            var options = {
-                headers: {
-                'Content-Type': file.picFile
-                }
-            };
-
-            const picURL = await uploadPic(url, file.picFile, options) 
-               
-            const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: picURL, medical_condition: postInfo.medical_condition}
-            const temp = {...postInfo, animal:tempAnimal, UID: "", location: postInfo.location}
-            const response =  await createPost(temp)
-            console.log(response)
-            
-
-            if (response.status === 201) {
-                console.log("create", response)
-                alert("created")
-            }
-        } catch (error) {
-            // if (error.status === 422){
-            //     alert("422")
-            // }
-            alert(error)
-        }
-
-    }
-
-
     return(
         <div>
            <body>
@@ -123,19 +67,13 @@ function HomePage(){
             
                 <div class="icons">
                     <div class="fas fa-bars" id="menu-btn" ></div>
-                    <div class="fas fa-pen" id="create-btn" ></div>
-                    <div class="fas fa-user" id="login-btn" ></div>
+                    {<Link to={{pathname:"/createPost"}}> 
+                        <div class="fas fa-pen" id="create-btn" ></div>
+                    </Link>}
+                    {<Link to={{pathname:"/login"}}> 
+                        <div class="fas fa-user" id="login-btn" ></div>
+                    </Link>}
                 </div>            
-                
-            
-                <form action="" class="login-form">
-                    <h3>login now</h3>
-                    <input type="email" placeholder="your email" class="box"/>
-                    <input type="password" placeholder="your password" class="box"/>
-                    <p>forget your password <a href="#">click here</a></p>
-                    <p>don't have an account <a href="#">create now</a></p>
-                    <input type="submit" class="btn"/>
-                </form>
             
             </header>
             

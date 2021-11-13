@@ -1,151 +1,166 @@
-// import { Link } from "react-router-dom";
-// import React, { useState, useEffect } from 'react'
-// import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-// import {createPost, getMenu, putMenu } from '../actions/posts'
+import React, { useState, useEffect } from 'react'
+import testUtils from 'react-dom/test-utils';
+import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { uploadPic, createPostAdopt, createPostLost} from '../actions/posts'
+import {generateUploadURL} from '../s3.js'
+import axios from 'axios'
 
-// function UpdateMenu() {
+function UpdatePost() {
+    const [postInfo, setPostInfo] = useState("") 
+    const [spay, setSpay] = useState(false)
+    const [file, setFile] = useState({}) 
 
-//     const [menu, setMenu] = useState({})
-//     const [categories, setCategories] = useState([])
-//     const [category, setCategory] = useState("")
-//     const [ingredients, setIngredients] = useState([])
-//     const [itemName, setItemName] = useState("")
-//     const [amount, setAmount] = useState("")
-//     const [available, setAvailable] = useState(false)
-//     let {id} = useParams()
+    const handlePostInput = (e) =>{
+        e.preventDefault()
+        const name = e.target.name
+        const value = e.target.value
+        setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
+    }
+   
+    const handleSpayInput = (e) =>{
+        e.preventDefault()
+        const name = e.target.name
+        const value = e.target.value
+        setSpay((oldValue) => ({ ...oldValue, [name]: value }))
+    }
 
-//     const addClick = async (e) => {
-//         try {
-//             e.preventDefault()
-//             const tempIngredients ={item_name:itemName, amount: +amount}
-//             const temp = {...menu, price:+menu.price, category:[...categories, category], ingredient:[...ingredients, tempIngredients], available:available}
-//             const response = await putMenu(temp)
-//             console.log(response)
+    const fileSelectedHandler = event => {
+        event.preventDefault()
+        const name = event.target.name
+        const value = event.target.value
+        setFile((oldValue) => ({ ...oldValue, [name]: value }))
+    }
+
+    const postUploadHandler = async (event) =>{
+
+        
+        try {
+            event.preventDefault()
+            const url =  await generateUploadURL()
+            var options = {
+                headers: {
+                'Content-Type': "multipart/form-data"
+                }
+            };
+
+            // const picURL = await uploadPic(url, file.picFile, options) 
+            axios.put(url, file, options).then((response) => {
+                console.log("response")
+                console.log(response)
+            })
+            const picURL = url.split('?')[0]
             
+            const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: picURL, medical_condition: postInfo.medical_condition}
+            const temp = {...postInfo, animal:tempAnimal, UID: "", location: postInfo.location}
+            const response = ""
+            if (postInfo.postType === 'adopt'){
+                response =  await createPostAdopt(temp)
+                console.log(response)
+            }else{
+                response =  await createPostLost(temp)
+                console.log(response)
+            }
 
-//             if (response.status === 201) {
-//                 console.log("create", response)
-//             }
-//         } catch (error) {
-//             // if (error.status === 422){
-//             //     alert("422")
-//             // }
-//             alert(error)
-//         }
-//       }
+            if (response.status === 201) {
+                console.log("create", response)
+                alert("created")
+            }
+        } catch (error) {
+     
+            alert( error)
+        }
 
-
-//     const handleChangeInput = (e) => {
-//         const name = e.target.name
-//         const value = e.target.value
-//         setMenu((oldValue) => ({ ...oldValue, [name]: value }))
-
-//     }
-//     const handleChangeCategoryInput = (e) =>{
-
-//         e.preventDefault()
-//         let test = [...categories, category]
-//         setCategories(test)
-//         setCategory("")
-//     }
-
-//     const handleChangeIngredientInput = (e) =>{
-//         e.preventDefault()
-//         const tempIngredientObject = {item_name: itemName, amount: +amount}
-//         let test2 = [...ingredients, tempIngredientObject]
-//         setIngredients(test2)
-//         setAmount("")
-//         setItemName("")
-//     }
+    }
 
 
-//     return (
-//         <div className="v1_3">
-//             <div className="v6_3"></div>
-//             <div className="v6_2"></div>
-//             <Link to="/showCart"><div className="v6_10">
-//                 <span className="v6_8">cart</span>
-//             </div></Link>
-//             <div className="v6_12"></div>
-//             <span className="v6_13">SHOP</span>
-//             {/*<form action="https://google.com">*/}
-//             {/*    <input type="submit" value="Go to Google" />*/}
-//             {/*</form>*/}
-//             <Link to="/showMenu/1"><div className="v6_14">MENU</div></Link>
-//             <Link to="/showOrder"><span className="v6_15">ORDER</span></Link>
-//             <Link to="/showMoney"><span className="v6_19">MONEY</span></Link>
-//             <Link to="/showStock"><span className="v6_20">STOCK</span></Link>
-//             <span className="v6_16">ADMIN</span>
-//             <Link to="/showReport"><span className="v6_17">REPORT</span></Link>
-//             <Link to="/showHistory"><span className="v6_18">HISTORY</span></Link>
-//             <span className="v6_25">
-//                 <div className="v6_22"></div>
-//                 <span className="v6_23">LOG OUT</span>
-//             </span>
-//             <Link to="/homepage"><span className="v6_32">POS COFFEE</span></Link>
-//             <div class="v14_33">
-//                 <div class="v14_34"></div><span class="v14_35">Update</span>
-//             </div><span class="v14_36">POS COFEE</span><span class="v14_37">Name : </span>
-//             <form className="form">
-//             <span className="v6_276">Name : </span>
-//                 <input className="v6_277" type='text' name='name' onChange={handleChangeInput} />
-//                 <span className="v6_278">Category :</span>
+    return (
+        <div>
+           <body>
+            <header class="header">
+            
+            {<Link to={{pathname:"/home"}}> 
+                 <a class="logo"> <i class="fas fa-paw"></i> Adopt </a>
+            </Link>}
                 
+            <nav class="navbar">
+                {<Link to={{pathname:"/home"}}> 
+                <a>home</a>
+                </Link>}
+                {<Link to={{pathname:"/posts/adopt/all"}}> 
+                <a>Adoption</a>
+                </Link>}
+                {<Link to={{pathname:"/posts/lost/all"}}> 
+                <a>Lost</a>
+                </Link>}
+            </nav>
             
-//             {categories.length>0 && categories.map((categoryItem, index) => {
-//                 return (
-//                     <div key = {index} className="category"  disabled>
-//                         <input className="v6_279" type='text' name='category' defaultValue={categoryItem}/>
-//                     </div>
-//                 )
-//             })}
-
-//             <div className="category" id="category1">
-//                 {/* <input className="v6_279" type='text' name='category'  onChange={(e) => setCategory(e.target.value)} value={category}/> */}
-//                 <input className="v6_279" type='text' name='category'  onChange={(e) => setCategory(e.target.value)} value={category}/>
-//                 <button className="v6_295" onClick={handleChangeCategoryInput}></button >
-//             </div>
-          
+            <div class="icons">
+                    <div class="fas fa-bars" id="menu-btn" ></div>
+                    {<Link to={{pathname:"/createPost"}}> 
+                        <div class="fas fa-pen" id="create-btn" ></div>
+                    </Link>}
+                    <div class="fas fa-user" id="login-btn" ></div>
+            </div>            
+            </header>
             
-//             <div className="addname"> 
-//             {ingredients.length>0 && ingredients.map((ingredientItem, index) =>{
-//                 console.log("ingredient item", ingredientItem.amount)
-//                 return (
-//                     <div key={index} className="ingredientAdd" >
-//                         <span className="v6_283">Name :</span>
-//                         <input className="v6_282" type='text' defaultValue={ingredientItem.item_name}/>
-//                         <span className="v6_284">Amount :</span>
-//                         <input className="v6_285" type='number' defaultValue={ingredientItem.amount} />
-//                     </div>
-//                 )
-//             }
+            
+            <h1 class="heading"> our <span>lost and found</span> </h1>
+            <section class="blogs" id="blogs">
+            
+                <h1 class="heading"> our <span>lost and found</span> </h1>
+            
+                <div class="box-container">
+                <div class= "icons">
+                                    
+            
+                </div>
+                    <div class="box">
+                        <div class="content">
+                            <div class="icons">
+                                <a > <i class="fas fa-user"></i> by user </a>
+                                <a > <i class="fas fa-calendar"></i> 1st January, 2000 </a>
+                            </div>
+                            <h3>Funny dog</h3>
+                            <p>Dog around the beach.</p>
+                            <div class="box">
+                            <div class="box">
+                            <h3>info</h3>
+                            <a  class="links"> <i class="fas fa-paw"></i>  <input type="text" placeholder="pet type eg. cat, dog" class="box" name = "type" onChange={handlePostInput}/> </a>
+                            <a  class="links"> <i class="fas fa-birthday-cake"></i> <input type="text" placeholder="Age of pet" class="box"/> </a>
+                            <a  class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> <input type="text" placeholder="gender of pet" class="box"/> </a>
+                            <a  class="links"> <i class="fab fa-font-awesome"></i> <input type="text" placeholder="spay of pet" class="box"/></a>
+                            <a  class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box"/> </a>
+                            <a  class="links"> <i class="fas fa-check"></i>  available  </a>
+                            </div>
+                            
+                            <h3>contact info</h3>
+                            <a class="links"> <i class="fas fa-phone"></i> --------- </a>
+                            <a class="links"> <i class="fas fa-phone"></i> ----------- </a>
+                            <a class="links"> <i class="fas fa-envelope"></i> --------- </a>
+                            <a class="links"> <i class="fas fa-map-marker-alt"></i> ---------- </a>
+                            </div>
+            
+                        
+                        </div>
+                    </div>
+            
+                    
+            
+            
+                </div>
+            
+            </section>
+   
+            <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+            
+            <script src="script.js"></script>
+            
+            </body>
+        </div>
 
-//             )}
-//             </div>
+    )
+}
 
+export default UpdatePost
 
-//             <div className="ingredient" id="ingredient">  
-//                 <span className="v6_281">Ingredient :</span>
-//                 <span className="v6_283">Name :</span>
-//                 <input className="v6_282" type='text' name='item_name' onChange={(e) => setItemName(e.target.value)} value={itemName} />
-//                 <span className="v6_284">Amount :</span>
-//                 <input className="v6_285" type='number' name='amount'  onChange={(e) => setAmount(e.target.value)} value={amount}/>
-//                 <button className="v6_296" onClick={handleChangeIngredientInput}> </button>
-//             </div>
-
-           
-
-//             <span className="v6_286">Price :</span>
-//                 <input className="v6_287" type='number' name='price' onChange={handleChangeInput} /*required="true"*//>
-//             <span className="v6_288">Available :</span>
-//                 <input className="v6_289" type='checkbox' name='available' onChange={(e) => setAvailable(e.currentTarget.checked)} />
-//             <button className="v6_192" onClick={addClick}>  
-//                 {<span className="v6_194">Update Menu</span> }
-//             </button>
-
-//             </form >
-//         </div>
-//     )
-// }
-
-// export default UpdateMenu
