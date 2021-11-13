@@ -144,7 +144,7 @@ function HomePage(){
                 <div class="content">
                     <h3>Adopt and <span>help</span> animal</h3>
                     <p>With more adoptable pets than ever, we have an urgent need for pet adopters. Search for dogs, cats, and other available pets for adoption near you.</p>
-                    {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                    {<Link to={{pathname:"/posts/adopt/all"}}> 
                         <a class="btn">adoption</a>
                     </Link>}
                     
@@ -154,7 +154,7 @@ function HomePage(){
 
             <section class="adoption" id="adoption">
 
-                {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                {<Link to={{pathname:"/posts/adopt/all"}}> 
                 <a ><h1 class="heading"> our <span> Adoption</span> </h1></a>
                 </Link>}
                 
@@ -166,7 +166,7 @@ function HomePage(){
                         <img src={process.env.PUBLIC_URL + './images/dog-icon.png'} alt="dog-icon"/>
                         <h3>Dog</h3>
                         <p>View all our DOGS available for adoption!</p>
-                        {<Link to={{pathname:"/posts/adopt/1/dog"}}> 
+                        {<Link to={{pathname:"/posts/adopt/dog"}}> 
                         <a class="btn">See more Dogs</a>
                         </Link>}
                         
@@ -178,7 +178,7 @@ function HomePage(){
                         <h3>Cat</h3>
                         <p>View all our CATS available for adoption!</p>
                         
-                        {<Link to={{pathname:"/posts/adopt/1/cat"}}> 
+                        {<Link to={{pathname:"/posts/adopt/cat"}}> 
                         <a href="/posts/adopt/1/cat" class="btn">See more Cats</a>
                         </Link>}
                         
@@ -189,7 +189,7 @@ function HomePage(){
                         <h3>Bunny</h3>
                         <p>View all our BUNNIES available for adoption!</p>
                         
-                        {<Link to={{pathname:"/posts/adopt/1/bunny"}}> 
+                        {<Link to={{pathname:"/posts/adopt/bunny"}}> 
                         <a href="/posts/adopt/1/bunny" class="btn">See more Bunnies</a>
                         </Link>}
                         
@@ -202,7 +202,7 @@ function HomePage(){
 
             <section class="blogs" id="blogs">
 
-                {<Link to={{pathname:"/posts/lost/1/all"}}> 
+                {<Link to={{pathname:"/posts/lost/all"}}> 
                 <a ><h1 class="heading"> our <span>lost and found</span> </h1></a>
                 </Link>}
              
@@ -233,6 +233,34 @@ function HomePage(){
                         })}                
                 
                     </div>
+
+            </section>
+
+            <section class="login" id="login">
+
+                <h1 class="heading"> <span>login</span> now </h1>
+
+                <div class="row">
+                    
+                    <div class="image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAunfoVrQZQn0yUL5rY8PgTX9LVZPq1HMhSA&usqp=CAU" alt=""/>
+                    </div>
+
+                    <form action="">
+
+                        <div class="inputBox">
+                            <input type="email" placeholder="email"/>
+                        </div>
+
+                        <div class="inputBox">
+                            <input type="text" placeholder="username name"/>
+                        </div>
+
+                        <input type="submit" value="login now" class="btn"/>
+
+                    </form>
+
+                </div>
 
             </section>
 

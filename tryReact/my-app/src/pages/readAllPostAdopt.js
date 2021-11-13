@@ -10,12 +10,7 @@ function ReadAllPostAdopt() {
     const petType = keyword
     const [postItem, setPostItems] = useState([])
     const [keywords, setKeyword] = useState("")
-
-    
-
-    useEffect(() => {
-        getList()
-    }, []);
+    const [retrieve, setRetrieve] = useState(true)
 
     const getList = async (e) => {
         try {
@@ -28,6 +23,47 @@ function ReadAllPostAdopt() {
         } catch (error) {
             alert(error)
         }
+    }
+
+    const changeToTrue = (e) =>{
+        setRetrieve(true)
+    }
+
+
+    function ShowAnimals(keyword) {
+        if (retrieve === true){
+            getList()
+            setRetrieve(false)
+        }
+
+        return(
+            <section class="adoption" id="adoption">
+
+            <h1 class="heading"> our <span> {`${petType}`} </span> </h1>
+
+            <div class="box-container">
+
+                {postItem.map((item, index) => {
+                    return(
+                    <div class="box" key={index}>
+                            <div>
+                                <img src={item.animal.image}  key={index} alt=""/>
+                                <h3 key={index}>{item.animal.type}</h3>
+                                <p key={index}>{item.animal.generalInformation} </p>
+                            </div>
+                        
+                            <Link to={{pathname:`/post/adopt/${item.id}`}} >
+                                    <a class="btn">See more</a>
+                            </Link>
+                    </div>
+                    )
+                })}
+
+            </div>
+
+        </section>
+        )
+
     }
 
     const handleChangeInput = (e) => {
@@ -55,10 +91,10 @@ function ReadAllPostAdopt() {
                         {<Link to={{pathname:"/home"}}> 
                         <a>home</a>
                         </Link>}
-                        {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                        {<Link to={{pathname:"/posts/adopt/all"}}> 
                         <a>Adoption</a>
                         </Link>}
-                        {<Link to={{pathname:"/posts/lost/1/all"}}> 
+                        {<Link to={{pathname:"/posts/lost/all"}}> 
                         <a>Lost</a>
                         </Link>}
                     </nav>
@@ -68,7 +104,7 @@ function ReadAllPostAdopt() {
                     <form action="" class="search-form">
                         <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>
                         
-                        {<Link to={`/posts/adopt/1/${keywords.keyword}`}> 
+                        {<Link to={`/posts/adopt/${keywords.keyword}`} onClick={changeToTrue}> 
                         <div class= "icons">
                         <label for="search-box" class="fas fa-search"></label>
                         </div>
@@ -94,32 +130,7 @@ function ReadAllPostAdopt() {
 
                 <h1 class="heading"> our <span> Dog </span> </h1>
 
-                <section class="adoption" id="adoption">
-
-                    <h1 class="heading"> our <span> {`${petType}`} </span> </h1>
-
-                    <div class="box-container">
-
-                        {postItem.map((item, index) => {
-                            return(
-                            <div class="box" key={index}>
-                                    <div>
-                                        <img src={item.animal.image}  key={index} alt=""/>
-                                        <h3 key={index}>{item.animal.type}</h3>
-                                        <p key={index}>{item.animal.generalInformation} </p>
-                                    </div>
-                                
-                                    <Link to={{pathname:`/post/adopt/${item.id}`}} >
-                                            <a class="btn">See more</a>
-                                    </Link>
-                            </div>
-                            )
-                        })}
-
-                    </div>
-
-                </section>
-
+                <ShowAnimals></ShowAnimals>
                 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
                 

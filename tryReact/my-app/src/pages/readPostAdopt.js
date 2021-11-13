@@ -57,10 +57,10 @@ function ReadPostAdopting() {
                     {<Link to={{pathname:"/home"}}> 
                     <a>home</a>
                     </Link>}
-                    {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                    {<Link to={{pathname:"/posts/adopt/all"}}> 
                     <a>Adoption</a>
                     </Link>}
-                    {<Link to={{pathname:"/posts/lost/1/all"}}> 
+                    {<Link to={{pathname:"/posts/lost/all"}}> 
                     <a>Lost</a>
                     </Link>}
                 </nav>
@@ -103,8 +103,6 @@ function ReadPostAdopting() {
 
                 <div class="swiper-wrapper">
 
-                {/* {postItem.map((item, index) => { */}
-                    {/* return( */}
                     <div class="swiper-slide box" >
 
                             <div>
@@ -130,9 +128,6 @@ function ReadPostAdopting() {
                             </div>
 
                     </div>
-                    
-                    {/* ) */}
-                {/* })}   */}
                     
                 </div>
 

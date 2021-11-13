@@ -53,10 +53,10 @@ function ReadPostLost() {
                     {<Link to={{pathname:"/home"}}> 
                     <a>home</a>
                     </Link>}
-                    {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                    {<Link to={{pathname:"/posts/adopt/all"}}> 
                     <a>Adoption</a>
                     </Link>}
-                    {<Link to={{pathname:"/posts/lost/1/all"}}> 
+                    {<Link to={{pathname:"/posts/lost/all"}}> 
                     <a>Lost</a>
                     </Link>}
                 </nav>
@@ -96,9 +96,7 @@ function ReadPostLost() {
                 <h1 class="heading"> our <span>lost and found</span> </h1>
             
                 <div class="box-container">
-                
-                {/* {postItem.map((item, index) => { */}
-                    {/* return( */}
+
                     <div class="box">
                             <div>
                             <img src={animal.image} alt=""/>
@@ -140,12 +138,7 @@ function ReadPostLost() {
                             </div>
                             </div>
                     </div>
-                    {/* ) */}
-                
-                {/* })}            */}
-                    
-            
-            
+
                 </div>
             
             </section>

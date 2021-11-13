@@ -5,15 +5,13 @@ import axios from 'axios'
 
 function ReadAllPostLost() {
     let limit = 100
-    let {page, keyword} = useParams()
+    let page = 1
+    let {keyword} = useParams()
 
 
     const [postItem, setPostItems] = useState([])
     const [keywords, setKeyword] = useState("")
-
-    useEffect(() => {
-        getList()
-    }, []);
+    const [retrieve, setRetrieve] = useState(true)
     
     const getList = async (e) => {
         try {
@@ -26,6 +24,52 @@ function ReadAllPostLost() {
         } catch (error) {
             alert(error)
         }
+    }
+
+    const changeToTrue = (e) =>{
+        setRetrieve(true)
+    }
+
+    function ShowAnimals(keyword) {
+        if (retrieve === true){
+            getList()
+            setRetrieve(false)
+        }
+        
+        return(
+            <section class="blogs" id="blogs">
+                
+                <h1 class="heading"> our <span>lost and found</span> </h1>
+            
+                <div class="box-container">
+
+                {postItem.map((item, index) => {
+                    return(
+                    <div class="box" key={index}>
+                        <div>
+                            <img src={item.animal.image} alt=""/>
+                            <div class="content">
+                                <div class="icons">
+                                    <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a>
+                                    <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
+                                </div>
+                                <h3 key={index}>{item.animal.type}</h3>
+                                <p key={index}>{item.animal.generalInformation}</p>
+                                <Link to={{pathname:`/post/lost/${item.id}`}} >
+                                <a class="btn">See more</a>
+                                </Link>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    )
+                    })}                
+            
+                </div>
+                
+            </section>    
+        )
+
     }
 
    
@@ -51,18 +95,17 @@ function ReadAllPostLost() {
                         {<Link to={{pathname:"/home"}}> 
                         <a>home</a>
                         </Link>}
-                        {<Link to={{pathname:"/posts/adopt/1/all"}}> 
+                        {<Link to={{pathname:"/posts/adopt/all"}}> 
                         <a>Adoption</a>
                         </Link>}
-                        {<Link to={{pathname:"/posts/lost/1/all"}}> 
+                        {<Link to={{pathname:"/posts/lost/all"}}> 
                         <a>Lost</a>
                         </Link>}
                     </nav>
 
                     <form action="" class="search-form">
-                        <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>
-                        
-                        {<Link to={`/posts/adopt/1/${keywords.keyword}`}> 
+                        <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>      
+                        {<Link to={`/posts/lost/${keywords.keyword}`} onClick={changeToTrue}> 
                         <div class= "icons">
                         <label for="search-box" class="fas fa-search"></label>
                         </div>
@@ -88,40 +131,8 @@ function ReadAllPostLost() {
                 </header>
 
                 <h1 class="heading"> our <span> Dog </span> </h1>
-
-                <section class="blogs" id="blogs">
                 
-                    <h1 class="heading"> our <span>lost and found</span> </h1>
-                
-                    <div class="box-container">
-
-                    {postItem.map((item, index) => {
-                       return(
-                        <div class="box" key={index}>
-                                    <div>
-                                        <img src={item.animal.image} alt=""/>
-                                        <div class="content">
-                                            <div class="icons">
-                                                <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a>
-                                                <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
-                                            </div>
-                                            <h3 key={index}>{item.animal.type}</h3>
-                                            <p key={index}>{item.animal.generalInformation}</p>
-                                            <Link to={{pathname:`/post/lost/${item.id}`}} >
-                                            <a class="btn">See more</a>
-                                            </Link>
-                                            
-                                        </div>
-                                    </div>
-                        </div>
-                       )
-                        })}                
-                
-                    </div>
-                
-                </section>             
-                
-                
+                <ShowAnimals></ShowAnimals>
                 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
                 
                 <script src="script.js"></script>
