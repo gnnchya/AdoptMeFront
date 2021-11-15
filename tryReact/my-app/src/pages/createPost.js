@@ -152,10 +152,7 @@ function CreatePost() {
                                 <input type="text" placeholder="Age of pet" class="box" name="age"  onChange={handlePostInput} />
                                 <p>Gender</p>
                                 <input type="text" placeholder="gender of pet" class="box" name="gender" onChange={handlePostInput} />
-                                <p>Post caption</p>
-                                <input type="text" placeholder="post info" class="box-info" name="info" onChange={handlePostInput} />
-                                <p>Location</p>
-                                <input type="text" placeholder="location" class="box" name="location" onChange={handlePostInput} />
+                               
                                 <p>Medical Condition</p>
                                 <input type="text" placeholder="medical condition" class="box" name="medical_condition" onChange={handlePostInput} />
                                 <p>Spay</p>
@@ -168,11 +165,17 @@ function CreatePost() {
                                     <input type="file" accept="image/png, image/jpeg" class="pics" onChange={fileSelectedHandler}/>
                                 </div>
 
+                                <p>Location</p>
+                                <input type="text" placeholder="location" class="box" name="location" onChange={handlePostInput} />
+
                                 <p>Type of Post</p>
                                 <select name="postType" id="postType" onChange={handlePostInput}>
                                     <option value="adopt">Adopt</option>
                                     <option value="lost">Lost</option>
                                 </select>
+
+                                <p>Post caption</p>
+                                <input type="text" placeholder="post info" class="box-info" name="info" onChange={handlePostInput} />
                                                         
                             </div>
                             {<Link to={{pathname:"/posts/lost/all"}}> 
