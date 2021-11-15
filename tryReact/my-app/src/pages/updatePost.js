@@ -8,12 +8,9 @@ import axios from 'axios'
 function UpdatePost() {
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
-    const [file, setFile] = useState({}) 
 
     const [postItem, setPostItems] = useState({})
     const [animal, setAnimal] = useState({})
-    const checking = ""
-    const found = ""
 
     useEffect(() => {
         getList()
@@ -28,12 +25,6 @@ function UpdatePost() {
                 setPostItems(response.data.data)
                 setAnimal(response.data.data.animal)
                 console.log(postItem)
-                if (animal.spay){
-                    checking = 'checked'
-                }
-                if (postItem.found){
-                    found = 'checked'
-                }
             })
         } catch (error) {
             alert(error)
@@ -57,20 +48,27 @@ function UpdatePost() {
 
     const postUploadHandler = async (event) =>{
 
-        
-        try {
-            event.preventDefault()            
-            const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: "", medical_condition: postInfo.medical_condition}
-            const temp = {...postInfo, animal:tempAnimal, UID: "", location: postInfo.location}
-            const response = ""
+        event.preventDefault()            
+        const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: "", medical_condition: postInfo.medical_condition}
+        const temp = {...postInfo, id: postItem.id ,animal:tempAnimal, UID: "", location: postInfo.location, found: spay.found}
+        const response = ""
 
-            response =  await updatePostLost(temp)
-            console.log(response)
+        response =  await updatePostLost(temp)
+        console.log(response)
 
-        } catch (error) {
+        // try {
+        //     event.preventDefault()            
+        //     const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: "", medical_condition: postInfo.medical_condition}
+        //     const temp = {...postInfo, id: postItem.id ,animal:tempAnimal, UID: "", location: postInfo.location, found: spay.found}
+        //     const response = ""
+
+        //     response =  await updatePostLost(temp)
+        //     console.log(response)
+
+        // } catch (error) {
      
-            alert( error)
-        }
+        //     alert( error)
+        // }
 
     }
 
@@ -127,22 +125,17 @@ function UpdatePost() {
                             <div class="box">
                             <div class="box">
                             <h3>info</h3>
-                                <a href="#" class="links"> <i class="fas fa-paw"></i>  <input type="text" placeholder="pet type eg. cat, dog" class="box" name = "type" defaultValue={animal.type} onChange={handlePostInput}/>  </a>
-                                <a href="#" class="links"> <i class="fas fa-dog"></i>  <input type="text" placeholder="pet species e.g. Bull dog" class="box" name = "species" defaultValue={animal.species}  onChange={handlePostInput}/></a>
-                                <a href="#" class="links"> <i class="fas fa-birthday-cake"></i> <input type="text" placeholder="Age of pet" class="box" name = "age" defaultValue={animal.age}  onChange={handlePostInput}/> </a>
-                                <a href="#" class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> <input type="text" placeholder="gender of pet" class="box" name = "gender" defaultValue={animal.gender}  onChange={handlePostInput}/></a>
-                                <a href="#" class="links"> <i class="fas fa-hospital"></i> <input type="text" placeholder="Pet medical condition" class="box" name = "medical_condition" defaultValue={animal.medical_condition} onChange={handlePostInput}/>  </a>
-                               
-                                <div class="spay">
-                                    <input type="checkbox" name="spay" id="spay" onChange={handleSpayInput} {...checking}/>
-                                    <label for="spay">Still spay</label>
-                                </div>
+                                <a  class="links"> <i class="fas fa-paw"></i>  <input type="text" placeholder="pet type eg. cat, dog" class="box" name = "type" defaultValue={animal.type} onChange={handlePostInput}/>  </a>
+                                <a  class="links"> <i class="fas fa-dog"></i>  <input type="text" placeholder="pet species e.g. Bull dog" class="box" name = "species" defaultValue={animal.species}  onChange={handlePostInput}/></a>
+                                <a  class="links"> <i class="fas fa-birthday-cake"></i> <input type="text" placeholder="Age of pet" class="box" name = "age" defaultValue={animal.age}  onChange={handlePostInput}/> </a>
+                                <a  class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> <input type="text" placeholder="gender of pet" class="box" name = "gender" defaultValue={animal.gender}  onChange={handlePostInput}/></a>
+                                <a  class="links"> <i class="fas fa-hospital"></i> <input type="text" placeholder="Pet medical condition" class="box" name = "medical_condition" defaultValue={animal.medical_condition} onChange={handlePostInput}/>  </a>
+                                <a  class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box" name = "location" defaultValue={postItem.lost_location} onChange={handlePostInput}/></a>
 
-                                <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box" name = "location" defaultValue={postItem.lost_location} onChange={handlePostInput}/></a>
-                                <div class="spay">
-                                    <input type="checkbox" name="found" id="found" onChange={handleSpayInput} {...found}/>
-                                    <label for="found">FOUND!!</label>
-                                </div>
+                                <a  class="links"> <i class="fab fa-font-awesome"></i>  <input type="checkbox" name="spay" id="spay" onChange={handleSpayInput}/> <label for="spay">Still spay</label></a>
+                                <a  class="links"> <i class="fas fa-check"></i>   <input type="checkbox" name="found" id="found" onChange={handleSpayInput}/> <label for="found">FOUND!!</label></a>
+                                
+
                             </div>
                             
                             <h3>contact info</h3>
