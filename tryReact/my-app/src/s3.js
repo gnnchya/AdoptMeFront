@@ -6,10 +6,10 @@ const randomBytes = promisify(crypto.randomBytes)
 
 
 
-const region = "us-east-1"
-const bucketName = "pic-storage"
-const accessKeyId = "ASIAWHA6UUIZ5JSY5IN3"
-const secretAccessKey = "+kjNwFrjyw1Rqg+DqtA2vpbcBKm8XXCX6EzxFXer"
+const region = "ap-southeast-1"
+const bucketName = "adoptme-pic-storage"
+const accessKeyId = `env:"aws_access_key_id" envDefault:""`
+const secretAccessKey = `env:"aws_secret_access_key_id" envDefault:""`
 
 const s3 = new aws.S3({
     region,

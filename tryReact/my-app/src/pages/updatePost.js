@@ -47,30 +47,23 @@ function UpdatePost() {
     }
 
     const postUploadHandler = async (event) =>{
+        try {
+            event.preventDefault()            
+            const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species
+                                , gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay
+                                ,image: animal.image, medical_condition: postInfo.medical_condition}
+            const temp = {...postInfo, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: spay.found 
+                                , lost_location: postInfo.location, post_at : postItem.post_at
+                                , update_at : postItem.update_at, delete_at : postItem.delete_at}
+            const response = ""
+    
+            response =  await updatePostLost(temp)
+            console.log(response)
 
-        event.preventDefault()            
-        const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species
-                            , gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay
-                            , medical_condition: postInfo.medical_condition}
-        const temp = {...postInfo, id: postItem.id ,animal:tempAnimal, found: spay.found , lost_location: postInfo.location}
-        const response = ""
-
-        response =  await updatePostLost(temp)
-        console.log(response)
-
-        // try {
-        //     event.preventDefault()            
-        //     const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: "", medical_condition: postInfo.medical_condition}
-        //     const temp = {...postInfo, id: postItem.id ,animal:tempAnimal, UID: "", location: postInfo.location, found: spay.found}
-        //     const response = ""
-
-        //     response =  await updatePostLost(temp)
-        //     console.log(response)
-
-        // } catch (error) {
+        } catch (error) {
      
-        //     alert( error)
-        // }
+            alert( error)
+        }
 
     }
 
