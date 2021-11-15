@@ -49,7 +49,9 @@ function UpdatePost() {
     const postUploadHandler = async (event) =>{
 
         event.preventDefault()            
-        const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: "", medical_condition: postInfo.medical_condition}
+        const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species
+                            , gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay
+                            , image: "", medical_condition: postInfo.medical_condition}
         const temp = {...postInfo, id: postItem.id ,animal:tempAnimal, UID: "", location: postInfo.location, found: spay.found}
         const response = ""
 
