@@ -53,8 +53,8 @@ function UpdatePost() {
                                 , gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay
                                 ,image: animal.image, medical_condition: postInfo.medical_condition}
             const temp = {...postInfo, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: spay.found 
-                                , lost_location: postInfo.location, post_at : postItem.post_at
-                                , update_at : postItem.update_at, delete_at : postItem.delete_at}
+                                , lost_location: postInfo.location, post_at : +postItem.post_at
+                                , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             const response = ""
     
             response =  await updatePostLost(temp)
