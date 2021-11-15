@@ -51,8 +51,8 @@ function UpdatePost() {
         event.preventDefault()            
         const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species
                             , gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay
-                            , image: "", medical_condition: postInfo.medical_condition}
-        const temp = {...postInfo, id: postItem.id ,animal:tempAnimal, UID: "", location: postInfo.location, found: spay.found}
+                            , medical_condition: postInfo.medical_condition}
+        const temp = {...postInfo, id: postItem.id ,animal:tempAnimal, found: spay.found , lost_location: postInfo.location}
         const response = ""
 
         response =  await updatePostLost(temp)
