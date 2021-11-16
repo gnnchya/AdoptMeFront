@@ -4,8 +4,14 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { updatePostLost} from '../actions/posts'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom';
 
 function UpdatePost() {
+
+    let {id} = useParams("id")
+    console.log("iddd", id)
+    const history = useHistory();
+
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
 
@@ -15,8 +21,7 @@ function UpdatePost() {
     useEffect(() => {
         getList()
     }, [])
-    let {id} = useParams("id")
-    console.log("iddd", id)
+
     const getList = async (e) => {
         try {
             axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost/${id}`
@@ -36,6 +41,7 @@ function UpdatePost() {
                 setSpay((oldValue) => ({ ...oldValue, ["found"]: Boolean(postItem.found )}))
                
             })
+
         } catch (error) {
             alert(error)
         }
@@ -59,22 +65,25 @@ function UpdatePost() {
 
     const postUploadHandler = async (event) =>{
         try {
-            // event.preventDefault()            
+            // event.preventDefault()
             const tempAnimal = {type: String(postInfo.type), age: +postInfo.age, species: String(postInfo.species)
-                                , gender: String(postInfo.gender), general_information: String(postInfo.general_information),  spay: Boolean(spay.spay)
-                                ,image: String(animal.image), medical_condition: String(postInfo.medical_condition)}
+                , gender: String(postInfo.gender), general_information: String(postInfo.general_information),  spay: Boolean(spay.spay)
+                ,image: String(animal.image), medical_condition: String(postInfo.medical_condition)}
             const temp = {...postItem, id: String(postItem.id) , uid: String(postItem.uid), animal:tempAnimal, found: Boolean(spay.found)
-                                , lost_location:String( postItem.lost_location), post_at : +postItem.post_at
-                                , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
-            const response = ""
-            console.log(temp)
-            response =  await updatePostLost(temp)
-            console.log(response)
+                        , lost_location:String( postItem.lost_location), post_at : +postItem.post_at
+                        , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
+            await updatePostLost(temp)
+
+            console.log("here")
+            
+            history.push({pathname:`/post/lost/${id}`})
+            
 
         } catch (error) {
-     
+
             alert( error)
         }
+        event.preventDefault()
 
     }
 
@@ -153,9 +162,9 @@ function UpdatePost() {
                             <a class="links"> <i class="fas fa-map-marker-alt"></i> ---------- </a>
                             </div>
 
-                            {<Link to={{pathname:`/post/lost/${id}`}}> 
+                            {/* {<Link to={{pathname:`/post/lost/${id}`}}>  */}
                             <input type="submit"  class="btn" onClick={postUploadHandler}/>
-                            </Link>}
+                            {/* </Link>} */}
                         
                         </div>
                     </div>
