@@ -59,7 +59,7 @@ function UpdatePost() {
 
     const postUploadHandler = async (event) =>{
         try {
-            event.preventDefault()            
+            // event.preventDefault()            
             const tempAnimal = {type: String(postInfo.type), age: +postInfo.age, species: String(postInfo.species)
                                 , gender: String(postInfo.gender), general_information: String(postInfo.general_information),  spay: Boolean(spay.spay)
                                 ,image: String(animal.image), medical_condition: String(postInfo.medical_condition)}
