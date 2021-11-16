@@ -24,7 +24,7 @@ function UpdatePost() {
                 console.log(response);
                 setPostItems(response.data.data)
                 setAnimal(response.data.data.animal)
-                setAnimal((oldValue) => ({ ...oldValue, ["location"]: postItem.lost_location }))
+                setAnimal((oldValue) => ({ ...oldValue, ["lost_location"]: postItem.lost_location }))
                 setSpay((oldValue) => ({ ...oldValue, ["spay"]: Boolean(animal.spay )}))
                 setSpay((oldValue) => ({ ...oldValue, ["found"]: Boolean(postItem.found )}))
                 console.log(postItem)
@@ -57,7 +57,7 @@ function UpdatePost() {
                                 , gender: animal.gender, general_information: animal.general_information,  spay: spay.spay
                                 ,image: animal.image, medical_condition: animal.medical_condition}
             const temp = {...postItem, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: spay.found 
-                                , lost_location: animal.location, post_at : +postItem.post_at
+                                , lost_location: animal.lost_location, post_at : +postItem.post_at
                                 , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             const response = ""
             console.log(temp)
@@ -129,7 +129,7 @@ function UpdatePost() {
                                 <a  class="links"> <i class="fas fa-birthday-cake"></i> <input type="text" placeholder="Age of pet" class="box" name = "age" defaultValue={animal.age}  onChange={handlePostInput}/> </a>
                                 <a  class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> <input type="text" placeholder="gender of pet" class="box" name = "gender" defaultValue={animal.gender}  onChange={handlePostInput}/></a>
                                 <a  class="links"> <i class="fas fa-hospital"></i> <input type="text" placeholder="Pet medical condition" class="box" name = "medical_condition" defaultValue={animal.medical_condition} onChange={handlePostInput}/>  </a>
-                                <a  class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box" name = "location" defaultValue={postItem.lost_location} onChange={handlePostInput}/></a>
+                                <a  class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box" name = "lost_location" defaultValue={postItem.lost_location} onChange={handlePostInput}/></a>
 
                                 <a  class="links"> <i class="fas fa-paw"></i>  <input type="text" placeholder="General Information" class="box" name = "general_information" defaultValue={animal.general_information} onChange={handlePostInput}/>  </a>
 
