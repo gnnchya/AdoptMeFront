@@ -140,7 +140,7 @@ function UpdatePost() {
                             </div>
                             
                             <h3>contact info</h3>
-                            <a class="links"> <i class="fas fa-phone"></i> --------- </a>
+                            <a class="links"> <i class="fas fa-phone"></i> ---------- </a>
                             <a class="links"> <i class="fas fa-phone"></i> ----------- </a>
                             <a class="links"> <i class="fas fa-envelope"></i> --------- </a>
                             <a class="links"> <i class="fas fa-map-marker-alt"></i> ---------- </a>
