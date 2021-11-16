@@ -37,6 +37,8 @@ function ReadPostAdopting() {
                 setPostItems(response.data.data)
                 setAnimal(response.data.data.animal)
                 console.log(postItem)
+                console.log(postItem.adopt)
+                console.log(typeof postItem.adopt)
             })
         } catch (error) {
             alert(error)
@@ -113,6 +115,7 @@ function ReadPostAdopting() {
                             <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
                             <a href="#" class="links"> <i class="fas fa-check"></i> {String(postItem.adopt)}  </a>
                             </div>
+
 
                             <p>{animal.general_information}</p>
                             <h3>{animal.type}</h3>
