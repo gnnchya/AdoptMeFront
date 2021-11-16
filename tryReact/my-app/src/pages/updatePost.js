@@ -56,7 +56,7 @@ function UpdatePost() {
             const tempAnimal = {type: animal.type, age: +animal.age, species: animal.species
                                 , gender: animal.gender, generalInformation: animal.info,  spay: spay.spay
                                 ,image: animal.image, medical_condition: animal.medical_condition}
-            const temp = {...postInfo, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: spay.found 
+            const temp = {...animal, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: spay.found 
                                 , lost_location: animal.location, post_at : +postItem.post_at
                                 , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             const response = ""
