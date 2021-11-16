@@ -49,7 +49,7 @@ function CreatePost() {
         const picURL = url.split('?')[0]
         
         const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender
-                        , generalInformation: postInfo.info,  spay: spay.spay, image: picURL
+                        , general_information: postInfo.info,  spay: spay.spay, image: picURL
                         , medical_condition: postInfo.medical_condition}
         const temp = {...postInfo, animal:tempAnimal, UID: "", location: postInfo.location}
         const response = ""

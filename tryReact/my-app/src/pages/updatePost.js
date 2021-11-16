@@ -54,7 +54,7 @@ function UpdatePost() {
         try {
             event.preventDefault()            
             const tempAnimal = {type: animal.type, age: +animal.age, species: animal.species
-                                , gender: animal.gender, generalInformation: animal.info,  spay: spay.spay
+                                , gender: animal.gender, general_information: animal.general_information,  spay: spay.spay
                                 ,image: animal.image, medical_condition: animal.medical_condition}
             const temp = {...postItem, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: spay.found 
                                 , lost_location: animal.location, post_at : +postItem.post_at
@@ -130,6 +130,8 @@ function UpdatePost() {
                                 <a  class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> <input type="text" placeholder="gender of pet" class="box" name = "gender" defaultValue={animal.gender}  onChange={handlePostInput}/></a>
                                 <a  class="links"> <i class="fas fa-hospital"></i> <input type="text" placeholder="Pet medical condition" class="box" name = "medical_condition" defaultValue={animal.medical_condition} onChange={handlePostInput}/>  </a>
                                 <a  class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box" name = "location" defaultValue={postItem.lost_location} onChange={handlePostInput}/></a>
+
+                                <a  class="links"> <i class="fas fa-paw"></i>  <input type="text" placeholder="General Information" class="box" name = "general_information" defaultValue={animal.general_information} onChange={handlePostInput}/>  </a>
 
                                 <a  class="links"> <i class="fab fa-font-awesome"></i>  <input type="checkbox" name="spay" id="spay" onChange={handleSpayInput}/> <label for="spay">Still spay</label></a>
                                 <a  class="links"> <i class="fas fa-check"></i>   <input type="checkbox" name="found" id="found" onChange={handleSpayInput}/> <label for="found">FOUND!!</label></a>

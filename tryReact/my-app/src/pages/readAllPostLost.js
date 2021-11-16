@@ -54,7 +54,7 @@ function ReadAllPostLost() {
                                     <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
                                 </div>
                                 <h3 key={index}>{item.animal.type}</h3>
-                                <p key={index}>{item.animal.generalInformation}</p>
+                                <p key={index}>{item.animal.general_information}</p>
                                 <Link to={{pathname:`/post/lost/${item.id}`}} >
                                 <a class="btn">See more</a>
                                 </Link>

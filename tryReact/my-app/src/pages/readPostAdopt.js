@@ -37,13 +37,14 @@ function ReadPostAdopting() {
                 setPostItems(response.data.data)
                 setAnimal(response.data.data.animal)
                 console.log(postItem)
-                console.log(Boolean(postItem.adopt))
-                console.log(typeof Boolean(postItem.adopt))
+                console.log(postItem.adopt)
+                console.log(typeof postItem.adopt)
             })
         } catch (error) {
             alert(error)
         }
     }
+
     return (
         <div>
         <body>

@@ -49,7 +49,7 @@ function ReadAllPostAdopt() {
                             <div>
                                 <img src={item.animal.image}  key={index} alt=""/>
                                 <h3 key={index}>{item.animal.type}</h3>
-                                <p key={index}>{item.animal.generalInformation} </p>
+                                <p key={index}>{item.animal.general_information} </p>
                             </div>
                         
                             <Link to={{pathname:`/post/adopt/${item.id}`}} >
