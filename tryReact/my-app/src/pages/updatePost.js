@@ -129,7 +129,7 @@ function UpdatePost() {
                                 <a  class="links"> <i class="fas fa-birthday-cake"></i> <input type="text" placeholder="Age of pet" class="box" name = "age" defaultValue={animal.age}  onChange={handlePostInput}/> </a>
                                 <a  class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> <input type="text" placeholder="gender of pet" class="box" name = "gender" defaultValue={animal.gender}  onChange={handlePostInput}/></a>
                                 <a  class="links"> <i class="fas fa-hospital"></i> <input type="text" placeholder="Pet medical condition" class="box" name = "medical_condition" defaultValue={animal.medical_condition} onChange={handlePostInput}/>  </a>
-                                <a  class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box" name = "lost_location" defaultValue={postItem.lost_location} onChange={handlePostInput}/></a>
+                                <a  class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box" name = "lost_location" defaultValue={animal.lost_location} onChange={handlePostInput}/></a>
 
                                 <a  class="links"> <i class="fas fa-paw"></i>  <input type="text" placeholder="General Information" class="box" name = "general_information" defaultValue={animal.general_information} onChange={handlePostInput}/>  </a>
 
