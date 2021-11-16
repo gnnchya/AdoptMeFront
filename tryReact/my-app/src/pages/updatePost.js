@@ -54,9 +54,9 @@ function UpdatePost() {
         try {
             event.preventDefault()            
             const tempAnimal = {type: animal.type, age: +animal.age, species: animal.species
-                                , gender: animal.gender, general_information: animal.general_information,  spay: spay.spay
+                                , gender: animal.gender, general_information: animal.general_information,  spay: Boolean(spay.spay)
                                 ,image: animal.image, medical_condition: animal.medical_condition}
-            const temp = {...postItem, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: spay.found 
+            const temp = {...postItem, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: Boolean(spay.found)
                                 , lost_location: animal.lost_location, post_at : +postItem.post_at
                                 , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             const response = ""
