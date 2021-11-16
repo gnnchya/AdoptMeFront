@@ -11,6 +11,7 @@ function UpdatePost() {
 
     const [postItem, setPostItems] = useState({})
     const [animal, setAnimal] = useState({})
+    const [animalStruct, SetAnimalStruct] = useState([])
 
     useEffect(() => {
         getList()
@@ -52,7 +53,7 @@ function UpdatePost() {
             const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species
                                 , gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay
                                 ,image: animal.image, medical_condition: postInfo.medical_condition}
-            const temp = {...postInfo, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: spay.found 
+            const temp = {...postInfo, id: postItem.id , uid: postItem.uid, animal: [...animalStruct, tempAnimal], found: spay.found 
                                 , lost_location: postInfo.location, post_at : +postItem.post_at
                                 , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             const response = ""
