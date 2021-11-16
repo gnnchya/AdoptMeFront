@@ -6,7 +6,7 @@ import { updatePostLost} from '../actions/posts'
 import axios from 'axios'
 
 function UpdatePost() {
-    // const [postInfo, setPostInfo] = useState("") 
+    const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
 
     const [postItem, setPostItems] = useState({})
@@ -24,10 +24,17 @@ function UpdatePost() {
                 console.log(response);
                 setPostItems(response.data.data)
                 setAnimal(response.data.data.animal)
-                setAnimal((oldValue) => ({ ...oldValue, ["lost_location"]: postItem.lost_location }))
+                setPostInfo(response.data.data.animal)
+                // setPostInfo((oldValue) => ({ ...oldValue, ["lost_location"]: String(postItem.lost_location)}))
+                // setPostInfo((oldValue) => ({ ...oldValue, ["type"]: postItem.type}))
+                // setPostInfo((oldValue) => ({ ...oldValue, ["age"]: postItem.age}))
+                // setPostInfo((oldValue) => ({ ...oldValue, ["species"]: postItem.species}))
+                // setPostInfo((oldValue) => ({ ...oldValue, ["gender"]: postItem.gender}))
+                // setPostInfo((oldValue) => ({ ...oldValue, ["general_information"]: postItem.general_information}))
+                // setPostInfo((oldValue) => ({ ...oldValue, ["medical_condition"]: postItem.medical_condition}))
                 setSpay((oldValue) => ({ ...oldValue, ["spay"]: Boolean(animal.spay )}))
                 setSpay((oldValue) => ({ ...oldValue, ["found"]: Boolean(postItem.found )}))
-                console.log(postItem)
+               
             })
         } catch (error) {
             alert(error)
@@ -39,7 +46,7 @@ function UpdatePost() {
         e.preventDefault()
         const name = e.target.name
         const value = e.target.value
-        setAnimal((oldValue) => ({ ...oldValue, [name]: value }))
+        setPostInfo((oldValue) => ({ ...oldValue, [name]: String(value) }))
     }
 
    
@@ -53,11 +60,11 @@ function UpdatePost() {
     const postUploadHandler = async (event) =>{
         try {
             event.preventDefault()            
-            const tempAnimal = {type: animal.type, age: +animal.age, species: animal.species
-                                , gender: animal.gender, general_information: animal.general_information,  spay: Boolean(spay.spay)
-                                ,image: animal.image, medical_condition: animal.medical_condition}
-            const temp = {...postItem, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: Boolean(spay.found)
-                                , lost_location: animal.lost_location, post_at : +postItem.post_at
+            const tempAnimal = {type: String(postInfo.type), age: +postInfo.age, species: String(postInfo.species)
+                                , gender: String(postInfo.gender), general_information: String(postInfo.general_information),  spay: Boolean(spay.spay)
+                                ,image: String(animal.image), medical_condition: String(postInfo.medical_condition)}
+            const temp = {...postItem, id: String(postItem.id) , uid: String(postItem.uid), animal:tempAnimal, found: Boolean(spay.found)
+                                , lost_location:String( postItem.lost_location), post_at : +postItem.post_at
                                 , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             const response = ""
             console.log(temp)
@@ -129,7 +136,7 @@ function UpdatePost() {
                                 <a  class="links"> <i class="fas fa-birthday-cake"></i> <input type="text" placeholder="Age of pet" class="box" name = "age" defaultValue={animal.age}  onChange={handlePostInput}/> </a>
                                 <a  class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> <input type="text" placeholder="gender of pet" class="box" name = "gender" defaultValue={animal.gender}  onChange={handlePostInput}/></a>
                                 <a  class="links"> <i class="fas fa-hospital"></i> <input type="text" placeholder="Pet medical condition" class="box" name = "medical_condition" defaultValue={animal.medical_condition} onChange={handlePostInput}/>  </a>
-                                <a  class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box" name = "lost_location" defaultValue={animal.lost_location} onChange={handlePostInput}/></a>
+                                {/* <a  class="links"> <i class="fas fa-map-marker-alt"></i> <input type="text" placeholder="location of pet" class="box" name = "lost_location" defaultValue={postItem.lost_location} onChange={handlePostInput}/></a> */}
 
                                 <a  class="links"> <i class="fas fa-paw"></i>  <input type="text" placeholder="General Information" class="box" name = "general_information" defaultValue={animal.general_information} onChange={handlePostInput}/>  </a>
 
