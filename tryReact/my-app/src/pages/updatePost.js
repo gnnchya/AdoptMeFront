@@ -6,12 +6,11 @@ import { updatePostLost} from '../actions/posts'
 import axios from 'axios'
 
 function UpdatePost() {
-    const [postInfo, setPostInfo] = useState("") 
+    // const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
 
     const [postItem, setPostItems] = useState({})
     const [animal, setAnimal] = useState({})
-    const [animalStruct, SetAnimalStruct] = useState([])
 
     useEffect(() => {
         getList()
@@ -25,6 +24,9 @@ function UpdatePost() {
                 console.log(response);
                 setPostItems(response.data.data)
                 setAnimal(response.data.data.animal)
+                setAnimal((oldValue) => ({ ...oldValue, ["location"]: postItem.lost_location }))
+                setSpay((oldValue) => ({ ...oldValue, ["spay"]: Boolean(animal.spay )}))
+                setSpay((oldValue) => ({ ...oldValue, ["found"]: Boolean(postItem.found )}))
                 console.log(postItem)
             })
         } catch (error) {
@@ -37,8 +39,9 @@ function UpdatePost() {
         e.preventDefault()
         const name = e.target.name
         const value = e.target.value
-        setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
+        setAnimal((oldValue) => ({ ...oldValue, [name]: value }))
     }
+
    
     const handleSpayInput = (e) =>{
         e.preventDefault()
@@ -50,14 +53,14 @@ function UpdatePost() {
     const postUploadHandler = async (event) =>{
         try {
             event.preventDefault()            
-            const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species
-                                , gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay
-                                ,image: animal.image, medical_condition: postInfo.medical_condition}
-            const temp = {...postInfo, id: postItem.id , uid: postItem.uid, animal: [...animalStruct, tempAnimal], found: spay.found 
-                                , lost_location: postInfo.location, post_at : +postItem.post_at
+            const tempAnimal = {type: animal.type, age: +animal.age, species: animal.species
+                                , gender: animal.gender, generalInformation: animal.info,  spay: spay.spay
+                                ,image: animal.image, medical_condition: animal.medical_condition}
+            const temp = {...postInfo, id: postItem.id , uid: postItem.uid, animal:tempAnimal, found: spay.found 
+                                , lost_location: animal.location, post_at : +postItem.post_at
                                 , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             const response = ""
-            console.log(temp)
+    
             response =  await updatePostLost(temp)
             console.log(response)
 
