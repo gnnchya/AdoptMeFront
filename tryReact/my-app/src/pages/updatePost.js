@@ -56,7 +56,7 @@ function UpdatePost() {
                                 , lost_location: postInfo.location, post_at : +postItem.post_at
                                 , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             const response = ""
-    
+            console.log(temp)
             response =  await updatePostLost(temp)
             console.log(response)
 
