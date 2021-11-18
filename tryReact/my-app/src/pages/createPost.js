@@ -56,8 +56,8 @@ function CreatePost() {
                 , gender: String(postInfo.gender), general_information: String(postInfo.general_information),  spay: Boolean(spay.spay)
                 ,image: String(picURL), medical_condition: String(postInfo.medical_condition)}
             const temp = {animal:tempAnimal, UID: "", location: String( postInfo.lost_location)}
-            console.log(temp)
-            if (postInfo.postType === 'Adopt'){
+            console.log(String(postInfo.postType))
+            if (String(postInfo.postType) === 'adopt'){
                 await createPostAdopt(temp)
             }else{
                 await createPostLost(temp)
@@ -138,7 +138,7 @@ function CreatePost() {
                                 <input type="text" placeholder="location" class="box" name="lost_location" onChange={handlePostInput} />
 
                                 <p>Type of Post</p>
-                                <select name="postType" id="postType" onChange={handlePostInput}>
+                                <select name="postType" id="postType" onChange={handlePostInput} defaultValue="adopt">
                                     <option value="adopt">Adopt</option>
                                     <option value="lost">Lost</option>
                                 </select>
