@@ -16,6 +16,7 @@ function ReadPostLost() {
     useEffect(() => {
         getList()
     }, [])
+    
     let {id} = useParams("id")
     console.log("iddd", id)
     const getList = async (e) => {
