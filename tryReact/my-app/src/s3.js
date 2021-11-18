@@ -6,8 +6,8 @@ const randomBytes = promisify(crypto.randomBytes)
 
 
 
-const region = "ap-southeast-1"
-const bucketName = "adoptme-pic-storage"
+const region = `env:"aws_region" envDefault:""`
+const bucketName = "pic-storage"
 const accessKeyId = `env:"aws_access_key_id" envDefault:""`
 const secretAccessKey = `env:"aws_secret_access_key_id" envDefault:""`
 

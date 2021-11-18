@@ -74,7 +74,7 @@ function UpdatePost() {
                         , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             await updatePostLost(temp)
 
-            console.log("here")
+            console.log(temp)
             
             history.push({pathname:`/post/lost/${id}`})
             

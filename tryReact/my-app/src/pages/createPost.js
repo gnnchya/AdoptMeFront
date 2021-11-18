@@ -5,9 +5,11 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { uploadPic, createPostAdopt, createPostLost} from '../actions/posts'
 import {generateUploadURL} from '../s3.js'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom';
+
 
 function CreatePost() {
-    const [postInfo, setPostInfo] = useState("") 
+    const [postInfo, setPostInfo] = useState({}) 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
     const history = useHistory();
@@ -34,7 +36,7 @@ function CreatePost() {
     }
 
     const postUploadHandler = async (event) =>{
-        try {
+        // try {
             event.preventDefault()
             const url =  await generateUploadURL()
             var options = {
@@ -42,30 +44,31 @@ function CreatePost() {
                 'Content-Type': "multipart/form-data"
                 }
             };
-    
+            console.log(url)
             // const picURL = await uploadPic(url, file.picFile, options) 
             axios.put(url, file, options).then((response) => {
                 console.log("response")
                 console.log(response)
             })
             const picURL = url.split('?')[0]
-            
+            console.log(picURL)
             const tempAnimal = {type: String(postInfo.type), age: +postInfo.age, species: String(postInfo.species)
                 , gender: String(postInfo.gender), general_information: String(postInfo.general_information),  spay: Boolean(spay.spay)
                 ,image: String(picURL), medical_condition: String(postInfo.medical_condition)}
-            const temp = {...postInfo, animal:tempAnimal, UID: "", location: String( postInfo.lost_location)}
+            const temp = {animal:tempAnimal, UID: "", location: String( postInfo.lost_location)}
+            console.log(temp)
             if (postInfo.postType === 'adopt'){
                 await createPostAdopt(temp)
             }else{
                 await createPostLost(temp)
             }
     
-            history.push({pathname: "/posts/lost/all"})
+            // history.push({pathname: "/posts/lost/all"})
             
-        } catch (error) {
+        // } catch (error) {
      
-            alert( error)
-        }
+        //     alert( error)
+        // }
 
     }
 
