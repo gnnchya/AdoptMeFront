@@ -14,6 +14,15 @@ function CreatePost() {
     const [file, setFile] = useState({}) 
     const history = useHistory();
 
+    useEffect(() => {
+        setDefault()
+    }, [])
+
+    const setDefault = async(e) => {
+        setSpay((oldValue) => ({ ...oldValue, ["spay"]: false}))
+        setSpay((oldValue) => ({ ...oldValue, ["postType"]: 'adopt'}))
+    }
+
     const handlePostInput = (e) =>{
         e.preventDefault()
         const name = e.target.name
