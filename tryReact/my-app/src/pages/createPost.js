@@ -30,9 +30,9 @@ function CreatePost() {
 
     const fileSelectedHandler = event => {
         event.preventDefault()
-        const name = event.target.name
         const value = event.target.value
-        setFile((oldValue) => ({ ...oldValue, [name]: value }))
+        setFile(value)  
+        // setFile(value[0])
     }
 
     const postUploadHandler = async (event) =>{
