@@ -5,10 +5,10 @@ import {promisify} from 'util'
 
 const randomBytes = promisify(crypto.randomBytes)
 
-const region = String(process.env.AWS_REGION)
+const region = String(process.env.REACT_APP_AWS_REGION)
 const bucketName = "pic-storage"
-const accessKeyId = `env:"aws_access_key_id" envDefault:""`
-const secretAccessKey = `env:"aws_secret_access_key_id" envDefault:""`
+const accessKeyId = String(process.env.REACT_APP_AWS_ACCESS_KEY)
+const secretAccessKey = String(process.env.REACT_APP_AWS_SECRET_ACCESS_KEY)
 
 const s3 = new aws.S3({
     region,
@@ -19,7 +19,7 @@ const s3 = new aws.S3({
 })
 
 export const generateUploadURL = async() =>{
-    console.log(region)
+    console.log(region,accessKeyId,secretAccessKey)
     const rawBytes = await randomBytes(16)
     const imageName = rawBytes.toString('hex')
 

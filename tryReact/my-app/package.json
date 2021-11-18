@@ -1,4 +1,9 @@
 {
+  "start": "env-cmd -f .env.staging react-scripts start",
+    "build:staging": "env-cmd -f .env.staging react-scripts build",
+    "build:production": "env-cmd -f .env.production react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -8,6 +13,7 @@
     "@testing-library/user-event": "^12.8.3",
     "aws-sdk": "^2.1023.0",
     "axios": "^0.21.1",
+    "env-cmd": "^10.1.0",
     "install": "^0.13.0",
     "js-file-download": "^0.4.12",
     "react": "^17.0.2",
