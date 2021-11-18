@@ -30,7 +30,7 @@ function CreatePost() {
 
     const fileSelectedHandler = event => {
         event.preventDefault()
-        const value = event.target.value
+        const value = event.target.files[0]
         setFile(value)  
         // setFile(value[0])
     }
@@ -57,7 +57,7 @@ function CreatePost() {
                 ,image: String(picURL), medical_condition: String(postInfo.medical_condition)}
             const temp = {animal:tempAnimal, UID: "", location: String( postInfo.lost_location)}
             console.log(temp)
-            if (postInfo.postType === 'adopt'){
+            if (postInfo.postType === 'Adopt'){
                 await createPostAdopt(temp)
             }else{
                 await createPostLost(temp)
