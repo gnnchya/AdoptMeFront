@@ -10,6 +10,7 @@ function CreatePost() {
     const [postInfo, setPostInfo] = useState("") 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
+    const history = useHistory();
 
     const handlePostInput = (e) =>{
         e.preventDefault()
@@ -33,75 +34,38 @@ function CreatePost() {
     }
 
     const postUploadHandler = async (event) =>{
-        event.preventDefault()
-        const url =  await generateUploadURL()
-        var options = {
-            headers: {
-            'Content-Type': "multipart/form-data"
-            }
-        };
-
-        // const picURL = await uploadPic(url, file.picFile, options) 
-        axios.put(url, file, options).then((response) => {
-            console.log("response")
-            console.log(response)
-        })
-        const picURL = url.split('?')[0]
-        
-        const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender
-                        , general_information: postInfo.info,  spay: spay.spay, image: picURL
-                        , medical_condition: postInfo.medical_condition}
-        const temp = {...postInfo, animal:tempAnimal, UID: "", location: postInfo.location}
-        const response = ""
-        if (postInfo.postType === 'adopt'){
-            response =  await createPostAdopt(temp)
-            console.log(response)
-        }else{
-            response =  await createPostLost(temp)
-            console.log(response)
-        }
-
-        if (response.status === 201) {
-            console.log("create", response)
-            alert("created")
-        }
-        
-        
-        // try {
-        //     event.preventDefault()
-        //     const url =  await generateUploadURL()
-        //     var options = {
-        //         headers: {
-        //         'Content-Type': "multipart/form-data"
-        //         }
-        //     };
-
-        //     // const picURL = await uploadPic(url, file.picFile, options) 
-        //     axios.put(url, file, options).then((response) => {
-        //         console.log("response")
-        //         console.log(response)
-        //     })
-        //     const picURL = url.split('?')[0]
+        try {
+            event.preventDefault()
+            const url =  await generateUploadURL()
+            var options = {
+                headers: {
+                'Content-Type': "multipart/form-data"
+                }
+            };
+    
+            // const picURL = await uploadPic(url, file.picFile, options) 
+            axios.put(url, file, options).then((response) => {
+                console.log("response")
+                console.log(response)
+            })
+            const picURL = url.split('?')[0]
             
-        //     const tempAnimal = {type: postInfo.type, age: +postInfo.age, species: postInfo.species, gender: postInfo.gender, generalInformation: postInfo.info,  spay: spay.spay, image: picURL, medical_condition: postInfo.medical_condition}
-        //     const temp = {...postInfo, animal:tempAnimal, UID: "", location: postInfo.location}
-        //     const response = ""
-        //     if (postInfo.postType === 'adopt'){
-        //         response =  await createPostAdopt(temp)
-        //         console.log(response)
-        //     }else{
-        //         response =  await createPostLost(temp)
-        //         console.log(response)
-        //     }
-
-        //     if (response.status === 201) {
-        //         console.log("create", response)
-        //         alert("created")
-        //     }
-        // } catch (error) {
+            const tempAnimal = {type: String(postInfo.type), age: +postInfo.age, species: String(postInfo.species)
+                , gender: String(postInfo.gender), general_information: String(postInfo.general_information),  spay: Boolean(spay.spay)
+                ,image: String(picURL), medical_condition: String(postInfo.medical_condition)}
+            const temp = {...postInfo, animal:tempAnimal, UID: "", location: String( postInfo.lost_location)}
+            if (postInfo.postType === 'adopt'){
+                await createPostAdopt(temp)
+            }else{
+                await createPostLost(temp)
+            }
+    
+            history.push({pathname: "/posts/lost/all"})
+            
+        } catch (error) {
      
-        //     alert( error)
-        // }
+            alert( error)
+        }
 
     }
 
@@ -168,7 +132,7 @@ function CreatePost() {
                                 </div>
 
                                 <p>Location</p>
-                                <input type="text" placeholder="location" class="box" name="location" onChange={handlePostInput} />
+                                <input type="text" placeholder="location" class="box" name="lost_location" onChange={handlePostInput} />
 
                                 <p>Type of Post</p>
                                 <select name="postType" id="postType" onChange={handlePostInput}>
@@ -177,12 +141,12 @@ function CreatePost() {
                                 </select>
 
                                 <p>Post caption</p>
-                                <input type="text" placeholder="post info" class="box-info" name="info" onChange={handlePostInput} />
+                                <input type="text" placeholder="post info" class="box-info" name="general_information" onChange={handlePostInput} />
                                                         
                             </div>
-                            {<Link to={{pathname:"/posts/lost/all"}}> 
+                            {/* {<Link to={{pathname:"/posts/lost/all"}}>  */}
                             <input type="submit"  class="btn" onClick={postUploadHandler}/>
-                            </Link>}
+                            {/* </Link>} */}
                         </div>
         
                     </div>
