@@ -20,7 +20,7 @@ function CreatePost() {
 
     const setDefault = async(e) => {
         setSpay((oldValue) => ({ ...oldValue, ["spay"]: false}))
-        setSpay((oldValue) => ({ ...oldValue, ["postType"]: 'adopt'}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["postType"]: 'adopt'}))
     }
 
     const handlePostInput = (e) =>{
