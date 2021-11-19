@@ -7,10 +7,11 @@ import {generateUploadURL} from '../s3.js'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 import Amplify, { Auth } from 'aws-amplify'
+import { PresignedPost } from 'aws-sdk/clients/s3';
 
 
 
-function Login() {
+function Login(props) {
     const [postInfo, setPostInfo] = useState({}) 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
@@ -53,6 +54,10 @@ function Login() {
             event.preventDefault()
             const user = await Auth.signIn(postInfo.username, postInfo.password);
             console.log(user)
+
+            // props.isAuthen = true
+            // props.user = dbfgvisudbfds
+
             history.push({pathname: "/home"})            
         } catch (error) {
     
