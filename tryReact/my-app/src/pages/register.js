@@ -5,8 +5,16 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { uploadPic, createPostAdopt, createPostLost} from '../actions/posts'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
-import {Auth} from "aws=amplify"
+//import {Auth} from "aws=amplify"
+import Amplify, { Auth } from 'aws-amplify'
 
+class register {
+    state= {
+        username : "",
+        email :"",
+        password : ""
+    }
+}
 
 function Register() {
     const [postInfo, setPostInfo] = useState("") 
@@ -28,33 +36,50 @@ function Register() {
         setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
     }
    
-    const handleSpayInput = (e) =>{
-        e.preventDefault()
-        const name = e.target.name
-        const value = e.target.value
-        setSpay((oldValue) => ({ ...oldValue, [name]: value }))
-    }
+    // const handleSpayInput = (e) =>{
+    //     e.preventDefault()
+    //     const name = e.target.name
+    //     const value = e.target.value
+    //     setSpay((oldValue) => ({ ...oldValue, [name]: value }))
+    // }
 
-    const fileSelectedHandler = event => {
-        event.preventDefault()
-        const value = event.target.files[0]
-        setFile(value)  
-        // setFile(value[0])
-    }
+    // const fileSelectedHandler = event => {
+    //     event.preventDefault()
+    //     const value = event.target.files[0]
+    //     setFile(value)  
+    //     // setFile(value[0])
+    // }
 
     const postUploadHandler = async (event) =>{
-        try {
-            event.preventDefault()
+        event.preventDefault()
+
+        const {email, username, password} = postInfo.state
+        const email = postInfo.email
+        console.log(String(postInfo.email)
+        try 
+        {
             const SignupResponse = await Auth.signUp({
-                    String(postInfo.username),
-                    String(postInfo.password),
+                username,
+                password,
+                attributes: {
+                    email: email
+                }
             })
+            console.log(SignupResponse)
     
             // history.push({pathname: "/posts/lost/all"})
             
         } catch (error) {
-     
-            alert( error)
+    
+            // alert( error)
+            let err = null;
+            !error.message ? err = {"message": error}: err = error;
+            postInfo.setState({
+                errors: {
+                    ...postInfo.state.errors,
+                    cognito: err
+                }
+            });
         }
 
     }
@@ -134,7 +159,7 @@ function Register() {
                     </div>
             
                     <form action="">
-                         <a class="links" >Name</a>
+                         {/* <a class="links" >Name</a>
                         <div class="inputBox">
                             <input type="text" placeholder="Name" name="given_name" onChange={handlePostInput}/>
                         </div>
@@ -142,7 +167,7 @@ function Register() {
                         <a class="links" >Family Name</a>
                         <div class="inputBox">
                             <input type="text" placeholder="Family Name" name="family_name" onChange={handlePostInput}/>
-                        </div>
+                        </div> */}
 
                         <a class="links" >Email</a>
                         <div class="inputBox">
@@ -154,7 +179,7 @@ function Register() {
                             <input type="text" placeholder="your Username" name="Username" onChange={handlePostInput}/>
                         </div>
 
-                        <a class="links" >Gender</a>
+                        {/* <a class="links" >Gender</a>
                         <div class="inputBox">
                             <select name="gender" id="gender" defaultValue="Male" onChange={handlePostInput}>
                                 <option value="male">Male</option>
@@ -172,7 +197,7 @@ function Register() {
                         <a class="links" >Phone Number</a>
                         <div class="inputBox">
                             <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" onChange={handlePostInput}/>
-                        </div>
+                        </div> */}
 
                         <a class="links" >Password</a>
                         <div class="inputBox">
