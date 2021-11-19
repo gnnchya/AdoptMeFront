@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 
 
 function Register() {
+    const [postInput, setPostInput] = useState("") 
     const [postInfo, setPostInfo] = useState({}) 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 
@@ -133,11 +134,6 @@ function Register() {
                     <a href="adoption.html">Adoption</a>
                     <a href="lost.html">Lost</a>
                 </nav>
-            
-                <form action="" class="search-form">
-                    <input type="search" placeholder="search here..." id="search-box"/>
-                    <label for="search-box" class="fas fa-search"></label>
-                </form>
             
                 <div class="icons">
                     <div class="fas fa-bars" id="menu-btn"></div>
