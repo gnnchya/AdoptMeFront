@@ -1,4 +1,6 @@
 import './App.css';
+import { useState, useEffect } from 'react'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -23,62 +25,65 @@ function App() {
 
     const [authen, setAuthen] = useState(false) 
     const [user, setUser] = useState({}) 
+    // useEffect(() => {
+    //     setDefault()
+    // }, [])
 
-    
-    useEffect(() => {
-        setDefault()
-    }, [])
-
-    const setDefault = async(e) => {
-        setAuthen(false)
-    }
+    // const setDefault = async(e) => {
+    //     setAuthen(false)
+    // }
     
     //set authen status when user login 
     const handleAuthen = (e) => {
-        e.preventDefault()
-        setAuthen((oldValue) => ({ ...oldValue, ["isAuthen"]: true}))
+        setAuthen(e)
+        // console.log("after", authen)
     }
     //set user, take in user object from aws
-    const handleAuthen = (e) => {
-        e.preventDefault()
-        setAuthen((oldValue) => ({ ...oldValue, ["isUser"]: user}))
+    const handleUser = (e) => {
+        setUser(e)
+        // console.log("after", user)    
     }
 
 
-
+    const authProps = {
+        authen,
+        user,
+        handleAuthen,
+        handleUser
+    }
 
     return (
         <Router>
             <Switch>
                 <Route exact path="/">
-                    <HomePage authen={authen} user={user}/>
+                    <HomePage auth={authProps}/>
                 </Route>
                 <Route exact path="/home">
-                    <HomePage authen={authen} user={user}/>
+                    <HomePage auth={authProps}/>
                 </Route>
                 <Route exact path="/posts/adopt/:keyword">
-                    <ReadAllPostAdopt authen={authen} user={user}/>
+                    <ReadAllPostAdopt auth={authProps}/>
                 </Route>
                 <Route exact path="/posts/lost/:keyword">
-                    <ReadAllPostLost  authen={authen} user={user}/>
+                    <ReadAllPostLost auth={authProps}/>
                 </Route>
                 <Route exact path="/post/lost/:id" >
-                    <ReadPostLost  authen={authen} user={user}/>
+                    <ReadPostLost auth={authProps}/>
                 </Route>
                 <Route exact path="/post/adopt/:id" >
-                    <ReadPostAdopt authen={authen} user={user}/>
+                    <ReadPostAdopt auth={authProps}/>
                 </Route>
                 <Route exact path="/updatePost/:id">
-                    <UpdatePost authen={authen} user={user}/>
+                    <UpdatePost auth={authProps}/>
                 </Route>
                 <Route exact path="/createPost">
-                    <CreatePost authen={authen} user={user}/>
+                    <CreatePost auth={authProps}/>
                 </Route>
                 <Route exact path="/register">
-                    <Register authen={authen} user={user}/>
+                    <Register auth={authProps}/>
                 </Route>
                 <Route exact path="/login">
-                    <Login authen={authen} user={user}/>
+                    <Login auth={authProps}/>
                 </Route>
             </Switch>
         </Router>

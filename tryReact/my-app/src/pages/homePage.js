@@ -22,6 +22,8 @@ function HomePage(props){
     }, []);
 
     const getList = (e) => {
+        console.log("home", props.auth.authen)
+        console.log("home", props.auth.user)
         // try {
         //     const response = await readAllPostLost("all",limit,1)
         //     console.log(response.data.data)

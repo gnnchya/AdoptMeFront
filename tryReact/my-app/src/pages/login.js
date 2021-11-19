@@ -51,18 +51,16 @@ function Login(props) {
                
         try 
         {
-            console.log(authen)
-            console.log(user)
+            console.log("before", props.auth.authen)
+            console.log("before", props.auth.user)
 
             event.preventDefault()
             const user = await Auth.signIn(postInfo.username, postInfo.password);
+            
             console.log(user)
 
-            props.authen = true
-            props.user = user
-
-            console.log(authen)
-            console.log(user)
+            props.auth.handleAuthen(true)
+            props.auth.handleUser(user)
         
 
             history.push({pathname: "/home"})            
