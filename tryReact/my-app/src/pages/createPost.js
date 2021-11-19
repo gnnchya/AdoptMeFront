@@ -8,7 +8,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 
 
-function CreatePost() {
+function CreatePost(props) {
     const [postInfo, setPostInfo] = useState({}) 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 

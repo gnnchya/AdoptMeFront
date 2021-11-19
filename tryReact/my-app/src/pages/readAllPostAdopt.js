@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios'
 
-function ReadAllPostAdopt() {
+function ReadAllPostAdopt(props) {
     let limit = 100
     const {page, keyword} = useParams();
 

@@ -6,7 +6,7 @@ import { updatePostLost} from '../actions/posts'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 
-function UpdatePost() {
+function UpdatePost(props) {
 
     let {id} = useParams("id")
     console.log("iddd", id)

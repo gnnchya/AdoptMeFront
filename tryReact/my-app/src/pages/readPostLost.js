@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios'
 // import PostList from '../components/PostList'
 
-function ReadPostLost() {
+function ReadPostLost(props) {
     // const customer_id = "c3ok6a2mvdvh8i865tag"
 
     const [postItem, setPostItems] = useState({})

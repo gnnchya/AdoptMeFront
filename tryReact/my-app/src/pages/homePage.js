@@ -5,7 +5,7 @@ import {uploadPic, createPost, readAllPostLost } from "../actions/posts.js";
 import {generateUploadURL} from '../s3.js'
 import axios from 'axios'
 
-function HomePage(){
+function HomePage(props){
 
     let limit = 3
    

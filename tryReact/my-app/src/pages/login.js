@@ -51,12 +51,19 @@ function Login(props) {
                
         try 
         {
+            console.log(authen)
+            console.log(user)
+
             event.preventDefault()
             const user = await Auth.signIn(postInfo.username, postInfo.password);
             console.log(user)
 
-            // props.isAuthen = true
-            // props.user = dbfgvisudbfds
+            props.authen = true
+            props.user = user
+
+            console.log(authen)
+            console.log(user)
+        
 
             history.push({pathname: "/home"})            
         } catch (error) {

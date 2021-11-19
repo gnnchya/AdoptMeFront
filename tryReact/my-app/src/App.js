@@ -30,8 +30,9 @@ function App() {
     }, [])
 
     const setDefault = async(e) => {
-        setAuthen((oldValue) => ({ ...oldValue, ["isAuthen"]: false}))
+        setAuthen(false)
     }
+    
     //set authen status when user login 
     const handleAuthen = (e) => {
         e.preventDefault()

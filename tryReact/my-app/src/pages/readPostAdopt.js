@@ -6,7 +6,7 @@ import axios from 'axios'
 
 // import PostList from '../components/PostList'
 
-function ReadPostAdopting() {
+function ReadPostAdopting(props) {
     // const customer_id = "c3ok6a2mvdvh8i865tag"
 
     const [postItem, setPostItems] = useState({})
