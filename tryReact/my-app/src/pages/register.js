@@ -5,16 +5,8 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { uploadPic, createPostAdopt, createPostLost} from '../actions/posts'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
-//import {Auth} from "aws=amplify"
 import Amplify, { Auth } from 'aws-amplify'
 
-// class register {
-//     state= {
-//         username : " ",
-//         email :" ",
-//         password : " "
-//     }
-// }
 
 function Register() {
     const [postInfo, setPostInfo] = useState("") 
@@ -35,33 +27,19 @@ function Register() {
         const value = e.target.value
         setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
     }
-   
-    // const handleSpayInput = (e) =>{
-    //     e.preventDefault()
-    //     const name = e.target.name
-    //     const value = e.target.value
-    //     setSpay((oldValue) => ({ ...oldValue, [name]: value }))
-    // }
-
-    // const fileSelectedHandler = event => {
-    //     event.preventDefault()
-    //     const value = event.target.files[0]
-    //     setFile(value)  
-    //     // setFile(value[0])
-    // }
 
     const postUploadHandler = async (event) =>{
-        
-
-        // const {email, username, password} = postInfo.state
-        
+               
         try 
         {
             event.preventDefault()
+            console.log(postInfo)
             const email = postInfo.email
             const username = postInfo.username
             const password = postInfo.password
-            console.log(String(postInfo.email))
+            console.log(String(email))
+            console.log(String(username))
+            console.log(String(password))
             const SignupResponse = await Auth.signUp({
                 username,
                 password,
@@ -71,19 +49,19 @@ function Register() {
             })
             console.log(SignupResponse)
     
-            // history.push({pathname: "/posts/lost/all"})
+            // history.push({pathname: "/home"})
             
         } catch (error) {
     
-            // alert( error)
+            alert( error)
             let err = null;
             !error.message ? err = {"message": error}: err = error;
-            postInfo.setState({
-                errors: {
-                    ...postInfo.state.errors,
-                    cognito: err
-                }
-            });
+            // setPostInfo({
+            //     errors: {
+            //         ...postInfo.state.errors,
+            //         cognito: err
+            //     }
+            // });
         }
 
     }
@@ -133,8 +111,8 @@ function Register() {
             
            <header class="header">
 
-            {<Link to={{pathname:"/home"}}> 
-                <a class="logo"> <i class="fas fa-paw"></i> Adopt </a>
+                {<Link to={{pathname:"/home"}}> 
+                    <a class="logo"> <i class="fas fa-paw"></i> Adopt </a>
                 </Link>}
 
                 <nav class="navbar">
@@ -149,13 +127,13 @@ function Register() {
                     </Link>}
                 </nav>
 
-            <div class="icons">
-                <div class="fas fa-bars" id="menu-btn" ></div>
-                <a href = "#"> <div class="fas fa-pen" id="create-btn"> </div></a>
-                {<Link to={{pathname:"/login"}}> 
-                    <div class="fas fa-user" id="login-btn" ></div>
-                </Link>}
-            </div>
+                <div class="icons">
+                    <div class="fas fa-bars" id="menu-btn" ></div>
+                    <a href = "#"> <div class="fas fa-pen" id="create-btn"> </div></a>
+                    {<Link to={{pathname:"/login"}}> 
+                        <div class="fas fa-user" id="login-btn" ></div>
+                    </Link>}
+                </div>
 
             </header>
             
@@ -189,7 +167,7 @@ function Register() {
 
                         <a class="links" >Username</a>
                         <div class="inputBox">
-                            <input type="text" placeholder="your Username" name="Username" onChange={handlePostInput}/>
+                            <input type="text" placeholder="your Username" name="username" onChange={handlePostInput}/>
                         </div>
 
                         {/* <a class="links" >Gender</a>
@@ -218,7 +196,7 @@ function Register() {
                         </div>
                         
             
-                        <input type="submit" value="register" class="btn" onclick={postUploadHandler} />
+                        <input type="submit" class="btn"  onClick={postUploadHandler} />
             
                     </form>
             
