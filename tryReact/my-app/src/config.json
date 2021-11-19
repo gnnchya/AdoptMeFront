@@ -1,6 +1,6 @@
 {
     "api": {
-        "invokeUrl" : "https://adoptme.auth.ap-southeast-1.amazoncognito.com"
+        "invokeUrl" : "https://adoptmee.auth.ap-southeast-1.amazoncognito.com"
     },
     "cognito": {
         "REGION": "ap-southeast-1",
