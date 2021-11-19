@@ -1,10 +1,10 @@
 {
     "api": {
-        "invokeUrl" : "https://adoptmee.auth.ap-southeast-1.amazoncognito.com"
+        "invokeUrl" : "https://adoptme.auth.ap-southeast-1.amazoncognito.com"
     },
     "cognito": {
         "REGION": "ap-southeast-1",
-        "USER_POOL_ID": "ap-southeast-1_Ogpf8gRLp",
-        "APP_CLIENT_ID": "4h9k27fqq3v9jr183pbtvhokun"
+        "USER_POOL_ID": "ap-southeast-1_UGeE9C4x0",
+        "APP_CLIENT_ID": "5inmisnneoitsq2047m5p07pc9"
       }
 }
