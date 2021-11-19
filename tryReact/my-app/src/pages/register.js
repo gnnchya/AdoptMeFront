@@ -8,13 +8,13 @@ import { useHistory } from 'react-router-dom';
 //import {Auth} from "aws=amplify"
 import Amplify, { Auth } from 'aws-amplify'
 
-class register {
-    state= {
-        username : "",
-        email :"",
-        password : ""
-    }
-}
+// class register {
+//     state= {
+//         username : " ",
+//         email :" ",
+//         password : " "
+//     }
+// }
 
 function Register() {
     const [postInfo, setPostInfo] = useState("") 
@@ -51,13 +51,17 @@ function Register() {
     // }
 
     const postUploadHandler = async (event) =>{
-        event.preventDefault()
+        
 
-        const {email, username, password} = postInfo.state
-        const email = postInfo.email
-        console.log(String(postInfo.email)
+        // const {email, username, password} = postInfo.state
+        
         try 
         {
+            event.preventDefault()
+            const email = postInfo.email
+            const username = postInfo.username
+            const password = postInfo.password
+            console.log(String(postInfo.email))
             const SignupResponse = await Auth.signUp({
                 username,
                 password,
@@ -127,23 +131,32 @@ function Register() {
         <div>
            <body>
             
-            <header class="header">
-            
-                <a href="index.html" class="logo"> <i class="fas fa-paw"></i> Adopt </a>
-            
+           <header class="header">
+
+            {<Link to={{pathname:"/home"}}> 
+                <a class="logo"> <i class="fas fa-paw"></i> Adopt </a>
+                </Link>}
+
                 <nav class="navbar">
-                    <a href="index.html">home</a>
-                    <a href="adoption.html">Adoption</a>
-                    <a href="lost.html">Lost</a>
+                    {<Link to={{pathname:"/home"}}> 
+                    <a>home</a>
+                    </Link>}
+                    {<Link to={{pathname:"/posts/adopt/all"}}> 
+                    <a>Adoption</a>
+                    </Link>}
+                    {<Link to={{pathname:"/posts/lost/all"}}> 
+                    <a>Lost</a>
+                    </Link>}
                 </nav>
-            
-                <div class="icons">
-                    <div class="fas fa-bars" id="menu-btn"></div>
-                    
-                    <a href = "create.html"> <div class="fas fa-pen" id="create-btn"> </div></a>
-                    <a href="Login.html"> <div class="fas fa-user" id="login-btn"></div></a>
-                    
-                </div>
+
+            <div class="icons">
+                <div class="fas fa-bars" id="menu-btn" ></div>
+                <a href = "#"> <div class="fas fa-pen" id="create-btn"> </div></a>
+                {<Link to={{pathname:"/login"}}> 
+                    <div class="fas fa-user" id="login-btn" ></div>
+                </Link>}
+            </div>
+
             </header>
             
             
