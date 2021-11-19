@@ -139,15 +139,19 @@ function Login() {
             
                         <input type="submit" value="login now" class="btn"/>
                         
+                    </form>                 
+                </div>
 
-                        
+                <div class="row">
+                    
+                    <form action="">
                         <h2 class="links" >Do not have an account? create one</h2>
 
                         {<Link to={{pathname:"/register"}}> 
-                            <input type="submit" value="Sign Up" class="btn"/>
+                            <a href="register.html" class="btn">Sign UP</a>            
                         </Link>}
-            
-                    </form>                 
+
+                    </form>    
                 </div>
                 
             
