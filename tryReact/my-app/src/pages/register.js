@@ -3,16 +3,13 @@ import testUtils from 'react-dom/test-utils';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { uploadPic, createPostAdopt, createPostLost} from '../actions/posts'
-import {generateUploadURL} from '../s3.js'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
+import {Auth} from "aws=amplify"
 
 
 function Register() {
-    const [postInput, setPostInput] = useState("") 
-    const [postInfo, setPostInfo] = useState({}) 
-    const [spay, setSpay] = useState(false)
-    const [file, setFile] = useState({}) 
+    const [postInfo, setPostInfo] = useState("") 
     const history = useHistory();
 
     useEffect(() => {
@@ -20,8 +17,8 @@ function Register() {
     }, [])
 
     const setDefault = async(e) => {
-        setSpay((oldValue) => ({ ...oldValue, ["spay"]: false}))
-        setSpay((oldValue) => ({ ...oldValue, ["postType"]: 'adopt'}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["birthdate"]: {todayDate}}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["gender"]: 'male'}))
     }
 
     const handlePostInput = (e) =>{
@@ -46,39 +43,19 @@ function Register() {
     }
 
     const postUploadHandler = async (event) =>{
-        // try {
+        try {
             event.preventDefault()
-            const url =  await generateUploadURL()
-            var options = {
-                headers: {
-                'Content-Type': "multipart/form-data"
-                }
-            };
-            console.log(url)
-            // const picURL = await uploadPic(url, file.picFile, options) 
-            axios.put(url, file, options).then((response) => {
-                console.log("response")
-                console.log(response)
+            const SignupResponse = await Auth.signUp({
+                    String(postInfo.username),
+                    String(postInfo.password),
             })
-            const picURL = url.split('?')[0]
-            console.log(picURL)
-            const tempAnimal = {type: String(postInfo.type), age: +postInfo.age, species: String(postInfo.species)
-                , gender: String(postInfo.gender), general_information: String(postInfo.general_information),  spay: Boolean(spay.spay)
-                ,image: String(picURL), medical_condition: String(postInfo.medical_condition)}
-            const temp = {animal:tempAnimal, UID: "", location: String( postInfo.lost_location)}
-            console.log(String(postInfo.postType))
-            if (String(postInfo.postType) === 'adopt'){
-                await createPostAdopt(temp)
-            }else{
-                await createPostLost(temp)
-            }
     
             // history.push({pathname: "/posts/lost/all"})
             
-        // } catch (error) {
+        } catch (error) {
      
-        //     alert( error)
-        // }
+            alert( error)
+        }
 
     }
 
@@ -148,7 +125,7 @@ function Register() {
             <h1 class="heading"> <span>login</span> now </h1>
             <section class="login" id="login">
             
-                <h1 class="heading"> <span>login</span> now </h1>
+                <h1 class="heading"> <span>Create free account</span> now </h1>
             
                 <div class="row">
                     
@@ -167,13 +144,23 @@ function Register() {
                             <input type="text" placeholder="Family Name" name="family_name" onChange={handlePostInput}/>
                         </div>
 
+                        <a class="links" >Email</a>
+                        <div class="inputBox">
+                            <input type="text" placeholder="@example.com" name="email" onChange={handlePostInput}/>
+                        </div>
+
+                        <a class="links" >Username</a>
+                        <div class="inputBox">
+                            <input type="text" placeholder="your Username" name="Username" onChange={handlePostInput}/>
+                        </div>
+
                         <a class="links" >Gender</a>
                         <div class="inputBox">
                             <select name="gender" id="gender" defaultValue="Male" onChange={handlePostInput}>
-                                <option value="adopt">Male</option>
-                                <option value="lost">Female</option>
-                                <option value="lost">LGBTQA+</option>
-                                <option value="lost">Rather not to disclose</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="lgbtqa">LGBTQA+</option>
+                                <option value="not_disclose">Rather not to disclose</option>
                             </select>
                         </div>
 
@@ -186,8 +173,14 @@ function Register() {
                         <div class="inputBox">
                             <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" onChange={handlePostInput}/>
                         </div>
+
+                        <a class="links" >Password</a>
+                        <div class="inputBox">
+                            <input type="text" placeholder="your Password" name="password" onChange={handlePostInput}/>
+                        </div>
+                        
             
-                        <input type="submit" value="register" class="btn"/>
+                        <input type="submit" value="register" class="btn" onclick={postUploadHandler} />
             
                     </form>
             
