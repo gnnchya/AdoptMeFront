@@ -14,6 +14,8 @@ import ReadPostLost from './pages/readPostLost';
 import ReadPostAdopt from './pages/readPostAdopt';
 import UpdatePost from './pages/updatePost';
 import CreatePost from './pages/createPost';
+import Register from './pages/register';
+import Login from './pages/login';
 import React, { Component }  from 'react';
 
 function App() {
@@ -43,6 +45,12 @@ function App() {
                 </Route>
                 <Route exact path="/createPost">
                     <CreatePost />
+                </Route>
+                <Route exact path="/register">
+                    <Register/>
+                </Route>
+                <Route exact path="/login">
+                    <Login/>
                 </Route>
             </Switch>
         </Router>
