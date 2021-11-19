@@ -37,6 +37,12 @@ function Register() {
             const email = postInfo.email
             const username = postInfo.username
             const password = postInfo.password
+            const name = postInfo.name
+            const gender = postInfo.gender
+            const birthdate = postInfo.birthdate
+            const address = postInfo.address
+
+
             console.log(String(email))
             console.log(String(username))
             console.log(String(password))
@@ -44,12 +50,15 @@ function Register() {
                 username,
                 password,
                 attributes: {
-                    email: email
+                    email: email,
+                    name: name,
+                    gender: gender,
+                    birthdate: birthdate,
+                    address: address
                 }
             })
             console.log(SignupResponse)
-    
-            // history.push({pathname: "/home"})
+            history.push({pathname: "/home"})
             
         } catch (error) {
     
@@ -150,19 +159,15 @@ function Register() {
                     </div>
             
                     <form action="">
-                         {/* <a class="links" >Name</a>
-                        <div class="inputBox">
-                            <input type="text" placeholder="Name" name="given_name" onChange={handlePostInput}/>
-                        </div>
-
-                        <a class="links" >Family Name</a>
-                        <div class="inputBox">
-                            <input type="text" placeholder="Family Name" name="family_name" onChange={handlePostInput}/>
-                        </div> */}
-
+                        
                         <a class="links" >Email</a>
                         <div class="inputBox">
                             <input type="text" placeholder="@example.com" name="email" onChange={handlePostInput}/>
+                        </div>
+
+                         <a class="links" >Name</a>
+                        <div class="inputBox">
+                            <input type="text" placeholder="Name" name="given_name" onChange={handlePostInput}/>
                         </div>
 
                         <a class="links" >Username</a>
@@ -170,7 +175,12 @@ function Register() {
                             <input type="text" placeholder="your Username" name="username" onChange={handlePostInput}/>
                         </div>
 
-                        {/* <a class="links" >Gender</a>
+                        <a class="links" >Password</a>
+                        <div class="inputBox">
+                            <input type="text" placeholder="your Password" name="password" onChange={handlePostInput}/>
+                        </div>
+
+                        <a class="links" >Gender</a>
                         <div class="inputBox">
                             <select name="gender" id="gender" defaultValue="Male" onChange={handlePostInput}>
                                 <option value="male">Male</option>
@@ -185,14 +195,9 @@ function Register() {
                             <input type="date" name="birthdate" id="birthdate"  min={firstDate()} max={todayDate() }  onChange={handlePostInput}/>
                         </div>
 
-                        <a class="links" >Phone Number</a>
+                        <a class="links" >Address</a>
                         <div class="inputBox">
-                            <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" onChange={handlePostInput}/>
-                        </div> */}
-
-                        <a class="links" >Password</a>
-                        <div class="inputBox">
-                            <input type="text" placeholder="your Password" name="password" onChange={handlePostInput}/>
+                            <input type="text" placeholder="address" name="address" onChange={handlePostInput}/>
                         </div>
                         
             

@@ -17,8 +17,35 @@ import CreatePost from './pages/createPost';
 import Register from './pages/register';
 import Login from './pages/login';
 import React, { Component }  from 'react';
+import { renderIntoDocument } from 'react-dom/test-utils';
 
 function App() {
+
+    const [authen, setAuthen] = useState(false) 
+    const [user, setUser] = useState({}) 
+
+    
+    useEffect(() => {
+        setDefault()
+    }, [])
+
+    const setDefault = async(e) => {
+        setAuthen((oldValue) => ({ ...oldValue, ["isAuthen"]: false}))
+    }
+    //set authen status when user login 
+    const handleAuthen = (e) => {
+        e.preventDefault()
+        setAuthen((oldValue) => ({ ...oldValue, ["isAuthen"]: true}))
+    }
+    //set user, take in user object from aws
+    const handleAuthen = (e) => {
+        e.preventDefault()
+        setAuthen((oldValue) => ({ ...oldValue, ["isUser"]: user}))
+    }
+
+
+
+
     return (
         <Router>
             <Switch>
