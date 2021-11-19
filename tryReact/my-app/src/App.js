@@ -50,34 +50,34 @@ function App() {
         <Router>
             <Switch>
                 <Route exact path="/">
-                    <HomePage />
+                    <HomePage authen={authen} user={user}/>
                 </Route>
                 <Route exact path="/home">
-                    <HomePage />
+                    <HomePage authen={authen} user={user}/>
                 </Route>
                 <Route exact path="/posts/adopt/:keyword">
-                    <ReadAllPostAdopt />
+                    <ReadAllPostAdopt authen={authen} user={user}/>
                 </Route>
                 <Route exact path="/posts/lost/:keyword">
-                    <ReadAllPostLost />
+                    <ReadAllPostLost  authen={authen} user={user}/>
                 </Route>
                 <Route exact path="/post/lost/:id" >
-                    <ReadPostLost />
+                    <ReadPostLost  authen={authen} user={user}/>
                 </Route>
                 <Route exact path="/post/adopt/:id" >
-                    <ReadPostAdopt />
+                    <ReadPostAdopt authen={authen} user={user}/>
                 </Route>
                 <Route exact path="/updatePost/:id">
-                    <UpdatePost />
+                    <UpdatePost authen={authen} user={user}/>
                 </Route>
                 <Route exact path="/createPost">
-                    <CreatePost />
+                    <CreatePost authen={authen} user={user}/>
                 </Route>
                 <Route exact path="/register">
-                    <Register/>
+                    <Register authen={authen} user={user}/>
                 </Route>
                 <Route exact path="/login">
-                    <Login/>
+                    <Login authen={authen} user={user}/>
                 </Route>
             </Switch>
         </Router>
