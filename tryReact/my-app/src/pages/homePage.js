@@ -211,7 +211,7 @@ function HomePage(props){
 
             </section>
 
-            <section class="login" id="login">
+            {/* <section class="login" id="login">
 
                 <h1 class="heading"> <span>login</span> now </h1>
 
@@ -237,7 +237,7 @@ function HomePage(props){
 
                 </div>
 
-            </section>
+            </section> */}
 
 
             

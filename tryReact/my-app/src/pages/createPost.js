@@ -80,11 +80,13 @@ function CreatePost(props) {
             console.log(String(postInfo.postType))
             if (String(postInfo.postType) === 'adopt'){
                 await createPostAdopt(temp)
+                history.push({pathname: "/posts/adopt/all"})
             }else{
                 await createPostLost(temp)
+                history.push({pathname: "/posts/lost/all"})
             }
     
-            // history.push({pathname: "/posts/lost/all"})
+            
             
         // } catch (error) {
      
@@ -192,9 +194,9 @@ function CreatePost(props) {
                                 <input type="text" placeholder="post info" class="box-info" name="general_information" onChange={handlePostInput} />
                                                         
                             </div>
-                            {<Link to={{pathname:"/posts/lost/all"}}> 
+                            {/* {<Link to={{pathname:"/posts/lost/all"}}>  */}
                             <input type="submit"  class="btn" onClick={postUploadHandler}/>
-                            </Link>}
+                            {/* </Link>} */}
                         </div>
         
                     </div>
