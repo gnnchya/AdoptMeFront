@@ -36,6 +36,7 @@ function ReadPostLost(props) {
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data)
+                // postItem.UID to get UID
                 setAnimal(response.data.data.animal)
                 console.log(postItem)
             })
@@ -49,6 +50,22 @@ function ReadPostLost(props) {
         const name = e.target.name
         const value = e.target.value
         setKeyword((oldValue) => ({ ...oldValue, [name]: value }))
+    }
+
+    function showUpdate() {
+        console.log("kinda wanna die sometime")
+        if (postItem.uid === props.auth.user.attributes.sub){
+            console.log("function showUpdate used")
+            console.log(postItem.uid)
+            console.log(props.auth.user.attributes.sub)
+        }
+            return(
+            <div>
+                <Link to={{pathname:`/updatePost/${id}`}}> 
+                    <a> <div class="fas fa-pen" id="create-btn"> </div></a>
+                </Link>
+            </div>
+        )
     }
 
     return (
@@ -82,12 +99,13 @@ function ReadPostLost(props) {
                         </div>
                         </Link>}
                 </form>
-            
+
                 <div class="icons">
                 <div class="fas fa-bars" id="menu-btn" ></div>
                     {/* {<Link to={{pathname:"/createPost"}}> 
                         <div class="fas fa-pen" id="create-btn" ></div>
                     </Link>} */}
+                    {/* <showUpdate></showUpdate> */}
 
                     {/* hide login button when logged in */}
                     {!props.auth.authen && (
@@ -116,9 +134,10 @@ function ReadPostLost(props) {
                     {props.auth.authen &&props.auth.user && (
                         <div>
                             {/* fark find log out icon aow ma tan login icon */}
-                            {<Link to={{pathname:"/home"}}> 
+                            {/* {<Link to={{pathname:"/home"}}> 
                                 <div class="fas fa-user" id="login-btn" onClick={handleLogout} ></div> 
-                            </Link>}
+                            </Link>} */}
+                            <showUpdate></showUpdate>
                         </div>
                         )}
                 </div>  
@@ -131,6 +150,7 @@ function ReadPostLost(props) {
             <section class="blogs" id="blogs">
             
                 <h1 class="heading"> our <span>lost and found</span> </h1>
+
             
                 <div class="box-container">
 
@@ -138,13 +158,13 @@ function ReadPostLost(props) {
                             <div>
                             <img src={animal.image} alt=""/>
                             <div class= "icons">
-                                {<Link to={{pathname:`/updatePost/${id}`}}> 
-                                    <a> <div class="fas fa-pen" id="create-btn"> </div></a>
-                                </Link>}
+                                <showUpdate></showUpdate>
                             </div>
 
                             <div class="content">
+
                                 <div class="icons">
+                                    {/* aow user name mar sai tan uid */}
                                     <a href="#"> <i class="fas fa-user"></i> {postItem.uid} </a>
                                     <a href="#"> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(postItem.post_at)}</a>
                                 </div>
@@ -164,6 +184,7 @@ function ReadPostLost(props) {
                                     </div>
                                     
                                     <h3>contact info</h3>
+                                    {/* change contact info to what we have  */}
                                     <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
                                     <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
                                     <a href="#" class="links"> <i class="fas fa-envelope"></i> pain@gmail.com </a>

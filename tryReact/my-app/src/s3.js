@@ -6,7 +6,7 @@ import {promisify} from 'util'
 const randomBytes = promisify(crypto.randomBytes)
 
 const region = String(process.env.REACT_APP_AWS_REGION)
-const bucketName = "pic-storage"
+const bucketName = "adoptme-pic-storage"
 const accessKeyId = String(process.env.REACT_APP_AWS_ACCESS_KEY)
 const secretAccessKey = String(process.env.REACT_APP_AWS_SECRET_ACCESS_KEY)
 

@@ -58,6 +58,7 @@ function App() {
         const user = await Auth.currentAuthenticatedUser();
         handleUser(user);
         console.log("from app", user);
+        console.log("sub from:", user.attributes.sub )
         
         }
         catch(error){

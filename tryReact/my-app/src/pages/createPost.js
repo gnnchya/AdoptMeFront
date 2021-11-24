@@ -75,7 +75,8 @@ function CreatePost(props) {
             const tempAnimal = {type: String(postInfo.type), age: +postInfo.age, species: String(postInfo.species)
                 , gender: String(postInfo.gender), general_information: String(postInfo.general_information),  spay: Boolean(spay.spay)
                 ,image: String(picURL), medical_condition: String(postInfo.medical_condition)}
-            const temp = {animal:tempAnimal, UID: "", location: String( postInfo.lost_location)}
+            console.log("UID: ",  props.auth.user.attributes.sub)
+            const temp = {animal:tempAnimal, UID: props.auth.user.attributes.sub, location: String( postInfo.lost_location)}
             console.log(String(postInfo.postType))
             if (String(postInfo.postType) === 'adopt'){
                 await createPostAdopt(temp)
@@ -190,9 +191,9 @@ function CreatePost(props) {
                                 <input type="text" placeholder="post info" class="box-info" name="general_information" onChange={handlePostInput} />
                                                         
                             </div>
-                            {/* {<Link to={{pathname:"/posts/lost/all"}}>  */}
+                            {<Link to={{pathname:"/posts/lost/all"}}> 
                             <input type="submit"  class="btn" onClick={postUploadHandler}/>
-                            {/* </Link>} */}
+                            </Link>}
                         </div>
         
                     </div>
