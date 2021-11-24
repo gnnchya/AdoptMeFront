@@ -100,7 +100,7 @@ function HomePage(props){
 
                             {/* logout button*/}
                             {<Link to={{pathname:"/home"}}> 
-                                <div class="fas fa-user" id="login-btn" onClick={handleLogout} ></div>     
+                                <div class="fas fa-door-open" id="login-btn" onClick={handleLogout} ></div>     
                             </Link>}
 
                             {/* show hello username */}

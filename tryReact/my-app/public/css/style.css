@@ -144,6 +144,11 @@ section{
     color:#fff;
 }
 
+
+.header .icons div p i{
+    color:var(--orange);
+}
+
 #menu-btn{
     display: none;
 }
@@ -745,12 +750,6 @@ blogs .box-container .create-form p{
 .login .row form .btn:hover{
   background:var(--red);
 }
-
-
-
-
-
-
 
 /* media queries  */
 

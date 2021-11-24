@@ -122,7 +122,7 @@ function ReadPostAdopting(props) {
                         <div>
                             {/* fark find log out icon aow ma tan login icon */}
                             {<Link to={{pathname:"/home"}}> 
-                                <div class="fas fa-user" id="login-btn" onClick={handleLogout} ></div> 
+                                <div class="fas fa-door-open" id="login-btn" onClick={handleLogout} ></div> 
                             </Link>}
                         </div>
                         )}
