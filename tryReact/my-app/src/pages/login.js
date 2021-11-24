@@ -51,13 +51,13 @@ function Login(props) {
                
         try 
         {
-            console.log("before", props.auth.authen)
-            console.log("before", props.auth.user)
+            // console.log("before", props.auth.authen)
+            // console.log("before", props.auth.user)
 
             event.preventDefault()
             const user = await Auth.signIn(postInfo.username, postInfo.password);
             
-            console.log(user)
+            console.log("from login", user)
 
             props.auth.handleAuthen(true)
             props.auth.handleUser(user)

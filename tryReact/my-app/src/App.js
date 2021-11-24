@@ -20,19 +20,20 @@ import Register from './pages/register';
 import Login from './pages/login';
 import React, { Component }  from 'react';
 import { renderIntoDocument } from 'react-dom/test-utils';
+import Amplify, { Auth } from 'aws-amplify'
+
+
 
 function App() {
 
     const [authen, setAuthen] = useState(false) 
     const [user, setUser] = useState({}) 
-    // useEffect(() => {
-    //     setDefault()
-    // }, [])
+    const [isAuthenticating, setAuthenticating ] = useState(true)
 
-    // const setDefault = async(e) => {
-    //     setAuthen(false)
-    // }
-    
+    useEffect(() => {
+        componentDidMount()
+    }, [])
+
     //set authen status when user login 
     const handleAuthen = (e) => {
         setAuthen(e)
@@ -41,9 +42,29 @@ function App() {
     //set user, take in user object from aws
     const handleUser = (e) => {
         setUser(e)
-        // console.log("after", user)    
+        // console.log("after", user)       
+    }
+    const handleAuthenticating = (e) => {
+        setAuthenticating(e)
+        // console.log("after", user)       
     }
 
+
+    const componentDidMount = async (e) => {
+        try{
+        const session = await Auth.currentSession();
+        handleAuthen(true);
+
+        const user = await Auth.currentAuthenticatedUser();
+        handleUser(user);
+        console.log("from app", user);
+        
+        }
+        catch(error){
+            console.log(error);
+        }
+        handleAuthenticating(false);
+    }
 
     const authProps = {
         authen,
@@ -53,6 +74,7 @@ function App() {
     }
 
     return (
+        !isAuthenticating && 
         <Router>
             <Switch>
                 <Route exact path="/">

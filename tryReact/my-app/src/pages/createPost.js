@@ -6,6 +6,7 @@ import { uploadPic, createPostAdopt, createPostLost} from '../actions/posts'
 import {generateUploadURL} from '../s3.js'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
+import Amplify, { Auth } from 'aws-amplify'
 
 
 function CreatePost(props) {

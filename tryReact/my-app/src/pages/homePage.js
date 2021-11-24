@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import {uploadPic, createPost, readAllPostLost } from "../actions/posts.js";
 import {generateUploadURL} from '../s3.js'
 import axios from 'axios'
+import Amplify, { Auth } from 'aws-amplify'
 
 function HomePage(props){
 
@@ -20,6 +21,16 @@ function HomePage(props){
         console.log("before getiing response")
         getList()
     }, []);
+
+    const handleLogout = (e) => {
+        try{
+            Auth.signOut();
+            props.auth.handleAuthen(false);
+            props.auth.handleUser(null);
+        }catch(error){
+            console.log(error.message);
+        } 
+    }
 
     const getList = (e) => {
         console.log("home", props.auth.authen)
@@ -65,16 +76,46 @@ function HomePage(props){
                         <a href="#home">home</a>
                         <a href="#adoption">Adoption</a>
                         <a href="#blogs">Lost</a>
+
+                        
                 </nav>
             
                 <div class="icons">
                     <div class="fas fa-bars" id="menu-btn" ></div>
-                    {<Link to={{pathname:"/createPost"}}> 
-                        <div class="fas fa-pen" id="create-btn" ></div>
-                    </Link>}
-                    {<Link to={{pathname:"/login"}}> 
-                        <div class="fas fa-user" id="login-btn" ></div>
-                    </Link>}
+                   
+                    
+                    {/* hide login button when logged in */}
+                    {!props.auth.authen && (
+                        <div>
+                        {<Link to={{pathname:"/login"}}> 
+                            <div class="fas fa-user" id="login-btn" ></div>
+                        </Link>}
+                        </div>
+                    )}
+                    
+                    {/* show hello username */}
+                    {props.auth.authen &&props.auth.user && (
+                        <div>
+                            {<Link to={{pathname:"/createPost"}}> 
+                             <div class="fas fa-pen" id="create-btn" ></div>
+                         </Link>}
+                         
+                            <p>
+                                Hello {props.auth.user.username}
+                            </p>
+                        </div>
+                        )}
+
+                    {/* logout button*/}
+                    {props.auth.authen &&props.auth.user && (
+                        <div>
+                        {/* fark find log out icon aow ma tan login icon */}
+                        {<Link to={{pathname:"/home"}}> 
+                            <div class="fas fa-user" id="login-btn" onClick={handleLogout} ></div> 
+                            
+                        </Link>}
+                        </div>
+                        )}
                 </div>            
             
             </header>
