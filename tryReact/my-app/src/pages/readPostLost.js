@@ -21,7 +21,7 @@ function ReadPostLost() {
     console.log("iddd", id)
     const getList = async (e) => {
         try {
-            axios.get(`http://18.140.154.104:8080/AdoptMe/LostPetPost/${id}`
+            axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost/${id}`
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data)
