@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import Amplify, { Auth } from 'aws-amplify'
 
 
-function Register() {
+function Register(props) {
     const [postInfo, setPostInfo] = useState("") 
     const history = useHistory();
 
