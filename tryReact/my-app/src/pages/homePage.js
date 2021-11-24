@@ -83,7 +83,6 @@ function HomePage(props){
                 <div class="icons">
                     <div class="fas fa-bars" id="menu-btn" ></div>
                    
-                    
                     {/* hide login button when logged in */}
                     {!props.auth.authen && (
                         <div>
@@ -93,29 +92,24 @@ function HomePage(props){
                         </div>
                     )}
                     
-                    {/* show hello username */}
                     {props.auth.authen &&props.auth.user && (
                         <div>
                             {<Link to={{pathname:"/createPost"}}> 
-                             <div class="fas fa-pen" id="create-btn" ></div>
-                         </Link>}
-                         
+                                <div class="fas fa-pen" id="create-btn" ></div>
+                            </Link>}
+
+                            {/* logout button*/}
+                            {<Link to={{pathname:"/home"}}> 
+                                <div class="fas fa-user" id="login-btn" onClick={handleLogout} ></div>     
+                            </Link>}
+
+                            {/* show hello username */}
                             <p>
                                 Hello {props.auth.user.username}
                             </p>
                         </div>
                         )}
 
-                    {/* logout button*/}
-                    {props.auth.authen &&props.auth.user && (
-                        <div>
-                        {/* fark find log out icon aow ma tan login icon */}
-                        {<Link to={{pathname:"/home"}}> 
-                            <div class="fas fa-user" id="login-btn" onClick={handleLogout} ></div> 
-                            
-                        </Link>}
-                        </div>
-                        )}
                 </div>            
             
             </header>
