@@ -33,7 +33,7 @@ function HomePage(){
         //     alert(error)
         // }
         try {
-        axios.get(`http://10.0.20.213:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
+        axios.get(`http://localhost:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
         ).then((response) => {
             console.log(response);
             setPostItems(response.data.data || [])
