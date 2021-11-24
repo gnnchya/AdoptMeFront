@@ -103,10 +103,10 @@ function Login(props) {
         
             <div class="icons">
                 <div class="fas fa-bars" id="menu-btn" ></div>
-                {<Link to={{pathname:"/createPost"}}> 
+                {/* {<Link to={{pathname:"/createPost"}}> 
                     <div class="fas fa-pen" id="create-btn" ></div>
                 </Link>}
-                    <div href="#" class="fas fa-user" id="login-btn" ></div>
+                    <div href="#" class="fas fa-user" id="login-btn" ></div> */}
 
             </div>            
         

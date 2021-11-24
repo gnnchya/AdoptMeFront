@@ -19,6 +19,16 @@ function CreatePost(props) {
         setDefault()
     }, [])
 
+    const handleLogout = (e) => {
+        try{
+            Auth.signOut();
+            props.auth.handleAuthen(false);
+            props.auth.handleUser(null);
+        }catch(error){
+            console.log(error.message);
+        } 
+    }
+
     const setDefault = async(e) => {
         setSpay((oldValue) => ({ ...oldValue, ["spay"]: false}))
         setPostInfo((oldValue) => ({ ...oldValue, ["postType"]: 'adopt'}))
@@ -106,10 +116,33 @@ function CreatePost(props) {
             
                 <div class="icons">
                     <div class="fas fa-bars" id="menu-btn" ></div>
-                    <a href = "#"> <div class="fas fa-pen" id="create-btn"> </div></a>
-                    {<Link to={{pathname:"/login"}}> 
-                        <div class="fas fa-user" id="login-btn" ></div>
-                    </Link>}
+                    {/* <a href = "#"> <div class="fas fa-pen" id="create-btn"> </div></a> */}
+
+                    {/* hide login button when logged in */}
+                    {!props.auth.authen && (
+                        <div>
+                            {<Link to={{pathname:"/login"}}> 
+                                <div class="fas fa-user" id="login-btn" ></div>
+                            </Link>}
+                        </div>
+                    )}
+
+                    {/* show hello username */}
+                    {props.auth.authen &&props.auth.user && (
+                        <p>
+                            Hello {props.auth.user.username}
+                        </p>
+                        )}
+
+                    {/* logout button*/}
+                    {props.auth.authen &&props.auth.user && (
+                        <div>
+                            {/* fark find log out icon aow ma tan login icon */}
+                            {<Link to={{pathname:"/home"}}> 
+                                <div class="fas fa-user" id="login-btn" onClick={handleLogout} ></div> 
+                            </Link>}
+                        </div>
+                        )}
                 </div>  
             
             </header>

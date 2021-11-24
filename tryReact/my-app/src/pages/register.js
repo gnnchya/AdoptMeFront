@@ -138,10 +138,10 @@ function Register(props) {
 
                 <div class="icons">
                     <div class="fas fa-bars" id="menu-btn" ></div>
-                    <a href = "#"> <div class="fas fa-pen" id="create-btn"> </div></a>
+                    {/* <a href = "#"> <div class="fas fa-pen" id="create-btn"> </div></a>
                     {<Link to={{pathname:"/login"}}> 
                         <div class="fas fa-user" id="login-btn" ></div>
-                    </Link>}
+                    </Link>} */}
                 </div>
 
             </header>
