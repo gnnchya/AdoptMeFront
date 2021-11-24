@@ -44,7 +44,6 @@ function ReadPostLost(props) {
             alert(error)
         }
     }
-
     const handleChangeInput = (e) => {
         e.preventDefault()
         const name = e.target.name
@@ -52,20 +51,25 @@ function ReadPostLost(props) {
         setKeyword((oldValue) => ({ ...oldValue, [name]: value }))
     }
 
-    function showUpdate() {
-        console.log("kinda wanna die sometime")
-        if (postItem.uid === props.auth.user.attributes.sub){
-            console.log("function showUpdate used")
-            console.log(postItem.uid)
-            console.log(props.auth.user.attributes.sub)
-        }
+    function ShowUpdate() {
+        console.log(String(postItem.uid))
+        console.log(String(props.auth.user.attributes.sub))
+        if (String(postItem.uid) === String(props.auth.user.attributes.sub)){
+            // console.log("function showUpdate used")
+            
             return(
+            <section>
             <div>
                 <Link to={{pathname:`/updatePost/${id}`}}> 
                     <a> <div class="fas fa-pen" id="create-btn"> </div></a>
                 </Link>
             </div>
+            </section>
         )
+        } else {
+            console.log("kinda wanna")
+            return null
+        }   
     }
 
     return (
@@ -131,15 +135,14 @@ function ReadPostLost(props) {
                     )}
 
                     {/* logout button*/}
-                    {props.auth.authen &&props.auth.user && (
+                    {/* {props.auth.authen &&props.auth.user && ( */}
                         <div>
                             {/* fark find log out icon aow ma tan login icon */}
                             {/* {<Link to={{pathname:"/home"}}> 
                                 <div class="fas fa-user" id="login-btn" onClick={handleLogout} ></div> 
                             </Link>} */}
-                            <showUpdate></showUpdate>
                         </div>
-                        )}
+                    {/* )} */}
                 </div>  
             
             </header>
@@ -158,7 +161,7 @@ function ReadPostLost(props) {
                             <div>
                             <img src={animal.image} alt=""/>
                             <div class= "icons">
-                                <showUpdate></showUpdate>
+                                <ShowUpdate></ShowUpdate>
                             </div>
 
                             <div class="content">
@@ -212,4 +215,3 @@ function ReadPostLost(props) {
 }
 
 export default ReadPostLost
-
