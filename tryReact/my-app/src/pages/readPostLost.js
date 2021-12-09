@@ -10,6 +10,7 @@ function ReadPostLost(props) {
     // const customer_id = "c3ok6a2mvdvh8i865tag"
 
     const [postItem, setPostItems] = useState({})
+    const [userItem, setUserItems] = useState({})
     const [keywords, setKeyword] = useState("")
     const [animal, setAnimal] = useState({})
 
@@ -39,7 +40,18 @@ function ReadPostLost(props) {
                 // postItem.UID to get UID
                 setAnimal(response.data.data.animal)
                 console.log(postItem)
+
+                axios.get(`http://127.0.0.1:8080/AdoptMe/UserInfo/${response.data.data.uid}`
+                ).then((response) => {
+                    console.log(response);
+                    setUserItems(response.data.data)
+                    // postItem.UID to get UID
+                    console.log(userItem)
+                })
+
             })
+
+           
         } catch (error) {
             alert(error)
         }
@@ -53,7 +65,10 @@ function ReadPostLost(props) {
 
     function ShowUpdate() {
         console.log(String(postItem.uid))
-        console.log(String(props.auth.user.attributes.sub))
+        // console.log(String(props.auth.user.attributes.sub))
+        if (typeof postItem.uid === 'undefined') {
+            return (null)
+          }
         if (String(postItem.uid) === String(props.auth.user.attributes.sub)){
             // console.log("function showUpdate used")
             
@@ -67,7 +82,6 @@ function ReadPostLost(props) {
             </section>
         )
         } else {
-            console.log("kinda wanna")
             return null
         }   
     }
@@ -162,8 +176,8 @@ function ReadPostLost(props) {
 
                                 <div class="icons">
                                     {/* aow user name mar sai tan uid */}
-                                    <a href="#"> <i class="fas fa-user"></i> {postItem.uid} </a>
-                                    <a href="#"> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(postItem.post_at)}</a>
+                                    <a href="#"> <i class="fas fa-user"></i> {userItem.name} </a>
+                                    <a href="#"> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(postItem.postAt)}</a>
                                 </div>
                                 <h3>{animal.species}</h3>
                                 <p>{animal.general_information}</p>
@@ -181,11 +195,9 @@ function ReadPostLost(props) {
                                     </div>
                                     
                                     <h3>contact info</h3>
-                                    {/* change contact info to what we have  */}
-                                    <a href="#" class="links"> <i class="fas fa-phone"></i> +123-456-7890 </a>
-                                    <a href="#" class="links"> <i class="fas fa-phone"></i> +111-222-3333 </a>
-                                    <a href="#" class="links"> <i class="fas fa-envelope"></i> pain@gmail.com </a>
-                                    <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> bkk, th - 11111 </a>
+                                    <a href="#" class="links"> <i class="fas fa-phone"></i> {userItem.name} </a>
+                                    <a href="#" class="links"> <i class="fas fa-envelope"></i> {userItem.email} </a>
+                                    <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {userItem.address}  </a>
                                 </div>
 
                                 <a href="#" class="btn">Found</a>

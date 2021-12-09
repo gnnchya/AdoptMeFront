@@ -12,6 +12,8 @@ function ReadPostAdopting(props) {
 
     const [postItem, setPostItems] = useState({})
 
+    const [userItem, setUserItems] = useState({})
+
     const [keywords, setKeyword] = useState("")
 
     const [animal,setAnimal] = useState({})
@@ -50,7 +52,17 @@ function ReadPostAdopting(props) {
                 console.log(postItem)
                 console.log(postItem.adopt)
                 console.log(typeof postItem.adopt)
+
+                axios.get(`http://127.0.0.1:8080/AdoptMe/UserInfo/${response.data.data.uid}`
+                ).then((response) => {
+                    console.log(response);
+                    setUserItems(response.data.data)
+                    // postItem.UID to get UID
+                    console.log(userItem)
+                })
+
             })
+
         } catch (error) {
             alert(error)
         }
@@ -160,6 +172,11 @@ function ReadPostAdopting(props) {
 
                             <p>{animal.general_information}</p>
                             <h3>{animal.type}</h3>
+
+                            <h3>contact info</h3>
+                                    <a href="#" class="links"> <i class="fas fa-phone"></i> {userItem.name} </a>
+                                    <a href="#" class="links"> <i class="fas fa-envelope"></i> {userItem.email} </a>
+                                    <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {userItem.address}  </a>
 
                             <a  type = "submit"
                             href="#" class="btn">Adopt</a>
