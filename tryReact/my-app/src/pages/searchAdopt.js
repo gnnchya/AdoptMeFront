@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
 
-function ReadAllPostAdopt(props) {
+function SearchAdopt(props) {
     let limit = 100
     let page = 1
     const {keyword} = useParams();
@@ -26,7 +26,7 @@ function ReadAllPostAdopt(props) {
 
     const getList = async (e) => {
         try {
-            axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost?keyword=${keyword}&limit=${limit}&page=${page}`
+            axios.get(`http://127.0.0.1:8080/AdoptMe/SearchAdoptionPost?limit=${limit}&page=${page}&keyword=${keyword}`
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data|| [])
@@ -175,4 +175,4 @@ function ReadAllPostAdopt(props) {
     )
 }
 
-export default ReadAllPostAdopt
+export default SearchAdopt

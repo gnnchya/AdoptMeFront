@@ -4,12 +4,12 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
 
-function ReadAllPostAdopt(props) {
+function SearchLost(props) {
     let limit = 100
     let page = 1
-    const {keyword} = useParams();
+    let {keyword} = useParams()
 
-    const petType = keyword
+
     const [postItem, setPostItems] = useState([])
     const [keywords, setKeyword] = useState("")
     const [retrieve, setRetrieve] = useState(true)
@@ -23,11 +23,11 @@ function ReadAllPostAdopt(props) {
             console.log(error.message);
         } 
     }
-
+    
     const getList = async (e) => {
         try {
-            axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost?keyword=${keyword}&limit=${limit}&page=${page}`
-            ).then((response) => {
+            axios.get(`http://127.0.0.1:8080/AdoptMe/SearchLostPetPost?keyword=${keyword}&limit=${limit}&page=${page}`)
+            .then((response) => {
                 console.log(response);
                 setPostItems(response.data.data|| [])
                 console.log(postItem)
@@ -41,42 +41,49 @@ function ReadAllPostAdopt(props) {
         setRetrieve(true)
     }
 
-
     function ShowAnimals(keyword) {
         if (retrieve === true){
             getList()
             setRetrieve(false)
         }
-
+        
         return(
-            <section class="adoption" id="adoption">
-
-            <h1 class="heading"> our <span> {`${petType}`} </span> </h1>
-
-            <div class="box-container">
+            <section class="blogs" id="blogs">
+                
+                <h1 class="heading"> our <span>lost and found</span> </h1>
+            
+                <div class="box-container">
 
                 {postItem.map((item, index) => {
                     return(
                     <div class="box" key={index}>
-                            <div>
-                                <img src={item.animal.image}  key={index} alt=""/>
+                        <div>
+                            <img src={item.animal.image} alt=""/>
+                            <div class="content">
+                                <div class="icons">
+                                    {/* <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a> */}
+                                    <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
+                                </div>
                                 <h3 key={index}>{item.animal.type}</h3>
-                                <p key={index}>{item.animal.general_information} </p>
+                                <p key={index}>{item.animal.general_information}</p>
+                                <Link to={{pathname:`/post/lost/${item.id}`}} >
+                                <a class="btn">See more</a>
+                                </Link>
+                                
                             </div>
-                        
-                            <Link to={{pathname:`/post/adopt/${item.id}`}} >
-                                    <a class="btn">See more</a>
-                            </Link>
+                        </div>
                     </div>
                     )
-                })}
-
-            </div>
-
-        </section>
+                    })}                
+            
+                </div>
+                
+            </section>    
         )
 
     }
+
+   
 
     const handleChangeInput = (e) => {
         e.preventDefault()
@@ -85,20 +92,16 @@ function ReadAllPostAdopt(props) {
         setKeyword((oldValue) => ({ ...oldValue, [name]: value }))
     }
 
+
     return (
         <div>  
-            <head>
-                <title>Adopt pet</title>
-            </head>
-            <body>
-                
+           <body>    
                 <header class="header">
-
-                    {<Link to={{pathname:"/home"}}> 
+                
+                {<Link to={{pathname:"/home"}}> 
                     <a class="logo"> <i class="fas fa-paw"></i> Adopt </a>
                     </Link>}
-                    
-
+                
                     <nav class="navbar">
                         {<Link to={{pathname:"/home"}}> 
                         <a>home</a>
@@ -111,18 +114,16 @@ function ReadAllPostAdopt(props) {
                         </Link>}
                     </nav>
 
-                   
-
                     <form action="" class="search-form">
-                        <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>
-                        
-                        {<Link to={`/posts/search/adopt/${keywords.keyword}`} onClick={changeToTrue}> 
+                        <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>      
+                        {<Link to={`/posts/search/lost/${keywords.keyword}`} onClick={changeToTrue}> 
                         <div class= "icons">
                         <label for="search-box" class="fas fa-search"></label>
                         </div>
                         </Link>}
                     </form>
 
+                
                     <div class="icons">
                     <div class="fas fa-bars" id="menu-btn" ></div>
                     {/* {<Link to={{pathname:"/createPost"}}> 
@@ -155,24 +156,22 @@ function ReadAllPostAdopt(props) {
                             </p>
                         </div>
                         )}
-
-                </div>  
-
-                    </header>
+                </div>                     
+                
+                </header>
 
                 <h1 class="heading"> our <span> Dog </span> </h1>
-
+                
                 <ShowAnimals></ShowAnimals>
                 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-
                 
-                <script src="../script.js"></script>
-
-            </body>
+                <script src="script.js"></script>
+                
+                </body>
 
         </div>
        
     )
 }
 
-export default ReadAllPostAdopt
+export default SearchLost

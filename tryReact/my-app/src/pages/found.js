@@ -7,7 +7,7 @@ import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
 
 function Found(props){
-    const {id} = useParams();
+    let {id} = useParams("id");
 
     useEffect(() => {
         console.log("before getiing response")
@@ -34,8 +34,6 @@ function Found(props){
         } catch (error) {
                 alert(error)
          }
-
-
     }
 
     return(

@@ -92,11 +92,13 @@ function ReadPostLost(props) {
         if (typeof postItem.uid === 'undefined') {
             return (null)
           }
-        if (!(String(postItem.uid) === String(props.auth.user.attributes.sub))){
+        if (!(String(postItem.uid) === String(props.auth.user.attributes.sub)) && !(Boolean(postItem.found))){
             // console.log("function showUpdate used")
             
             return(
-                <a class="btn">Found</a>
+                <Link to={{pathname:`/found/${id}`}} target="_blank"> 
+                    <a class="btn">Found</a>
+                </Link>
         )
         } else {
             return null

@@ -116,7 +116,7 @@ function ReadAllPostLost(props) {
 
                     <form action="" class="search-form">
                         <input type="text" name="keyword" id="search-box" placeholder="search here..."  onChange={handleChangeInput} onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }}/>      
-                        {<Link to={`/posts/lost/${keywords.keyword}`} onClick={changeToTrue}> 
+                        {<Link to={`/posts/search/lost/${keywords.keyword}`} onClick={changeToTrue}> 
                         <div class= "icons">
                         <label for="search-box" class="fas fa-search"></label>
                         </div>

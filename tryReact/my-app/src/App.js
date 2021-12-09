@@ -21,6 +21,8 @@ import Register from './pages/register';
 import Login from './pages/login';
 import Adopted from './pages/adopted';
 import Found from './pages/found';
+import SearchAdopt from './pages/searchAdopt';
+import SearchLost from './pages/searchLost';
 import React, { Component }  from 'react';
 import { renderIntoDocument } from 'react-dom/test-utils';
 import Amplify, { Auth } from 'aws-amplify'
@@ -92,6 +94,12 @@ function App() {
                 </Route>
                 <Route exact path="/posts/lost/:keyword">
                     <ReadAllPostLost auth={authProps}/>
+                </Route>
+                <Route exact path="/posts/search/lost/:keyword">
+                    <SearchLost auth={authProps}/>
+                </Route>
+                <Route exact path="/posts/search/adopt/:keyword">
+                    <SearchAdopt auth={authProps}/>
                 </Route>
                 <Route exact path="/post/lost/:id" >
                     <ReadPostLost auth={authProps}/>
