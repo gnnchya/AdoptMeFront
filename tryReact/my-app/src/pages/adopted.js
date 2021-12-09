@@ -7,15 +7,7 @@ import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
 
 function Adopted(props){
-
-    let limit = 3
-   
-    const [postItem, setPostItems] = useState([])
-
-    const [postInfo, setPostInfo] = useState("") 
-    const [spay, setSpay] = useState(false)
-    const [file, setFile] = useState({}) 
-    
+    const {id} = useParams();
 
     useEffect(() => {
         console.log("before getiing response")
@@ -33,14 +25,10 @@ function Adopted(props){
     }
 
     const getList = (e) => {
-        console.log("home", props.auth.authen)
-        console.log("home", props.auth.user)
+        const temp = {uid :String(props.auth.user.attributes.sub), id:id}
         try {
-        axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
-        ).then((response) => {
+        axios.post(`http://127.0.0.1:8080/AdoptMe/Adopt`, temp ).then((response) => {
             console.log(response);
-            setPostItems(response.data.data || [])
-            console.log(postItem)
         })
 
         } catch (error) {
