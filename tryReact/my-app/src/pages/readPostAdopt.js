@@ -68,6 +68,47 @@ function ReadPostAdopting(props) {
         }
     }
 
+    function ShowUpdate() {
+        console.log(String(postItem.uid))
+        // console.log(String(props.auth.user.attributes.sub))
+        if (typeof postItem.uid === 'undefined') {
+            return (null)
+          }
+        if (String(postItem.uid) === String(props.auth.user.attributes.sub)){
+            // console.log("function showUpdate used")
+            
+            return(
+            <section>
+            <div>
+                <Link to={{pathname:`/updatePostAdopt/${id}`}}> 
+                    <a> <div class="fas fa-pen" id="create-btn"> </div></a>
+                </Link>
+            </div>
+            </section>
+        )
+        } else {
+            return null
+        }   
+    }
+
+    function ShowAdopt() {
+        console.log(String(postItem.uid))
+        // console.log(String(props.auth.user.attributes.sub))
+        if (typeof postItem.uid === 'undefined') {
+            return (null)
+          }
+        if (!(String(postItem.uid) === String(props.auth.user.attributes.sub))){
+            // console.log("function showUpdate used")
+            
+            return(
+                <a  type = "submit"
+                href="#" class="btn">Adopt</a>
+        )
+        } else {
+            return null
+        }   
+    }
+
     return (
         <div>
         <body>
@@ -156,6 +197,9 @@ function ReadPostAdopting(props) {
 
                             <div>
                             <img src={animal.image} alt=""/>
+                            <div class= "icons">
+                                <ShowUpdate></ShowUpdate>
+                            </div>
 
                             <div class="box">
                             <h3>info</h3>
@@ -165,7 +209,7 @@ function ReadPostAdopting(props) {
                             <a href="#" class="links"> <i class="fas fa-hospital"></i> {animal.medical_condition} </a>
                             <a href="#" class="links"> <i class="fas fa-male"></i> <i class="fas fa-female"></i> {animal.gender} </a>
                             <a href="#" class="links"> <i class="fab fa-font-awesome"></i> {String(animal.spay)} </a>
-                            <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a>
+                            {/* <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {postItem.location}</a> */}
                             <a href="#" class="links"> <i class="fas fa-check"></i> {String(postItem.adopt)}  </a>
                             </div>
 
@@ -178,8 +222,7 @@ function ReadPostAdopting(props) {
                                     <a href="#" class="links"> <i class="fas fa-envelope"></i> {userItem.email} </a>
                                     <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {userItem.address}  </a>
 
-                            <a  type = "submit"
-                            href="#" class="btn">Adopt</a>
+                            <ShowAdopt></ShowAdopt>
                             </div>
 
                     </div>
