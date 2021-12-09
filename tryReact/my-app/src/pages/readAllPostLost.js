@@ -61,7 +61,7 @@ function ReadAllPostLost(props) {
                             <img src={item.animal.image} alt=""/>
                             <div class="content">
                                 <div class="icons">
-                                    <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a>
+                                    {/* <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a> */}
                                     <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
                                 </div>
                                 <h3 key={index}>{item.animal.type}</h3>
