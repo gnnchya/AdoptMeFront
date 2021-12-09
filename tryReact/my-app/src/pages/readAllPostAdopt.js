@@ -6,7 +6,8 @@ import Amplify, { Auth } from 'aws-amplify'
 
 function ReadAllPostAdopt(props) {
     let limit = 100
-    const {page, keyword} = useParams();
+    let page = 1
+    const {keyword} = useParams();
 
     const petType = keyword
     const [postItem, setPostItems] = useState([])
@@ -25,7 +26,7 @@ function ReadAllPostAdopt(props) {
 
     const getList = async (e) => {
         try {
-            axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost?keyword=${keyword}&limit=${limit}&page=${page}`
+            axios.get(`http://127.0.0.1:8080/AdoptMe/AdoptionPost?limit=${limit}&page=${page}&keyword=${keyword}`
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data|| [])
