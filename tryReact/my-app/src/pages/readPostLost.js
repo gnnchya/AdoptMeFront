@@ -75,11 +75,28 @@ function ReadPostLost(props) {
             return(
             <section>
             <div>
-                <Link to={{pathname:`/updatePost/${id}`}}> 
+                <Link to={{pathname:`/updatePostLost/${id}`}}> 
                     <a> <div class="fas fa-pen" id="create-btn"> </div></a>
                 </Link>
             </div>
             </section>
+        )
+        } else {
+            return null
+        }   
+    }
+
+    function ShowLost() {
+        console.log(String(postItem.uid))
+        // console.log(String(props.auth.user.attributes.sub))
+        if (typeof postItem.uid === 'undefined') {
+            return (null)
+          }
+        if (!(String(postItem.uid) === String(props.auth.user.attributes.sub))){
+            // console.log("function showUpdate used")
+            
+            return(
+                <a class="btn">Found</a>
         )
         } else {
             return null
@@ -200,7 +217,7 @@ function ReadPostLost(props) {
                                     <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {userItem.address}  </a>
                                 </div>
 
-                                <a href="#" class="btn">Found</a>
+                                <ShowLost></ShowLost>
                                 
                             </div>
                             </div>
