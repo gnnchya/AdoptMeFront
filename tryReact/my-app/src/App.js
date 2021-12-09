@@ -19,6 +19,8 @@ import UpdatePostAdopt from './pages/updatePostAdopt';
 import CreatePost from './pages/createPost';
 import Register from './pages/register';
 import Login from './pages/login';
+import Adopted from './pages/adopted';
+import Found from './pages/found';
 import React, { Component }  from 'react';
 import { renderIntoDocument } from 'react-dom/test-utils';
 import Amplify, { Auth } from 'aws-amplify'
@@ -111,6 +113,12 @@ function App() {
                 </Route>
                 <Route exact path="/login">
                     <Login auth={authProps}/>
+                </Route>
+                <Route exact path="/adopted">
+                    <Adopted auth={authProps}/>
+                </Route>
+                <Route exact path="/found">
+                    <Found auth={authProps}/>
                 </Route>
             </Switch>
         </Router>
