@@ -65,8 +65,9 @@ function ReadPostLost(props) {
 
     function ShowUpdate() {
         console.log(String(postItem.uid))
+
         // console.log(String(props.auth.user.attributes.sub))
-        if (typeof postItem.uid === 'undefined') {
+        if ((typeof postItem.uid === 'undefined') || (typeof props.auth.user.attributes === 'undefined' ) ) {
             return (null)
           }
         if (String(postItem.uid) === String(props.auth.user.attributes.sub)){
@@ -89,7 +90,7 @@ function ReadPostLost(props) {
     function ShowLost() {
         console.log(String(postItem.uid))
         // console.log(String(props.auth.user.attributes.sub))
-        if (typeof postItem.uid === 'undefined') {
+        if ((typeof postItem.uid === 'undefined') || (typeof props.auth.user.attributes=== 'undefined' ) ) {
             return (null)
           }
         if (!(String(postItem.uid) === String(props.auth.user.attributes.sub)) && !(Boolean(postItem.found))){
