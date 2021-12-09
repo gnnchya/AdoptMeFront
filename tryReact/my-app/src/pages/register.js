@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import testUtils from 'react-dom/test-utils';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import { uploadPic, createPostAdopt, createPostLost} from '../actions/posts'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom';
 import Amplify, { Auth } from 'aws-amplify'
+import { register} from '../actions/posts'
 
 
 function Register(props) {
@@ -17,7 +17,7 @@ function Register(props) {
     }, [])
 
     const setDefault = async(e) => {
-        setPostInfo((oldValue) => ({ ...oldValue, ["birthdate"]: {todayDate}}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["birthdate"]: toUnix(todayDate()) }))
         setPostInfo((oldValue) => ({ ...oldValue, ["gender"]: 'male'}))
     }
 
@@ -25,6 +25,7 @@ function Register(props) {
         e.preventDefault()
         const name = e.target.name
         const value = e.target.value
+    
         setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
     }
 
@@ -58,6 +59,15 @@ function Register(props) {
                 }
             })
             console.log(SignupResponse)
+            
+            const temp = {...postInfo, uid: String(SignupResponse.userSub), username:String(postInfo.username), name: String(postInfo.name)
+                , address :String( postInfo.address), birthdate : +toUnix(postInfo.birthdate)
+                , email : String(postInfo.email), gender : String(postInfo.gender) 
+            }
+            console.log(temp)
+
+             await register(temp)
+
             history.push({pathname: "/home"})
             
         } catch (error) {
@@ -92,6 +102,12 @@ function Register(props) {
 
         var date = yyyy+'-'+mm+'-'+dd
         return date
+    }
+
+    function toUnix(dateTime){
+        var date = new Date(dateTime);
+        var unixTimeStamp = Math.floor(date.getTime() / 1000);
+        return unixTimeStamp
     }
 
     function firstDate(){
@@ -167,7 +183,7 @@ function Register(props) {
 
                          <a class="links" >Name</a>
                         <div class="inputBox">
-                            <input type="text" placeholder="Name" name="given_name" onChange={handlePostInput}/>
+                            <input type="text" placeholder="Name" name="name" onChange={handlePostInput}/>
                         </div>
 
                         <a class="links" >Username</a>

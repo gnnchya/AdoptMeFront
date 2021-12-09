@@ -13,3 +13,4 @@ export const updatePostLost = (data) => axios.put("http://127.0.0.1:8080/AdoptMe
 export const updatePostAdopt = (data) => axios.put("http://127.0.0.1:8080/AdoptMe/AdoptionPost", data)
 export const deletePost = (id) => axios.delete(`http://127.0.0.1:8080/AdoptMe/post/${id}`)
 export const uploadPic = (url, file, option) => axios.put(url, file, option)
+export const register = (data) => axios.post("http://127.0.0.1:8080/AdoptMe/Register", data)
