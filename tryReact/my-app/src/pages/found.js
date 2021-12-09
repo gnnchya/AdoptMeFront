@@ -1,0 +1,128 @@
+import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import {uploadPic, createPost, readAllPostLost } from "../actions/posts.js";
+import {generateUploadURL} from '../s3.js'
+import axios from 'axios'
+import Amplify, { Auth } from 'aws-amplify'
+
+function Found(props){
+   
+    const [postItem, setPostItems] = useState([])
+
+    const [postInfo, setPostInfo] = useState("") 
+    const [spay, setSpay] = useState(false)
+    const [file, setFile] = useState({}) 
+    
+
+    useEffect(() => {
+        console.log("before getiing response")
+        getList()
+    }, []);
+
+    const handleLogout = (e) => {
+        try{
+            Auth.signOut();
+            props.auth.handleAuthen(false);
+            props.auth.handleUser(null);
+        }catch(error){
+            console.log(error.message);
+        } 
+    }
+
+    const getList = (e) => {
+        console.log("home", props.auth.authen)
+        console.log("home", props.auth.user)
+        try {
+        axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost?keyword=${"all"}&page=${1}`
+        ).then((response) => {
+            console.log(response);
+            setPostItems(response.data.data || [])
+            console.log(postItem)
+        })
+
+        } catch (error) {
+                alert(error)
+         }
+
+
+    }
+
+    return(
+        <div>
+           <body>
+
+           <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+            <script src="../home.js"></script>
+
+
+            <header class="header">
+            
+                {<Link to={{pathname:"/home"}}> 
+                        <a class="logo"> <i class="fas fa-paw"></i> Adopt </a>
+                </Link>}
+            
+                <nav class="navbar">
+                        {<Link to={{pathname:"/home"}}> 
+                        <a>home</a>
+                        </Link>}
+                        {<Link to={{pathname:"/posts/adopt/all"}}> 
+                        <a>Adoption</a>
+                        </Link>}
+                        {<Link to={{pathname:"/posts/lost/all"}}> 
+                        <a>Lost</a>
+                        </Link>}
+                    </nav>
+            
+                <div class="icons">
+                    <div class="fas fa-bars" id="menu-btn" ></div>
+                   
+                    {/* hide login button when logged in */}
+                    {!props.auth.authen && (
+                        <div>
+                        {<Link to={{pathname:"/login"}}> 
+                            <div class="fas fa-user" id="login-btn" ></div>
+                        </Link>}
+                        </div>
+                    )}
+                    
+                    {props.auth.authen &&props.auth.user && (
+                        <div>
+                            {<Link to={{pathname:"/createPost"}}> 
+                                <div class="fas fa-pen" id="create-btn" ></div>
+                            </Link>}
+
+                            {/* logout button*/}
+                            {<Link to={{pathname:"/home"}}> 
+                                <div class="fas fa-door-open" id="login-btn" onClick={handleLogout} ></div>     
+                            </Link>}
+
+                            {/* show hello username */}
+                            <p>
+                                Hello {props.auth.user.username}
+                            </p>
+                        </div>
+                        )}
+
+                </div>            
+            
+            </header>
+            
+            <section class="home" id="home">
+
+                <div class="content">
+                    <h3>We would like to <span>THANK YOU</span> for your response</h3>
+                    <p>We sent your contact to the post owner, please kindly waiting for their response!</p>
+                    
+                    {<Link to={{pathname:"/posts/adopt/all"}}> 
+                        <a  class="btn">OK</a>
+                    </Link>}
+                </div>
+
+            </section>
+            </body>
+        </div>
+    )
+}
+
+export default Found
