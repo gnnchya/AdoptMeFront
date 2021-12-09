@@ -41,6 +41,16 @@ function ReadAllPostLost(props) {
         setRetrieve(true)
     }
 
+    function timeConverter(UNIX_timestamp){
+        var a = new Date(UNIX_timestamp * 1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var time = date + ' ' + month + ' ' + year  ;
+        return time;
+      }
+
     function ShowAnimals(keyword) {
         if (retrieve === true){
             getList()
@@ -62,7 +72,7 @@ function ReadAllPostLost(props) {
                             <div class="content">
                                 <div class="icons">
                                     {/* <a href="#" key={index}> <i class="fas fa-user"></i> {item.uid} </a> */}
-                                    <a href="#" key={index}> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(item.postAt)} </a>
+                                    <a href="#" key={index}> <i class="fas fa-calendar"></i> {timeConverter(item.post_at)} </a>
                                 </div>
                                 <h3 key={index}>{item.animal.type}</h3>
                                 <p key={index}>{item.animal.general_information}</p>

@@ -63,6 +63,16 @@ function ReadPostLost(props) {
         setKeyword((oldValue) => ({ ...oldValue, [name]: value }))
     }
 
+    function timeConverter(UNIX_timestamp){
+        var a = new Date(UNIX_timestamp * 1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var time = date + ' ' + month + ' ' + year  ;
+        return time;
+      }
+
     function ShowUpdate() {
         console.log(String(postItem.uid))
 
@@ -197,7 +207,7 @@ function ReadPostLost(props) {
                                 <div class="icons">
                                     {/* aow user name mar sai tan uid */}
                                     <a href="#"> <i class="fas fa-user"></i> {userItem.name} </a>
-                                    <a href="#"> <i class="fas fa-calendar"></i> {Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(postItem.postAt)}</a>
+                                    <a href="#"> <i class="fas fa-calendar"></i> {timeConverter(postItem.post_at)}</a>
                                 </div>
                                 <h3>{animal.species}</h3>
                                 <p>{animal.general_information}</p>
