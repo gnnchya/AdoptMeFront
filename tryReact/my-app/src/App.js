@@ -114,10 +114,10 @@ function App() {
                 <Route exact path="/login">
                     <Login auth={authProps}/>
                 </Route>
-                <Route exact path="/adopted">
+                <Route exact path="/adopted/:id">
                     <Adopted auth={authProps}/>
                 </Route>
-                <Route exact path="/found">
+                <Route exact path="/found/:id">
                     <Found auth={authProps}/>
                 </Route>
             </Switch>
