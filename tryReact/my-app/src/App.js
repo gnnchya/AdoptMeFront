@@ -14,7 +14,8 @@ import ReadAllPostAdopt from './pages/readAllPostAdopt';
 import ReadAllPostLost from './pages/readAllPostLost';
 import ReadPostLost from './pages/readPostLost';
 import ReadPostAdopt from './pages/readPostAdopt';
-import UpdatePost from './pages/updatePost';
+import UpdatePostLost from './pages/updatePostLost';
+import UpdatePostAdopt from './pages/updatePostAdopt';
 import CreatePost from './pages/createPost';
 import Register from './pages/register';
 import Login from './pages/login';
@@ -96,8 +97,11 @@ function App() {
                 <Route exact path="/post/adopt/:id" >
                     <ReadPostAdopt auth={authProps}/>
                 </Route>
-                <Route exact path="/updatePost/:id">
-                    <UpdatePost auth={authProps}/>
+                <Route exact path="/updatePostLost/:id">
+                    <UpdatePostLost auth={authProps}/>
+                </Route>
+                <Route exact path="/updatePostAdopt/:id">
+                    <UpdatePostAdopt auth={authProps}/>
                 </Route>
                 <Route exact path="/createPost">
                     <CreatePost auth={authProps}/>
