@@ -36,7 +36,7 @@ function UpdatePostAdopt(props) {
 
     const getList = async (e) => {
         try {
-            axios.get(`http://10.0.2.2:8080/AdoptMe/AdoptionPost/${id}`
+            axios.get(`http://localhost:8080/AdoptMe/AdoptionPost/${id}`
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data)
@@ -52,7 +52,7 @@ function UpdatePostAdopt(props) {
                 setSpay((oldValue) => ({ ...oldValue, ["spay"]: Boolean(animal.spay )}))
                 setSpay((oldValue) => ({ ...oldValue, ["found"]: Boolean(postItem.adopt )}))
 
-                axios.get(`http://10.0.2.2:8080/AdoptMe/UserInfo/${response.data.data.uid}`
+                axios.get(`http://localhost:8080/AdoptMe/UserInfo/${response.data.data.uid}`
                 ).then((response) => {
                     console.log(response);
                     setUserItems(response.data.data)
