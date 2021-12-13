@@ -32,6 +32,7 @@ function CreatePost(props) {
     const setDefault = async(e) => {
         setSpay((oldValue) => ({ ...oldValue, ["spay"]: false}))
         setPostInfo((oldValue) => ({ ...oldValue, ["postType"]: 'adopt'}))
+        setSpay((oldValue) => ({ ...oldValue, ["valid"]: false}))
     }
 
     const handlePostInput = (e) =>{
@@ -39,6 +40,7 @@ function CreatePost(props) {
         const name = e.target.name
         const value = e.target.value
         setPostInfo((oldValue) => ({ ...oldValue, [name]: value }))
+
     }
    
     const handleSpayInput = (e) =>{
@@ -56,7 +58,7 @@ function CreatePost(props) {
     }
 
     const postUploadHandler = async (event) =>{
-        // try {
+        try {
             event.preventDefault()
             const url =  await generateUploadURL()
             var options = {
@@ -88,10 +90,10 @@ function CreatePost(props) {
     
             
             
-        // } catch (error) {
+        } catch (error) {
      
-        //     alert( error)
-        // }
+            alert( error)
+        }
 
     }
 
