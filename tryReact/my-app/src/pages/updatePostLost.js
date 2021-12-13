@@ -232,9 +232,9 @@ function UpdatePostLost(props) {
                             <a href="#" class="links"> <i class="fas fa-phone"></i> {userItem.name} </a>
                             <a href="#" class="links"> <i class="fas fa-envelope"></i> {userItem.email} </a>
                             <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {userItem.address}  </a>
-                            {/* {<Link to={{pathname:`/post/lost/${id}`}}>  */}
-                            <input type="submit"  disabled={handleSubmission} class="btn" onClick={postUploadHandler}/>
-                            {/* </Link>} */}
+
+                            <input type="submit"  disabled={handleSubmission()} class="btn" onClick={postUploadHandler}/>
+
                         
                         </form>
                     </div>

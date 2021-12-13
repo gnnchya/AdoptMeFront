@@ -230,7 +230,7 @@ function UpdatePostAdopt(props) {
                                 <a href="#" class="links"> <i class="fas fa-envelope"></i> {userItem.email} </a>
                                 <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {userItem.address}  </a>
 
-                                <input type="submit"  disabled={handleSubmission} class="btn" onClick={postUploadHandler}/>
+                                <input type="submit"  disabled={handleSubmission()} class="btn" onClick={postUploadHandler}/>
                             </div>
 
                     </form>
