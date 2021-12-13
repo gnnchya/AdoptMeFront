@@ -11,6 +11,7 @@ export const readPostAdopt = (id) => axios.get(`http://127.0.0.1:8080/AdoptMe/Ad
 export const readPostLost = (id) => axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost/${id}`)
 export const updatePostLost = (data) => axios.put("http://127.0.0.1:8080/AdoptMe/LostPetPost", data)
 export const updatePostAdopt = (data) => axios.put("http://127.0.0.1:8080/AdoptMe/AdoptionPost", data)
-export const deletePost = (id) => axios.delete(`http://127.0.0.1:8080/AdoptMe/post/${id}`)
+export const deletePostAdopt = (id) => axios.delete(`http://127.0.0.1:8080/AdoptMe/AdoptionPost/${id}`)
+export const deletePostLost = (id) => axios.delete(`http://127.0.0.1:8080/AdoptMe/LostPetPost/${id}`)
 export const uploadPic = (url, file, option) => axios.put(url, file, option)
 export const register = (data) => axios.post("http://127.0.0.1:8080/AdoptMe/Register", data)

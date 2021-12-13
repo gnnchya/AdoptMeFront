@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
+import { deletePostAdopt } from '../actions/posts';
 
 // import PostList from '../components/PostList'
 
@@ -68,6 +69,14 @@ function ReadPostAdopting(props) {
         }
     }
 
+    const handleDelete = async (e) => {
+        try {
+            await deletePostAdopt(id)
+        } catch (error) {
+            alert(error)
+        }
+    }
+
     function ShowUpdate() {
         console.log(String(postItem.uid))
         // console.log(String(props.auth.user.attributes.sub))
@@ -78,13 +87,16 @@ function ReadPostAdopting(props) {
             // console.log("function showUpdate used")
             
             return(
-            <section>
-            <div>
+                <div class= "icons">
+
                 <Link to={{pathname:`/updatePostAdopt/${id}`}}> 
                     <a> <div class="fas fa-pen" id="create-btn"> </div></a>
                 </Link>
-            </div>
-            </section>
+                <Link to={{pathname:`/posts/adopt/all`}}> 
+                <a> <div class="fas fa-trash" id="create-trash" onClick={handleDelete}> </div></a>
+                </Link>
+
+                </div>
         )
         } else {
             return null
@@ -198,9 +210,9 @@ function ReadPostAdopting(props) {
 
                             <div>
                             <img src={animal.image} alt=""/>
-                            <div class= "icons">
-                                <ShowUpdate></ShowUpdate>
-                            </div>
+                     
+                            <ShowUpdate></ShowUpdate>
+                       
 
                             <div class="box">
                             <h3>info</h3>

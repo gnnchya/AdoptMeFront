@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
+import { deletePostLost } from '../actions/posts';
 // import PostList from '../components/PostList'
 
 function ReadPostLost(props) {
@@ -62,6 +63,13 @@ function ReadPostLost(props) {
         const value = e.target.value
         setKeyword((oldValue) => ({ ...oldValue, [name]: value }))
     }
+    const handleDelete =  async (e) => {
+        try {
+            await deletePostLost(id)
+        } catch (error) {
+            alert(error)
+        }
+    }
 
     function timeConverter(UNIX_timestamp){
         var a = new Date(UNIX_timestamp * 1000);
@@ -84,14 +92,19 @@ function ReadPostLost(props) {
             // console.log("function showUpdate used")
             
             return(
-            <section>
-            <div>
+
+                <div class= "icons">
+
                 <Link to={{pathname:`/updatePostLost/${id}`}}> 
                     <a> <div class="fas fa-pen" id="create-btn"> </div></a>
                 </Link>
-            </div>
-            </section>
-        )
+                <Link to={{pathname:`/posts/lost/all`}}> 
+                <a> <div class="fas fa-trash" id="create-trash" onClick={handleDelete}> </div></a>
+                </Link>
+
+                </div>
+
+                )
         } else {
             return null
         }   
@@ -196,11 +209,11 @@ function ReadPostLost(props) {
                 <div class="box-container">
 
                     <div class="box">
-                            <div>
+                           
                             <img src={animal.image} alt=""/>
-                            <div class= "icons">
-                                <ShowUpdate></ShowUpdate>
-                            </div>
+                            
+                            <ShowUpdate></ShowUpdate>
+                      
 
                             <div class="content">
 
@@ -233,7 +246,7 @@ function ReadPostLost(props) {
                                 <ShowLost></ShowLost>
                                 
                             </div>
-                            </div>
+              
                     </div>
 
                 </div>
