@@ -46,7 +46,7 @@ function HomePage(props){
         //     alert(error)
         // }
         try {
-        axios.get(`http://127.0.0.1:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
+        axios.get(`http://10.0.20.154:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
         ).then((response) => {
             console.log(response);
             setPostItems(response.data.data || [])

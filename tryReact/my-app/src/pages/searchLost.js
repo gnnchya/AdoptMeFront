@@ -26,7 +26,7 @@ function SearchLost(props) {
     
     const getList = async (e) => {
         try {
-            axios.get(`http://127.0.0.1:8080/AdoptMe/SearchLostPetPost?keyword=${keyword}&limit=${limit}&page=${page}`)
+            axios.get(`http://10.0.20.154:8080/AdoptMe/SearchLostPetPost?keyword=${keyword}&limit=${limit}&page=${page}`)
             .then((response) => {
                 console.log(response);
                 setPostItems(response.data.data|| [])
