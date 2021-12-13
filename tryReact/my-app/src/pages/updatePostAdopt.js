@@ -125,7 +125,7 @@ function UpdatePostAdopt(props) {
                         , location:String( postItem.location), post_at : +postItem.post_at
                         , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
             const result = await updatePostAdopt(temp).then(
-                () => {
+                (result) => {
                     history.push({pathname:`/post/adopt/${id}`});
                 }
             )
