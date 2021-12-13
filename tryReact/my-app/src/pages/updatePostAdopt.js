@@ -92,11 +92,19 @@ function UpdatePostAdopt(props) {
             const temp = {...postItem, id: String(postItem.id) , uid: String(postItem.uid), animal:tempAnimal, adopt: Boolean(spay.adopt)
                         , location:String( postItem.location), post_at : +postItem.post_at
                         , update_at : +postItem.update_at, delete_at : +postItem.delete_at}
-            await updatePostAdopt(temp)
-
-            console.log(temp)
+            const result = await updatePostAdopt(temp).then(
+                () => {
+                    history.push({pathname:`/post/adopt/${id}`});
+                }
+            )
+         
+   
             
-            history.push({pathname:`/post/adopt/${id}`})
+            
+            
+                 
+
+            
             
 
         } catch (error) {
