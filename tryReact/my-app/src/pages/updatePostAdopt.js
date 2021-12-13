@@ -206,7 +206,7 @@ function UpdatePostAdopt(props) {
 
                 <div class="swiper-wrapper">
 
-                    <div class="swiper-slide box" >
+                    <form class="swiper-slide box" >
 
                             <div>
                             <img src={animal.image} alt=""/>
@@ -233,7 +233,7 @@ function UpdatePostAdopt(props) {
                                 <input type="submit"  disabled={handleSubmission} class="btn" onClick={postUploadHandler}/>
                             </div>
 
-                    </div>
+                    </form>
                     
                 </div>
 

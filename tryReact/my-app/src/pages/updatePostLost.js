@@ -205,7 +205,7 @@ function UpdatePostLost(props) {
                 <div class="box-container">
         
                     <div class="box">
-                        <div class="content">
+                        <form class="content">
                             <div class="icons">
                                 <a > <i class="fas fa-user"></i> {userItem.name}</a>
                                 <a > <i class="fas fa-calendar"></i> {postItem.postAt} </a>
@@ -236,7 +236,7 @@ function UpdatePostLost(props) {
                             <input type="submit"  disabled={handleSubmission} class="btn" onClick={postUploadHandler}/>
                             {/* </Link>} */}
                         
-                        </div>
+                        </form>
                     </div>
             
                     
