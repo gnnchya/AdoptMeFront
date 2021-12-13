@@ -31,8 +31,14 @@ function CreatePost(props) {
 
     const setDefault = async(e) => {
         setSpay((oldValue) => ({ ...oldValue, ["spay"]: false}))
-        setPostInfo((oldValue) => ({ ...oldValue, ["postType"]: 'adopt'}))
         setSpay((oldValue) => ({ ...oldValue, ["valid"]: false}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["type"]: ''}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["age"]: ''}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["species"]: ''}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["gender"]: ''}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["general_information"]: ''}))
+        // setPostInfo((oldValue) => ({ ...oldValue, ["image"]: ''}))
+        setPostInfo((oldValue) => ({ ...oldValue, ["medical_condition"]: ''}))
     }
 
     const handlePostInput = (e) =>{
@@ -54,7 +60,43 @@ function CreatePost(props) {
         event.preventDefault()
         const value = event.target.files[0]
         setFile(value)  
-        // setFile(value[0])
+        setSpay((oldValue) => ({ ...oldValue, ["valid"]: true}))
+    }
+
+    function handleSubmission(){
+        console.log("here")
+        if (postInfo.type === ''){
+            console.log("type")
+            return true
+            
+        }
+        if (postInfo.age === ''){
+            console.log("age")
+            return true
+        }
+        if (postInfo.species === ''){
+            console.log("species")
+            return true
+        }
+        if (postInfo.gender === ''){
+            console.log("gender")
+            return true
+        }
+        if (postInfo.general_information === ''){
+            console.log("gen")
+            return true
+        }
+        if (postInfo.medical_condition === ''){
+            console.log("med")
+            return true
+        }
+        if (spay.valid === false){
+            console.log("file")
+            return true
+        }
+        else{
+            return false
+        }
     }
 
     const postUploadHandler = async (event) =>{
@@ -160,7 +202,7 @@ function CreatePost(props) {
                     <div class = "create-form">
                         <h3>Lost</h3>
                         <div class = "box">
-                            <div class="content">
+                            <form class="content">
                                 <h3>Create lost pet post</h3>
                                 <p>Type</p>
                                 <input type="text" placeholder="pet type eg. cat, dog" class="box" name = "type" onChange={handlePostInput}/>
@@ -195,10 +237,8 @@ function CreatePost(props) {
                                 <p>Post caption</p>
                                 <input type="text" placeholder="post info" class="box-info" name="general_information" onChange={handlePostInput} />
                                                         
-                            </div>
-                            {/* {<Link to={{pathname:"/posts/lost/all"}}>  */}
-                            <input type="submit"  class="btn" onClick={postUploadHandler}/>
-                            {/* </Link>} */}
+                            </form>
+                            <input type="submit" disabled={handleSubmission()} class="btn" onClick={postUploadHandler}/>
                         </div>
         
                     </div>
