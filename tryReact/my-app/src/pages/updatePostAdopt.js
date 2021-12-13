@@ -109,10 +109,6 @@ function UpdatePostAdopt(props) {
             console.log("med")
             return true
         }
-        if (spay.valid === false){
-            console.log("file")
-            return true
-        }
         else{
             return false
         }
