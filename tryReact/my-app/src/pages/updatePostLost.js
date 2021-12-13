@@ -88,7 +88,7 @@ function UpdatePostLost(props) {
         if (postInfo.type === ''){
             console.log("type")
             return true
-            
+
         }
         if (postInfo.age === ''){
             console.log("age")
@@ -114,6 +114,16 @@ function UpdatePostLost(props) {
             return false
         }
     }
+
+    function timeConverter(UNIX_timestamp){
+        var a = new Date(UNIX_timestamp * 1000);
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var time = date + ' ' + month + ' ' + year  ;
+        return time;
+      }
 
     const postUploadHandler = async (event) =>{
         try {
@@ -205,10 +215,10 @@ function UpdatePostLost(props) {
                 <div class="box-container">
         
                     <div class="box">
-                        <form class="content">
+                        <div class="content">
                             <div class="icons">
                                 <a > <i class="fas fa-user"></i> {userItem.name}</a>
-                                <a > <i class="fas fa-calendar"></i> {postItem.postAt} </a>
+                                <a > <i class="fas fa-calendar"></i> {timeConverter(postItem.post_at)} </a>
                             </div>
                             <h3>{animal.species}</h3>
                             <p>{animal.generalInformation}</p>
@@ -236,7 +246,7 @@ function UpdatePostLost(props) {
                             <input type="submit"  disabled={handleSubmission()} class="btn" onClick={postUploadHandler}/>
 
                         
-                        </form>
+                        </div>
                     </div>
             
                     
