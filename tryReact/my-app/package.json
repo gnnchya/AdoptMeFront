@@ -1,9 +1,9 @@
 {
   "start": "env-cmd -f .env.staging react-scripts start",
-    "build:staging": "env-cmd -f .env.staging react-scripts build",
-    "build:production": "env-cmd -f .env.production react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+  "build:staging": "env-cmd -f .env.staging react-scripts build",
+  "build:production": "env-cmd -f .env.production react-scripts build",
+  "test": "react-scripts test",
+  "eject": "react-scripts eject",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
