@@ -82,6 +82,41 @@ function UpdatePostLost(props) {
         const value = e.target.value
         setSpay((oldValue) => ({ ...oldValue, [name]: value }))
     }
+    function handleSubmission(){
+        console.log("here")
+        if (postInfo.type === ''){
+            console.log("type")
+            return true
+            
+        }
+        if (postInfo.age === ''){
+            console.log("age")
+            return true
+        }
+        if (postInfo.species === ''){
+            console.log("species")
+            return true
+        }
+        if (postInfo.gender === ''){
+            console.log("gender")
+            return true
+        }
+        if (postInfo.general_information === ''){
+            console.log("gen")
+            return true
+        }
+        if (postInfo.medical_condition === ''){
+            console.log("med")
+            return true
+        }
+        if (spay.valid === false){
+            console.log("file")
+            return true
+        }
+        else{
+            return false
+        }
+    }
 
     const postUploadHandler = async (event) =>{
         try {
@@ -193,8 +228,7 @@ function UpdatePostLost(props) {
 
                                 <a  class="links"> <i class="fab fa-font-awesome"></i>  <input type="checkbox" name="spay" id="spay" onChange={handleSpayInput}/> <label for="spay">Still spay</label></a>
                                 <a  class="links"> <i class="fas fa-check"></i>   <input type="checkbox" name="found" id="found" onChange={handleSpayInput}/> <label for="found">FOUND!!</label></a>
-                                
-
+                            
                             </div>
                             
                             <h3>contact info</h3>
@@ -202,7 +236,7 @@ function UpdatePostLost(props) {
                             <a href="#" class="links"> <i class="fas fa-envelope"></i> {userItem.email} </a>
                             <a href="#" class="links"> <i class="fas fa-map-marker-alt"></i> {userItem.address}  </a>
                             {/* {<Link to={{pathname:`/post/lost/${id}`}}>  */}
-                            <input type="submit"  class="btn" onClick={postUploadHandler}/>
+                            <input type="submit"  disabled={handleSubmission} class="btn" onClick={postUploadHandler}/>
                             {/* </Link>} */}
                         
                         </div>
