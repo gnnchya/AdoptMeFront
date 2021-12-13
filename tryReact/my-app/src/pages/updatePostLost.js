@@ -82,6 +82,7 @@ function UpdatePostLost(props) {
         const value = e.target.value
         setSpay((oldValue) => ({ ...oldValue, [name]: value }))
     }
+
     function handleSubmission(){
         console.log("here")
         if (postInfo.type === ''){
@@ -206,7 +207,7 @@ function UpdatePostLost(props) {
                     <div class="box">
                         <div class="content">
                             <div class="icons">
-                                <a > <i class="fas fa-user"></i> {postItem.uid}</a>
+                                <a > <i class="fas fa-user"></i> {userItem.name}</a>
                                 <a > <i class="fas fa-calendar"></i> {postItem.postAt} </a>
                             </div>
                             <h3>{animal.species}</h3>
