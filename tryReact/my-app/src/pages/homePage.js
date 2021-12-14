@@ -56,7 +56,7 @@ function HomePage(props){
         // } catch (error) {
         //         alert(error)
         //  }
-         try {
+        //  try {
             const response = await axios.get(`http://10.0.20.88:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`);
             // ).then((response) => {
                 console.log(response);
@@ -64,9 +64,10 @@ function HomePage(props){
                 console.log(postItem)
             // })
     
-            } catch (error) {
-                    alert(error)
-             }
+            // }
+            //  catch (error) {
+            //         alert(error)
+            //  }
 
 
     }
