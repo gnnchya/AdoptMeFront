@@ -32,7 +32,7 @@ function HomePage(props){
         } 
     }
 
-    const getList = (e) => {
+    const getList = async (e) => {
         console.log("home", props.auth.authen)
         console.log("home", props.auth.user)
         // try {
