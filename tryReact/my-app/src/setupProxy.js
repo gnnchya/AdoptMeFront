@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     // '/AdoptMe',
     createProxyMiddleware({
-      target: 'http://0.0.0.0:3000',
+      target: 'http://0.0.0.0:80',
       changeOrigin: true,
     })
   );
