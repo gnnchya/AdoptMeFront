@@ -45,17 +45,28 @@ function HomePage(props){
         // } catch (error) {
         //     alert(error)
         // }
-        try {
-        axios.get(`http://10.0.20.88:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
-        ).then((response) => {
-            console.log(response);
-            setPostItems(response.data.data || [])
-            console.log(postItem)
-        })
+        // try {
+        // axios.get(`http://10.0.20.88:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`
+        // ).then((response) => {
+        //     console.log(response);
+        //     setPostItems(response.data.data || [])
+        //     console.log(postItem)
+        // })
 
-        } catch (error) {
-                alert(error)
-         }
+        // } catch (error) {
+        //         alert(error)
+        //  }
+         try {
+            const response = await axios.get(`http://10.0.20.88:8080/AdoptMe/LostPetPost?keyword=${"all"}&limit=${limit}&page=${1}`);
+            // ).then((response) => {
+                console.log(response);
+                setPostItems(response.data.data || [])
+                console.log(postItem)
+            // })
+    
+            } catch (error) {
+                    alert(error)
+             }
 
 
     }
