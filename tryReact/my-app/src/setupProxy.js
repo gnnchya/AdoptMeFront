@@ -2,9 +2,9 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function(app) {
   app.use(
-    // '/AdoptMe',
+    '/AdoptMe',
     createProxyMiddleware({
-      target: 'http://0.0.0.0:80',
+      target: 'http://0.0.0.0:3000',
       changeOrigin: true,
     })
   );
