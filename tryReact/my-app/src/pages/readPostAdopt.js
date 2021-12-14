@@ -45,7 +45,7 @@ function ReadPostAdopting(props) {
 
     const getList = async (e) => {
         try {
-            axios.get(`http://18.140.63.167:8080/AdoptMe/AdoptionPost/${id}`
+            axios.get(`http://10.0.20.160:8080/AdoptMe/AdoptionPost/${id}`
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data)
@@ -54,7 +54,7 @@ function ReadPostAdopting(props) {
                 console.log(postItem.adopt)
                 console.log(typeof postItem.adopt)
 
-                axios.get(`http://18.140.63.167:8080/AdoptMe/UserInfo/${response.data.data.uid}`
+                axios.get(`http://10.0.20.160:8080/AdoptMe/UserInfo/${response.data.data.uid}`
                 ).then((response) => {
                     console.log(response);
                     setUserItems(response.data.data)
