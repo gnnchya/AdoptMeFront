@@ -34,7 +34,7 @@ function ReadPostLost(props) {
     console.log("iddd", id)
     const getList = async (e) => {
         try {
-            axios.get(`http://10.0.20.88:8080/AdoptMe/LostPetPost/${id}`
+            axios.get(`http://18.140.63.167:8080/AdoptMe/LostPetPost/${id}`
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data)
@@ -42,7 +42,7 @@ function ReadPostLost(props) {
                 setAnimal(response.data.data.animal)
                 console.log(postItem)
 
-                axios.get(`http://10.0.20.88:8080/AdoptMe/UserInfo/${response.data.data.uid}`
+                axios.get(`http://18.140.63.167:8080/AdoptMe/UserInfo/${response.data.data.uid}`
                 ).then((response) => {
                     console.log(response);
                     setUserItems(response.data.data)
