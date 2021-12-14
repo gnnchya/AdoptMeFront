@@ -26,7 +26,7 @@ function ReadAllPostAdopt(props) {
 
     const getList = async (e) => {
         try {
-            axios.get(`http://localhost:8080/AdoptMe/AdoptionPost?keyword=${keyword}&limit=${limit}&page=${page}`
+            axios.get(`http://10.0.20.88:8080/AdoptMe/AdoptionPost?keyword=${keyword}&limit=${limit}&page=${page}`
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data|| [])
