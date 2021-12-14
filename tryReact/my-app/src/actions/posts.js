@@ -1,11 +1,11 @@
 import axios from 'axios'
 import {data} from '../pages/readAllPostAdopt'
 
-const instance = axios.create({
-    baseURL: 'https://some-domain.com/api/',
-    timeout: 1000,
-    headers: {'X-Custom-Header': 'foobar'}
-  });
+// const instance = axios.create({
+//     baseURL: 'https://some-domain.com/api/',
+//     timeout: 1000,
+//     headers: {'X-Custom-Header': 'foobar'}
+//   });
 
 export const createPostLost = (data) => axios.post("http://10.0.20.88:8080/AdoptMe/LostPetPost", data)
 export const createPostAdopt = (data) => axios.post("http://10.0.20.88:8080/AdoptMe/AdoptionPost", data)
