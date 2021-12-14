@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
 
+axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+  axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
 function ReadAllPostLost(props) {
     let limit = 100
     let page = 1
