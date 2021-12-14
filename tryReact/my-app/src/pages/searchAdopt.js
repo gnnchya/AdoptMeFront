@@ -26,7 +26,7 @@ function SearchAdopt(props) {
 
     const getList = async (e) => {
         try {
-            axios.get(`http://10.0.20.88:8080/AdoptMe/SearchAdoptionPost?limit=${limit}&page=${page}&keyword=${keyword}`
+            axios.get(`http://18.140.154.104:8080/AdoptMe/SearchAdoptionPost?limit=${limit}&page=${page}&keyword=${keyword}`
             ).then((response) => {
                 console.log(response);
                 setPostItems(response.data.data|| [])
