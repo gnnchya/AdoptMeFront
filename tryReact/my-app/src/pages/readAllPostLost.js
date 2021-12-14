@@ -26,7 +26,7 @@ function ReadAllPostLost(props) {
     
     const getList = async (e) => {
         try {
-            axios.get(`http://18.140.154.104:8080/AdoptMe/LostPetPost?keyword=${keyword}&limit=${limit}&page=${page}`)
+            axios.get(`http://10.0.20.88:8080/AdoptMe/LostPetPost?keyword=${keyword}&limit=${limit}&page=${page}`)
             .then((response) => {
                 console.log(response);
                 setPostItems(response.data.data|| [])

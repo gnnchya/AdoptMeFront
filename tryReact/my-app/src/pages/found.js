@@ -27,7 +27,7 @@ function Found(props){
     const getList = (e) => {
         const temp = {uid :String(props.auth.user.attributes.sub), id:id}
         try {
-        axios.post(`http://18.140.154.104:8080/AdoptMe/Found`, temp ).then((response) => {
+        axios.post(`http://10.0.20.88:8080/AdoptMe/Found`, temp ).then((response) => {
             console.log(response);
         })
 
