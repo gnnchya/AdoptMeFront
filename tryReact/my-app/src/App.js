@@ -27,9 +27,13 @@ import React, { Component }  from 'react';
 import { renderIntoDocument } from 'react-dom/test-utils';
 import Amplify, { Auth } from 'aws-amplify'
 
+const ip = String(process.env.REACT_APP_IP)
 
 
 function App() {
+
+    // const ip = String(process.env.REACT_APP_IP)
+    console.log("ip" ,ip)
 
     const [authen, setAuthen] = useState(false) 
     const [user, setUser] = useState({}) 
@@ -134,4 +138,3 @@ function App() {
 }
 
 export default App;
-

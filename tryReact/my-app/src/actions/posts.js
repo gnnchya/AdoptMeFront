@@ -6,7 +6,7 @@ import {data} from '../pages/readAllPostAdopt'
 //     timeout: 1000,
 //     headers: {'X-Custom-Header': 'foobar'}
 //   });
-const ip = String(process.env.IP)
+const ip = String(process.env.REACT_APP_IP)
 
 export const createPostLost = (data) => axios.post("http://"+ip+":8080/AdoptMe/LostPetPost", data)
 export const createPostAdopt = (data) => axios.post("http://"+ip+":8080/AdoptMe/AdoptionPost", data)

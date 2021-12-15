@@ -5,7 +5,7 @@ import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
 
 function SearchLost(props) {
-    const ip = String(process.env.IP)
+    const ip = String(process.env.REACT_APP_IP)
     let limit = 100
     let page = 1
     let {keyword} = useParams()

@@ -8,7 +8,7 @@ import { deletePostLost } from '../actions/posts';
 // import PostList from '../components/PostList'
 
 function ReadPostLost(props) {
-    const ip = String(process.env.IP)
+    const ip = String(process.env.REACT_APP_IP)
     // const customer_id = "c3ok6a2mvdvh8i865tag"
 
     const [postItem, setPostItems] = useState({})

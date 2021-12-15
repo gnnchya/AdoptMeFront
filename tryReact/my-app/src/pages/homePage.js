@@ -9,8 +9,9 @@ import Amplify, { Auth } from 'aws-amplify'
 function HomePage(props){
 
     let limit = 3
-    const ip = String(process.env.IP)
-    
+    const ip = String(process.env.REACT_APP_IP)
+    console.log("ip",ip)
+
     const [postItem, setPostItems] = useState([])
 
     const [postInfo, setPostInfo] = useState("") 
