@@ -7,8 +7,6 @@ import Amplify, { Auth } from 'aws-amplify'
 
 
 function ReadAllPostLost(props) {
-    axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     let limit = 100
     let page = 1
     let {keyword} = useParams()
