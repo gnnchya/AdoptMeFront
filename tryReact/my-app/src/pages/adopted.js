@@ -8,6 +8,7 @@ import Amplify, { Auth } from 'aws-amplify'
 
 function Adopted(props){
     let {id} = useParams("id");
+    const ip = String(process.env.IP)
 
     useEffect(() => {
         console.log("before getiing response")
@@ -27,7 +28,7 @@ function Adopted(props){
     const getList = (e) => {
         const temp = {uid :String(props.auth.user.attributes.sub), id:id}
         try {
-        axios.post(`http://18.140.154.104:8080/AdoptMe/Adopt`, temp ).then((response) => {
+        axios.post("http://"+ip+":8080/AdoptMe/Adopt", temp ).then((response) => {
             console.log(response);
         })
 
