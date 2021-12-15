@@ -5,6 +5,7 @@ import axios from 'axios'
 import Amplify, { Auth } from 'aws-amplify'
 
 function ReadAllPostAdopt(props) {
+    const ip = String(process.env.IP)
     let limit = 100
     let page = 1
     const {keyword} = useParams();

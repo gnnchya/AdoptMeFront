@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import Amplify, { Auth } from 'aws-amplify'
 
 function UpdatePostLost(props) {
+    const ip = String(process.env.IP)
 
     let {id} = useParams("id")
     console.log("iddd", id)

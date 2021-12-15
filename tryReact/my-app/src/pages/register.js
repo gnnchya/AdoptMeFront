@@ -9,6 +9,7 @@ import { register} from '../actions/posts'
 
 
 function Register(props) {
+    const ip = String(process.env.IP)
     const [postInfo, setPostInfo] = useState("") 
     const history = useHistory();
 

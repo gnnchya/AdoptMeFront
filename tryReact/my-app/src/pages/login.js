@@ -12,6 +12,7 @@ import { PresignedPost } from 'aws-sdk/clients/s3';
 
 
 function Login(props) {
+    const ip = String(process.env.IP)
     const [postInfo, setPostInfo] = useState({}) 
     const [spay, setSpay] = useState(false)
     const [file, setFile] = useState({}) 

@@ -8,6 +8,7 @@ import Amplify, { Auth } from 'aws-amplify'
 
 function Found(props){
     let {id} = useParams("id");
+    const ip = String(process.env.IP)
 
     useEffect(() => {
         console.log("before getiing response")

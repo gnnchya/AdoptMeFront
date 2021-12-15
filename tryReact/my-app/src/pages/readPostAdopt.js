@@ -9,6 +9,7 @@ import { deletePostAdopt } from '../actions/posts';
 // import PostList from '../components/PostList'
 
 function ReadPostAdopting(props) {
+    const ip = String(process.env.IP)
     // const customer_id = "c3ok6a2mvdvh8i865tag"
 
     const [postItem, setPostItems] = useState({})

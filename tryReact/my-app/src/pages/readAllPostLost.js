@@ -7,6 +7,7 @@ import Amplify, { Auth } from 'aws-amplify'
 
 
 function ReadAllPostLost(props) {
+    const ip = String(process.env.IP)
     let limit = 100
     let page = 1
     let {keyword} = useParams()
